@@ -1,0 +1,40 @@
+{
+    "author":"Matt Traynham",
+    "name":"charts",
+    "version":"0.0.1",
+    "description": "Charting examples that use a combination of D3, Crossfilter, & DC",
+    "bugs": "https://github.com/mtraynham/charts/issues",
+    "repository":{
+        "type":"git",
+        "url":"git://github.com/mtraynham/charts.git"
+    },
+    "licenses": [
+        {
+            "type": "Apache-2.0",
+            "url": "https://raw.github.com/mtraynham/charts/master/LICENSE.md"
+        }
+    ],
+    "engines":{
+        "node":">= 0.10.22"
+    },
+    "dependencies":{
+        "bower":"git://github.com/neoziro/bower.git#v1.2.8-patched"
+    },
+    "devDependencies":{
+        "express": "~3.5.0",
+        "grunt": "~0.4.3",
+        "grunt-bowercopy": "~0.9.0",
+        "grunt-contrib-less": "~0.10.0",
+        "grunt-contrib-clean": "~0.5.0",
+        "grunt-contrib-copy": "~0.5.0",
+        "grunt-contrib-jshint": "~0.8.0",
+        "grunt-contrib-concat": "~0.3.0",
+        "grunt-contrib-uglify": "~0.4.0",
+        "grunt-html2js": "~0.2.4",
+        "grunt-contrib-watch": "~0.5.3",
+        "grunt-express-server": "~0.4.13"
+    },
+    "scripts":{
+        "postinstall":"node_modules/.bin/bower install"
+    }
+}
