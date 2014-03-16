@@ -1,6 +1,6 @@
 (function() {
     dc.gauge = function(parent, chartGroup) {
-        var _chart = dc.colorMixin(dc.baseMixin({}));
+        var _chart = dc.colorMixin(dc.marginMixin(dc.baseMixin({})));
 
         var _sliceCssClass = "pie-slice";
 
@@ -72,16 +72,17 @@
             var radius = (_radius ? _radius : Math.min(_chart.width() / 2, _chart.height())) - _externalLabelRadius;
             var innerRadius = (_innerRadiusPercentage !== null ? Math.max(Math.min(_innerRadiusPercentage, 1), 0) : 0.5) * radius;
             var labelData = d3.scale.linear().range([0, 1]).domain(_domain).ticks(_slices);
-            var data = d3.range(_slices).map(function() { return 1/_slices; }).map(function(d, i) {
-                return { key: i, value: d };
+            var data = d3.range(_slices).map(function(d, i) {
+                return { key: i, value: 1/_slices };
             });
 
             var startRadian = deg2rad(_minAngle);
             var endRadian = deg2rad(_maxAngle);
 
-            var arc = d3.svg.arc().outerRadius(radius).innerRadius(innerRadius);
             var pie = d3.layout.pie().sort(null).startAngle(startRadian).endAngle(endRadian).value(_chart.valueAccessor());
             var pieData = pie(data);
+
+            var arc = d3.svg.arc().outerRadius(radius).innerRadius(innerRadius);
 
             if (_g) {
                 // Get slices

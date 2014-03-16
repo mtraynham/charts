@@ -37,6 +37,29 @@ angular.module('charts').controller('Example3Ctrl', ['$scope', function($scope) 
             defaultValue : 0,
             type: "number"
         }),
+        marginTop : new Attribute({
+            name : "Margin Top",
+            defaultValue : 10,
+            renderRequired : true,
+            type: "number"
+        }),
+        marginBottom : new Attribute({
+            name : "Margin Bottom",
+            defaultValue : 30,
+            renderRequired : true,
+            type: "number"
+        }),
+        marginLeft : new Attribute({
+            name : "Margin Left",
+            defaultValue : 40,
+            renderRequired : true,
+            type: "number"
+        }),
+        marginRight : new Attribute({
+            name : "Margin Right",
+            defaultValue : 10,
+            renderRequired : true,
+        }),
         maxAngle : new Attribute({
             name : "Maximum Angle",
             defaultValue : 90,
@@ -80,6 +103,12 @@ angular.module('charts').controller('Example3Ctrl', ['$scope', function($scope) 
         chart1.domain([ $scope.attributes.domainMin.getValueOrDefault(), $scope.attributes.domainMax.getValueOrDefault() ]);
         chart1.externalLabelRadius($scope.attributes.externalLabelRadius.getValueOrDefault());
         chart1.innerRadiusPercentage($scope.attributes.innerRadiusPercentage.getValueOrDefault());
+        chart1.margins({
+            top : $scope.attributes.marginTop.getValueOrDefault(),
+            right : $scope.attributes.marginRight.getValueOrDefault(),
+            left : $scope.attributes.marginLeft.getValueOrDefault(),
+            bottom : $scope.attributes.marginBottom.getValueOrDefault()
+        });
         chart1.maxAngle($scope.attributes.maxAngle.getValueOrDefault());
         chart1.minAngle($scope.attributes.minAngle.getValueOrDefault());
         chart1.renderLabel($scope.attributes.renderLabel.getValueOrDefault());
