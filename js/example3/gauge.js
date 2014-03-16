@@ -1,13 +1,13 @@
 (function() {
     dc.gauge = function(parent, chartGroup) {
-        var _chart = dc.colorMixin(dc.marginMixin(dc.baseMixin({})));
+        var _chart = dc.colorMixin(dc.baseMixin({}));
 
         var _sliceCssClass = "pie-slice";
 
         var _domain = [ 0, 100 ];
         var _gap = 1;
         var _externalLabelRadius = 0;
-        var _innerRadius = 0;
+        var _innerRadiusPercentage = 0.5;
         var _radius = 0;
         var _maxAngle = 90;
         var _minAngle = -90;
@@ -69,8 +69,8 @@
 
         function drawChart() {
             // set radius on basis of chart dimension if missing
-            var radius = _radius ? _radius : d3.min([ _chart.width(), _chart.height() ]) / 2;
-            var innerRadius = _innerRadius ? d3.min([ _innerRadius, radius ]) : d3.max([ _innerRadius, 0 ]);
+            var radius = _radius ? _radius : (d3.min([_chart.width() / 2, _chart.height()]) - _externalLabelRadius);
+            var innerRadius = (_innerRadiusPercentage !== null ? d3.max([d3.min([ _innerRadiusPercentage, 1 ]), 0]) : 0.5) * radius;
             var labelData = d3.scale.linear().range([0, 1]).domain(_domain).ticks(_slices);
             var data = d3.range(_slices).map(function() { return 1/_slices; }).map(function(d, i) {
                 return { key: i, value: d };
@@ -78,7 +78,6 @@
 
             var startRadian = deg2rad(_minAngle);
             var endRadian = deg2rad(_maxAngle);
-
 
             var arc = d3.svg.arc().outerRadius(radius).innerRadius(innerRadius);
             var pie = d3.layout.pie().sort(null).startAngle(startRadian).endAngle(endRadian).value(_chart.valueAccessor());
@@ -129,7 +128,8 @@
 
         _chart._doRender = function() {
             _chart.resetSvg();
-            _g = _chart.svg().append("g").attr("transform", "translate(" + _chart.width() / 2 + "," + _chart.height() / 2 + ")");
+            _g = _chart.svg().append("g")
+                .attr("transform", "translate(" + (_chart.width() / 2) + ", " + _chart.height() + ")");
             drawChart();
             return _chart;
         };
@@ -163,11 +163,11 @@
             return _chart;
         };
 
-        _chart.innerRadius = function(_) {
+        _chart.innerRadiusPercentage = function(_) {
             if (!arguments.length) {
-                return _innerRadius;
+                return _innerRadiusPercentage;
             }
-            _innerRadius = _;
+            _innerRadiusPercentage = _;
             return _chart;
         };
 

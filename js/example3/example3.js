@@ -19,33 +19,12 @@ angular.module('charts').controller('Example3Ctrl', ['$scope', function($scope) 
             defaultValue : 5,
             type: "number"
         }),
-        innerRadius : new Attribute({
-            name : "Inner Radius",
-            defaultValue : 50,
-            type: "number"
-        }),
-        marginTop : new Attribute({
-            name : "Margin Top",
-            defaultValue : 10,
-            renderRequired : true,
-            type: "number"
-        }),
-        marginBottom : new Attribute({
-            name : "Margin Bottom",
-            defaultValue : 30,
-            renderRequired : true,
-            type: "number"
-        }),
-        marginLeft : new Attribute({
-            name : "Margin Left",
-            defaultValue : 40,
-            renderRequired : true,
-            type: "number"
-        }),
-        marginRight : new Attribute({
-            name : "Margin Right",
-            defaultValue : 10,
-            renderRequired : true,
+        innerRadiusPercentage : new Attribute({
+            name : "Inner Radius Percentage",
+            defaultValue : 0.5,
+            min: 0,
+            max: 1,
+            step: 0.05,
             type: "number"
         }),
         domainMax : new Attribute({
@@ -86,21 +65,6 @@ angular.module('charts').controller('Example3Ctrl', ['$scope', function($scope) 
         })
     };
 
-    $scope.gap = 1;
-    $scope.externalLabelRadius = 5;
-    $scope.innerRadius = 50;
-    $scope.marginTop = 10;
-    $scope.marginBottom = 30;
-    $scope.marginLeft = 40;
-    $scope.marginRight = 10;
-    $scope.domainMax = 100;
-    $scope.domainMin = 0;
-    $scope.maxAngle = 90;
-    $scope.minAngle = -90;
-    $scope.renderLabel = false;
-    $scope.slices = 5;
-    $scope.value = 50;
-
     // Chart 1
     var index = crossfilter([]);
     var dimension1 = index,
@@ -115,13 +79,7 @@ angular.module('charts').controller('Example3Ctrl', ['$scope', function($scope) 
         chart1.gap($scope.attributes.gap.getValueOrDefault());
         chart1.domain([ $scope.attributes.domainMin.getValueOrDefault(), $scope.attributes.domainMax.getValueOrDefault() ]);
         chart1.externalLabelRadius($scope.attributes.externalLabelRadius.getValueOrDefault());
-        chart1.innerRadius($scope.attributes.innerRadius.getValueOrDefault());
-        chart1.margins({
-            top : $scope.attributes.marginTop.getValueOrDefault(),
-            right : $scope.attributes.marginRight.getValueOrDefault(),
-            left : $scope.attributes.marginLeft.getValueOrDefault(),
-            bottom : $scope.attributes.marginBottom.getValueOrDefault()
-        });
+        chart1.innerRadiusPercentage($scope.attributes.innerRadiusPercentage.getValueOrDefault());
         chart1.maxAngle($scope.attributes.maxAngle.getValueOrDefault());
         chart1.minAngle($scope.attributes.minAngle.getValueOrDefault());
         chart1.renderLabel($scope.attributes.renderLabel.getValueOrDefault());
