@@ -2,6 +2,26 @@ angular.module('charts').controller('Example2Ctrl', ['$scope', 'CrossfilterServi
 
     var timeFormat = d3.time.format("%b %e, %Y");
     var numberFormat = d3.format(".2f");
+    var colors = d3.map({
+        // Dreamcast
+        "dreamcast": colorbrewer.Oranges[9][5],
+        // PC
+        "pc": colorbrewer.Purples[9][2],
+        // Nintendo
+        "n64": colorbrewer.Reds[9][3],
+        "gamecube": colorbrewer.Reds[9][4],
+        "wii": colorbrewer.Reds[9][5],
+        "wii-u": colorbrewer.Reds[9][6],
+        // Playstation
+        "ps": colorbrewer.Blues[9][3],
+        "ps2": colorbrewer.Blues[9][4],
+        "ps3": colorbrewer.Blues[9][5],
+        "ps4": colorbrewer.Blues[9][6],
+        // XBox
+        "xbox": colorbrewer.Greens[9][3],
+        "xbox360": colorbrewer.Greens[9][4],
+        "xboxone": colorbrewer.Greens[9][5]
+    });
 
     /**
      * Handles parsing of CSV data.
@@ -60,14 +80,17 @@ angular.module('charts').controller('Example2Ctrl', ['$scope', 'CrossfilterServi
         var dimension1 = index.dimension(platformAccessor),
             group1 = CrossfilterService.reduceCount(dimension1.group()),
             chart1 = dc.rowChart("#chart1")
-            .width(350)
+            .width(1000)
             .height(300)
             .dimension(dimension1)
             .group(group1)
             .elasticX(true)
             .cap(20)
             .gap(1)
-            .labelOffsetY(13);
+            .labelOffsetY(13)
+            .colors(function(d) {
+                return colors.get(d);
+            });
         chart1.render();
 
         // Chart 1
@@ -84,7 +107,10 @@ angular.module('charts').controller('Example2Ctrl', ['$scope', 'CrossfilterServi
             .elasticX(true)
             .cap(20)
             .gap(1)
-            .labelOffsetY(13);
+            .labelOffsetY(13)
+            .colors(function(d) {
+                return colors.get(d);
+            });
         chart2.render();
 
         // Chart 1
@@ -101,7 +127,10 @@ angular.module('charts').controller('Example2Ctrl', ['$scope', 'CrossfilterServi
             .elasticX(true)
             .cap(20)
             .gap(1)
-            .labelOffsetY(13);
+            .labelOffsetY(13)
+            .colors(function(d) {
+                return colors.get(d);
+            });
         chart3.render();
 
         // Chart 3
@@ -250,9 +279,6 @@ angular.module('charts').controller('Example2Ctrl', ['$scope', 'CrossfilterServi
             .height(400)
             .dimension(dimension9)
             .group(group9)
-            .colorAccessor(function (d) {
-                return d.value.critic_avg();
-            })
             .keyAccessor(function (p) {
                 return p.value.critic_avg();
             })
@@ -281,11 +307,17 @@ angular.module('charts').controller('Example2Ctrl', ['$scope', 'CrossfilterServi
                    "Average Critic Score: " + numberFormat(p.value.critic_avg()),
                    "Average User Score: " + numberFormat(p.value.user_avg())]
                    .join("\n");
+            })
+            .colorAccessor(function (d) {
+                return d.key;
+            })
+            .colors(function(d) {
+                return colors.get(d);
             });
         chart9.render();
     }
 
     var q = queue();
-    q.defer(parseData, 'data/metacritic/videoGames/metacritic_games_20130313_formatted.csv');
+    q.defer(parseData, 'data/metacritic/metacritic_games_20130313_formatted.csv');
     q.await(render);
 }]);
