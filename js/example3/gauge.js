@@ -69,8 +69,8 @@
 
         function drawChart() {
             // set radius on basis of chart dimension if missing
-            var radius = _radius ? _radius : (d3.min([_chart.width() / 2, _chart.height()]) - _externalLabelRadius);
-            var innerRadius = (_innerRadiusPercentage !== null ? d3.max([d3.min([ _innerRadiusPercentage, 1 ]), 0]) : 0.5) * radius;
+            var radius = (_radius ? _radius : Math.min(_chart.width() / 2, _chart.height())) - _externalLabelRadius;
+            var innerRadius = (_innerRadiusPercentage !== null ? Math.max(Math.min(_innerRadiusPercentage, 1), 0) : 0.5) * radius;
             var labelData = d3.scale.linear().range([0, 1]).domain(_domain).ticks(_slices);
             var data = d3.range(_slices).map(function() { return 1/_slices; }).map(function(d, i) {
                 return { key: i, value: d };
