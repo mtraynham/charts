@@ -45,25 +45,21 @@ angular.module('charts').controller('Example3Ctrl', ['$scope', function($scope) 
         marginTop : new Attribute({
             name : "Margin Top",
             defaultValue : 0,
-            renderRequired : true,
             type: "number"
         }),
         marginBottom : new Attribute({
             name : "Margin Bottom",
-            defaultValue : 0,
-            renderRequired : true,
+            defaultValue : 20,
             type: "number"
         }),
         marginLeft : new Attribute({
             name : "Margin Left",
             defaultValue : 0,
-            renderRequired : true,
             type: "number"
         }),
         marginRight : new Attribute({
             name : "Margin Right",
             defaultValue : 0,
-            renderRequired : true,
             type: "number"
         }),
         maxAngle : new Attribute({
@@ -76,10 +72,12 @@ angular.module('charts').controller('Example3Ctrl', ['$scope', function($scope) 
             defaultValue : -90,
             type: "number"
         }),
-        needleLength : new Attribute({
-            name : "Needle Length",
-            defaultValue : 90,
+        needleLengthPercentage : new Attribute({
+            name : "Needle Length (% of Radius)",
+            defaultValue : 0.9,
             min: 0,
+            max: 1,
+            step: 0.05,
             type: "number"
         }),
         needleRadius : new Attribute({
@@ -112,7 +110,7 @@ angular.module('charts').controller('Example3Ctrl', ['$scope', function($scope) 
         group1 = dimension1.groupAll(),
         chart1 = dc.gauge("#chart1")
         .width(700)
-        .height(300)
+        .height(600)
         .dimension(dimension1)
         .group(group1);
 
@@ -130,7 +128,7 @@ angular.module('charts').controller('Example3Ctrl', ['$scope', function($scope) 
         });
         chart1.maxAngle($scope.attributes.maxAngle.getValueOrDefault());
         chart1.minAngle($scope.attributes.minAngle.getValueOrDefault());
-        chart1.needleLength($scope.attributes.needleLength.getValueOrDefault());
+        chart1.needleLengthPercentage($scope.attributes.needleLengthPercentage.getValueOrDefault());
         chart1.needleRadius($scope.attributes.needleRadius.getValueOrDefault());
         chart1.needleValue($scope.attributes.value.getValueOrDefault());
         chart1.renderLabel($scope.attributes.renderLabel.getValueOrDefault());
