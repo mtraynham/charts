@@ -23,8 +23,10 @@
         var _needleValue = 0;
         var _needleColor = "#000000";
         
+        var numberFormat = d3.format("s");
+        
         _chart.margins({top:0, left: 0, right: 0, bottom: 20});
-        _chart.label(function(d) { return d; });
+        _chart.label(function(d) { return numberFormat(d); });
         _chart.data(null);
 
         function deg2rad(deg) {
