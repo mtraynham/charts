@@ -4,24 +4,24 @@ angular.module('charts').controller('Example3Ctrl', ['$scope', function($scope) 
         angular.extend(this, data);
     };
     Attribute.prototype.getValueOrDefault = function() {
-        return this.value ? this.value : this.defaultValue;
+        return this.value !== null && typeof this.value !== 'undefined' ? this.value : this.defaultValue;
     };
 
     $scope.attributes = {
         gap : new Attribute({
             name : "Gap",
-            defaultValue : 1,
+            defaultValue : 5,
             min : 0,
             type: "number"
         }),
-        externalLabelRadius : new Attribute({
-            name : "External Label Radius",
-            defaultValue : 5,
+        externalRadiusPadding : new Attribute({
+            name : "External Radius Padding",
+            defaultValue : 30,
             type: "number"
         }),
         innerRadiusPercentage : new Attribute({
             name : "Inner Radius Percentage",
-            defaultValue : 0.5,
+            defaultValue : 0.9,
             min: 0,
             max: 1,
             step: 0.05,
@@ -37,28 +37,34 @@ angular.module('charts').controller('Example3Ctrl', ['$scope', function($scope) 
             defaultValue : 0,
             type: "number"
         }),
+        labelPadding : new Attribute({
+            name : "Label Padding",
+            defaultValue : 3,
+            type: "number"
+        }),
         marginTop : new Attribute({
             name : "Margin Top",
-            defaultValue : 10,
+            defaultValue : 0,
             renderRequired : true,
             type: "number"
         }),
         marginBottom : new Attribute({
             name : "Margin Bottom",
-            defaultValue : 30,
+            defaultValue : 0,
             renderRequired : true,
             type: "number"
         }),
         marginLeft : new Attribute({
             name : "Margin Left",
-            defaultValue : 40,
+            defaultValue : 0,
             renderRequired : true,
             type: "number"
         }),
         marginRight : new Attribute({
             name : "Margin Right",
-            defaultValue : 10,
+            defaultValue : 0,
             renderRequired : true,
+            type: "number"
         }),
         maxAngle : new Attribute({
             name : "Maximum Angle",
@@ -70,9 +76,21 @@ angular.module('charts').controller('Example3Ctrl', ['$scope', function($scope) 
             defaultValue : -90,
             type: "number"
         }),
+        needleLength : new Attribute({
+            name : "Needle Length",
+            defaultValue : 90,
+            min: 0,
+            type: "number"
+        }),
+        needleRadius : new Attribute({
+            name : "Needle Radius",
+            defaultValue : 15,
+            min: 0,
+            type: "number"
+        }),
         renderLabel : new Attribute({
             name : "Render Labels",
-            defaultValue : false,
+            defaultValue : true,
             type: "checkbox"
         }),
         slices : new Attribute({
@@ -93,7 +111,7 @@ angular.module('charts').controller('Example3Ctrl', ['$scope', function($scope) 
     var dimension1 = index,
         group1 = dimension1.groupAll(),
         chart1 = dc.gauge("#chart1")
-        .width(500)
+        .width(700)
         .height(300)
         .dimension(dimension1)
         .group(group1);
@@ -101,8 +119,9 @@ angular.module('charts').controller('Example3Ctrl', ['$scope', function($scope) 
     $scope.updateAttributes = function(render) {
         chart1.gap($scope.attributes.gap.getValueOrDefault());
         chart1.domain([ $scope.attributes.domainMin.getValueOrDefault(), $scope.attributes.domainMax.getValueOrDefault() ]);
-        chart1.externalLabelRadius($scope.attributes.externalLabelRadius.getValueOrDefault());
+        chart1.externalRadiusPadding($scope.attributes.externalRadiusPadding.getValueOrDefault());
         chart1.innerRadiusPercentage($scope.attributes.innerRadiusPercentage.getValueOrDefault());
+        chart1.labelPadding($scope.attributes.labelPadding.getValueOrDefault());
         chart1.margins({
             top : $scope.attributes.marginTop.getValueOrDefault(),
             right : $scope.attributes.marginRight.getValueOrDefault(),
@@ -111,6 +130,9 @@ angular.module('charts').controller('Example3Ctrl', ['$scope', function($scope) 
         });
         chart1.maxAngle($scope.attributes.maxAngle.getValueOrDefault());
         chart1.minAngle($scope.attributes.minAngle.getValueOrDefault());
+        chart1.needleLength($scope.attributes.needleLength.getValueOrDefault());
+        chart1.needleRadius($scope.attributes.needleRadius.getValueOrDefault());
+        chart1.needleValue($scope.attributes.value.getValueOrDefault());
         chart1.renderLabel($scope.attributes.renderLabel.getValueOrDefault());
         chart1.slices($scope.attributes.slices.getValueOrDefault());
         if(render) {
