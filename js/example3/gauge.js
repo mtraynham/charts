@@ -7,6 +7,7 @@
         var _sliceLabelsCssClass = "pie-slice-labels";
         var _needleCircleCssClass = 'needle-center';
         var _needleCssClass = 'needle';
+        var _gaugeTextCssClass = "gauge-text";
 
         var _domain = [ 0, 100 ];
         var _gap = 3;
@@ -23,9 +24,14 @@
         var _needleValue = 0;
         var _needleColor = "#000000";
         
+        var _text = "";
+        var _textX = 0;
+        var _textY = 30;
+        var _textRotation = 0;
+        
         var numberFormat = d3.format("s");
         
-        _chart.margins({top:0, left: 0, right: 0, bottom: 20});
+        _chart.margins({top:0, left: 0, right: 0, bottom: 35});
         _chart.label(function(d) { return numberFormat(d); });
         _chart.data(null);
 
@@ -183,6 +189,17 @@
             _g.select("path." + _needleCssClass)
                 .attr('fill', _needleColor)
                 .attr('d', needlePath(needleValue, _domain, _minAngle, _maxAngle, _needleLengthPercentage * radius, _needleRadius));
+            
+            /*****************************************************************
+             * Text
+             *****************************************************************/
+            // Update text
+            var text = _g.select("text." + _gaugeTextCssClass);
+            dc.transition(text, _chart.transitionDuration()).attr("transform", function(d) {
+                return 'rotate(' + _textRotation + ') translate(' + _textX + ',' + _textY + ')';
+            }).attr("text-anchor", "middle").text(function(d) {
+                return _text;
+            });
         }
 
         _chart._doRender = function() {
@@ -193,6 +210,9 @@
                 .attr('cx', 0)
                 .attr('cy', 0);
             _g.append('path').attr('class', _needleCssClass);
+            _g.append('text').attr('class', _gaugeTextCssClass)
+                .attr('cx', 0)
+                .attr('cy', 0);
             drawChart();
             return _chart;
         };
@@ -303,6 +323,38 @@
                 return _slices;
             }
             _slices = _;
+            return _chart;
+        };
+        
+        _chart.text = function(_) {
+            if (!arguments.length) {
+                return _text;
+            }
+            _text = _;
+            return _chart;
+        };
+        
+        _chart.textX = function(_) {
+            if (!arguments.length) {
+                return _textX;
+            }
+            _textX = _;
+            return _chart;
+        };
+        
+        _chart.textY = function(_) {
+            if (!arguments.length) {
+                return _textY;
+            }
+            _textY = _;
+            return _chart;
+        };
+        
+        _chart.textRotation = function(_) {
+            if (!arguments.length) {
+                return _textRotation;
+            }
+            _textRotation = _;
             return _chart;
         };
         

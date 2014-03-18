@@ -49,7 +49,7 @@ angular.module('charts').controller('Example3Ctrl', ['$scope', function($scope) 
         }),
         marginBottom : new Attribute({
             name : "Margin Bottom",
-            defaultValue : 20,
+            defaultValue : 35,
             type: "number"
         }),
         marginLeft : new Attribute({
@@ -97,6 +97,26 @@ angular.module('charts').controller('Example3Ctrl', ['$scope', function($scope) 
             min : 0,
             type: "number"
         }),
+        text : new Attribute({
+            name : "Text",
+            defaultValue : "Foo Bar",
+            type: "text"
+        }),
+        textX : new Attribute({
+            name : "Text X",
+            defaultValue : 0,
+            type: "number"
+        }),
+        textY : new Attribute({
+            name : "Text Y",
+            defaultValue : 30,
+            type: "number"
+        }),
+        textRotation : new Attribute({
+            name : "Text Rotation",
+            defaultValue : 0,
+            type: "number"
+        }),
         value : new Attribute({
             name : "Value",
             defaultValue : 50,
@@ -133,6 +153,11 @@ angular.module('charts').controller('Example3Ctrl', ['$scope', function($scope) 
         chart1.needleValue($scope.attributes.value.getValueOrDefault());
         chart1.renderLabel($scope.attributes.renderLabel.getValueOrDefault());
         chart1.slices($scope.attributes.slices.getValueOrDefault());
+        chart1.text($scope.attributes.text.getValueOrDefault());
+        chart1.textX($scope.attributes.textX.getValueOrDefault());
+        chart1.textY($scope.attributes.textY.getValueOrDefault());
+        chart1.textRotation($scope.attributes.textRotation.getValueOrDefault());
+
         if(render) {
             chart1.render();
         } else {
