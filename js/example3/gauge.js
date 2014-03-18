@@ -25,6 +25,7 @@
         var _needleColor = "#000000";
         
         var _text = "";
+        var _textColor = "#FFFFFF";
         var _textX = 0;
         var _textY = 30;
         var _textRotation = 0;
@@ -197,7 +198,10 @@
             var text = _g.select("text." + _gaugeTextCssClass);
             dc.transition(text, _chart.transitionDuration()).attr("transform", function(d) {
                 return 'rotate(' + _textRotation + ') translate(' + _textX + ',' + _textY + ')';
-            }).attr("text-anchor", "middle").text(function(d) {
+            })
+            .attr("text-anchor", "middle")
+            .attr("fill", _textColor)
+            .text(function(d) {
                 return _text;
             });
         }
@@ -331,6 +335,14 @@
                 return _text;
             }
             _text = _;
+            return _chart;
+        };
+        
+        _chart.textColor = function(_) {
+            if (!arguments.length) {
+                return _textColor;
+            }
+            _textColor = _;
             return _chart;
         };
         
