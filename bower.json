@@ -18,7 +18,7 @@
         "jquery-ui": "~1.10.3",
         "queue-async": "~1.0.7",
         "sprintf": "*",
-        "topojson": "~1.4.9",
+        "topojson": "~1.5.0",
         "topojsonexports": "git://github.com/mtraynham/TopoJsonExports.git",
         "underscore": "~1.6.0"
     },

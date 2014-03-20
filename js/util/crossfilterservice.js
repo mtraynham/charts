@@ -54,10 +54,10 @@ angular.module('charts').service('CrossfilterService', function() {
     this.reduceSum = function(group, accessor) {
         return group.reduce(function(p, v) {
             var val = accessor(v);
-            return val != null ? p += val : p;
+            return val !== null ? p += val : p;
         }, function(p, v) {
             var val = accessor(v);
-            return val != null ? p -= val : p;
+            return val !== null ? p -= val : p;
         }, function(p) {
             return 0;
         });

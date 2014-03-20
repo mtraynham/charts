@@ -37,15 +37,15 @@ angular.module('charts').controller('Example2Ctrl', ['$scope', 'CrossfilterServi
      */
     function parseData(data, callback) {
         d3.csv(data, function(row) {
-            row['critic_score'] = CrossfilterService.coerceNumber(row['critic_score']);
-            row['genre'] = CrossfilterService.coerceArray(row['genre']);
-            row['platform'] = CrossfilterService.coerceString(row['platform']);
-            row['publisher'] = CrossfilterService.coerceString(row['publisher']);
-            row['rating'] = CrossfilterService.coerceString(row['rating']);
-            row['release'] = CrossfilterService.coerceDate(timeFormat, row['release']);
-            row['score'] = CrossfilterService.coerceNumber(row['score']);
-            row['title'] = CrossfilterService.coerceString(row['title']);
-            row['url'] = CrossfilterService.coerceString(row['url']);
+            row.critic_score = CrossfilterService.coerceNumber(row.critic_score);
+            row.genre = CrossfilterService.coerceArray(row.genre);
+            row.platform = CrossfilterService.coerceString(row.platform);
+            row.publisher = CrossfilterService.coerceString(row.publisher);
+            row.rating = CrossfilterService.coerceString(row.rating);
+            row.release = CrossfilterService.coerceDate(timeFormat, row.release);
+            row.score = CrossfilterService.coerceNumber(row.score);
+            row.title = CrossfilterService.coerceString(row.title);
+            row.url = CrossfilterService.coerceString(row.url);
             return row;
         }, function(data) {
             callback(null, data);
@@ -93,147 +93,9 @@ angular.module('charts').controller('Example2Ctrl', ['$scope', 'CrossfilterServi
             });
         chart1.render();
 
-        // Chart 1
+        // Chart 2
         var dimension2 = index.dimension(platformAccessor),
-            group2 = CrossfilterService.reduceAvg(dimension2.group(), criticScoreAccessor);
-            chart2 = dc.rowChart("#chart2")
-            .width(350)
-            .height(300)
-            .dimension(dimension2)
-            .group(group2)
-            .valueAccessor(function(p) {
-                return p.value.valueOf();
-            })
-            .elasticX(true)
-            .cap(20)
-            .gap(1)
-            .labelOffsetY(13)
-            .colors(function(d) {
-                return colors.get(d);
-            });
-        chart2.render();
-
-        // Chart 1
-        var dimension3 = index.dimension(platformAccessor),
-            group3 = CrossfilterService.reduceAvg(dimension3.group(), scoreAccessor);
-            chart3 = dc.rowChart("#chart3")
-            .width(350)
-            .height(300)
-            .dimension(dimension3)
-            .group(group3)
-            .valueAccessor(function(p) {
-                return p.value.valueOf();
-            })
-            .elasticX(true)
-            .cap(20)
-            .gap(1)
-            .labelOffsetY(13)
-            .colors(function(d) {
-                return colors.get(d);
-            });
-        chart3.render();
-
-        // Chart 3
-        var dimension4 = index.dimension(publisherAccessor),
-            group4 = CrossfilterService.reduceCount(dimension4.group()),
-            chart4 = dc.rowChart("#chart4")
-            .width(350)
-            .height(400)
-            .dimension(dimension4)
-            .group(group4)
-            .elasticX(true)
-            .cap(20)
-            .gap(1)
-            .labelOffsetY(13);
-        chart4.render();
-
-        // Chart 5
-        var dimension5 = index.dimension(publisherAccessor),
-            group5 = CrossfilterService.reduceAvg(dimension5.group(), criticScoreAccessor);
-            chart5 = dc.rowChart("#chart5")
-            .width(350)
-            .height(400)
-            .dimension(dimension5)
-            .group(group5)
-            .valueAccessor(function(p) {
-                if(p.key === "Others") {
-                    return p.value;
-                }
-                return p.value.valueOf();
-            })
-            .elasticX(true)
-            .cap(20)
-            .gap(1)
-            .labelOffsetY(13);
-        chart5.othersGrouper(CrossfilterService.avgOthersGrouper(chart5));
-        chart5.render();
-
-        // Chart 6
-        var dimension6 = index.dimension(publisherAccessor),
-            group6 = CrossfilterService.reduceAvg(dimension6.group(), scoreAccessor);
-            chart6 = dc.rowChart("#chart6")
-            .width(350)
-            .height(400)
-            .dimension(dimension6)
-            .group(group6)
-            .valueAccessor(function(p) {
-                if(p.key === "Others") {
-                    return p.value;
-                }
-                return p.value.valueOf();
-            })
-            .elasticX(true)
-            .cap(20)
-            .gap(1)
-            .labelOffsetY(13);
-        chart6.othersGrouper(CrossfilterService.avgOthersGrouper(chart6));
-        chart6.render();
-
-        // Chart 7
-        var dimension7 = index.dimension(titleAccessor),
-            group7 = CrossfilterService.reduceAvg(dimension7.group(), criticScoreAccessor);
-            chart7 = dc.rowChart("#chart7")
-            .width(350)
-            .height(400)
-            .dimension(dimension7)
-            .group(group7)
-            .valueAccessor(function(p) {
-                if(p.key === "Others") {
-                    return p.value;
-                }
-                return p.value.valueOf();
-            })
-            .elasticX(true)
-            .cap(20)
-            .gap(1)
-            .labelOffsetY(13);
-        chart7.othersGrouper(CrossfilterService.avgOthersGrouper(chart7));
-        chart7.render();
-
-        // Chart 8
-        var dimension8 = index.dimension(titleAccessor),
-            group8 = CrossfilterService.reduceAvg(dimension8.group(), scoreAccessor);
-            chart8 = dc.rowChart("#chart8")
-            .width(350)
-            .height(400)
-            .dimension(dimension8)
-            .group(group8)
-            .valueAccessor(function(p) {
-                if(p.key === "Others") {
-                    return p.value;
-                }
-                return p.value.valueOf();
-            })
-            .elasticX(true)
-            .cap(20)
-            .gap(1)
-            .labelOffsetY(13);
-        chart8.othersGrouper(CrossfilterService.avgOthersGrouper(chart8));
-        chart8.render();
-
-        // Chart 9
-        var dimension9 = index.dimension(platformAccessor),
-            group9 = dimension9.group().reduce(function(p, v) {
+            group2 = dimension2.group().reduce(function(p, v) {
                 ++p.count;
                 var critic_score = criticScoreAccessor(v);
                 if(critic_score) {
@@ -274,11 +136,11 @@ angular.module('charts').controller('Example2Ctrl', ['$scope', 'CrossfilterServi
                     }
                 };
             }),
-            chart9 = dc.bubbleChart("#chart9")
+            chart2 = dc.bubbleChart("#chart2")
             .width(1000)
             .height(400)
-            .dimension(dimension9)
-            .group(group9)
+            .dimension(dimension2)
+            .group(group2)
             .keyAccessor(function (p) {
                 return p.value.critic_avg();
             })
@@ -314,7 +176,38 @@ angular.module('charts').controller('Example2Ctrl', ['$scope', 'CrossfilterServi
             .colors(function(d) {
                 return colors.get(d);
             });
-        chart9.render();
+        chart2.render();
+
+        // Chart 3
+        var dimension3 = index.dimension(releaseAccessor),
+            group3Critic = CrossfilterService.reduceAvg(dimension2.group(), criticScoreAccessor),
+            group3User = CrossfilterService.reduceAvg(dimension2.group(), scoreAccessor),
+            chart3 = dc.lineChart("#chart3")
+            .width(1000)
+            .height(400)
+            .dimension(dimension3)
+            .group(group3Critic, "Average Critic Score")
+            .x(d3.time.scale().domain(d3.extent(dimension3.top(Number.POSITIVE_INFINITY), releaseAccessor)))
+            .round(d3.time.month.round)
+            .xUnits(d3.time.months)
+            .y(d3.scale.linear().domain([0, 20]))
+            .stack(group3User, "Average User Score")
+            .elasticY(true)
+            .xAxisLabel('Release Date')
+            .yAxisLabel('Score')
+            .yAxisPadding(0.5)
+            .xAxisPadding(3)
+            .renderHorizontalGridLines(true)
+            .renderVerticalGridLines(true)
+            .colorAccessor(function (d) {
+                return d.key;
+            })
+            .colors(function(d) {
+                return colors.get(d);
+            });
+        chart3.render();
+
+
     }
 
     var q = queue();
