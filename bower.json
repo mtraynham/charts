@@ -16,6 +16,8 @@
         "freebase": "git://github.com/spencermountain/Freebase.js.git#master",
         "jquery": "~1.10.2",
         "jquery-ui": "~1.10.3",
+        "mathjs": "git://github.com/mtraynham/mathjs.git#all_patches",
+        "momentjs": "~2.5.1",
         "queue-async": "~1.0.7",
         "sprintf": "*",
         "topojson": "~1.5.0",

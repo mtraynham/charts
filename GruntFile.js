@@ -72,6 +72,10 @@ module.exports = function(grunt) {
                     'jquery-ui/ui/jquery-ui.js' : 'jquery-ui/ui/jquery-ui.js',
                     'jquery-ui/themes/base/jquery.ui.core.css' : 'jquery-ui/themes/base/jquery.ui.core.css',
                     'jquery-ui/themes/base/jquery.ui.resizable.css' : 'jquery-ui/themes/base/jquery.ui.resizable.css',
+                    // Math JS
+                    'mathjs/dist/math.js' : 'mathjs/dist/math.js',
+                    // Moment JS
+                    'momentjs/moment.js' : 'momentjs/moment.js',
                     // Queue
                     'queue-async/queue.js' : 'queue-async/queue.js',
                     // Sprint F
@@ -115,6 +119,10 @@ module.exports = function(grunt) {
                     'jquery-ui/ui/jquery-ui.js' : 'jquery-ui/ui/minified/jquery-ui.min.js',
                     'jquery-ui/themes/base/jquery.ui.core.css' : 'jquery-ui/themes/base/minified/jquery.ui.core.min.css',
                     'jquery-ui/themes/base/jquery.ui.resizable.css' : 'jquery-ui/themes/base/minified/jquery.ui.resizable.min.css',
+                    // Math JS
+                    'mathjs/dist/math.js' : 'mathjs/dist/math.min.js',
+                    // Moment JS
+                    'momentjs/moment.js' : 'momentjs/min/moment.min.js',
                     // Queue
                     'queue-async/queue.js' : 'queue-async/queue.min.js',
                     // Sprint F
