@@ -90,11 +90,11 @@ angular.module('charts').controller('Example1Ctrl', ['$scope', 'GeoService', fun
             }, []);
             data = d3.nest()
                 .key(function(d) { return d["Country Name"]; })
-                .key(function(d) { return d["Year"]; })
+                .key(function(d) { return d.Year; })
                 .rollup(function(values) {
                     return values.reduce(function(previous, current) {
                         previous["Country Code"] = current["Country Code"];
-                        previous[current["Indicator Name"]] = current["Value"];
+                        previous[current["Indicator Name"]] = current.Value;
                         return previous;
                     }, {});
                 })
@@ -106,7 +106,7 @@ angular.module('charts').controller('Example1Ctrl', ['$scope', 'GeoService', fun
                     var year  = countryValues[i].key;
                     var yearValues = countryValues[i].values;
                     yearValues["Country Name"] = countryName;
-                    yearValues["Year"] = yearFormat.parse(year);
+                    yearValues.Year = yearFormat.parse(year);
                     previous.push(yearValues);
                 }
                 return previous;
