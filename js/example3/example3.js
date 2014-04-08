@@ -136,7 +136,8 @@ angular.module('charts').controller('Example3Ctrl', ['$scope', function($scope) 
 
     $scope.updateAttributes = function(render) {
         chart1.gap($scope.attributes.gap.getValueOrDefault());
-        chart1.domain([ $scope.attributes.domainMin.getValueOrDefault(), $scope.attributes.domainMax.getValueOrDefault() ]);
+        chart1.domain([ $scope.attributes.domainMin.getValueOrDefault(),
+            $scope.attributes.domainMax.getValueOrDefault() ]);
         chart1.externalRadiusPadding($scope.attributes.externalRadiusPadding.getValueOrDefault());
         chart1.innerRadiusPercentage($scope.attributes.innerRadiusPercentage.getValueOrDefault());
         chart1.labelPadding($scope.attributes.labelPadding.getValueOrDefault());

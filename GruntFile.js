@@ -12,8 +12,10 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-express-server');
 
     // Default task.
-    grunt.registerTask('default', [ 'clean', 'html2js', 'jshint', 'concat', 'clean:templates', 'less:build', 'copy', 'bowercopy:build' ]);
-    grunt.registerTask('release', [ 'clean', 'html2js', 'jshint', 'concat', 'clean:templates', 'uglify', 'less:min', 'copy', 'bowercopy:release' ]);
+    grunt.registerTask('default', [ 'clean', 'html2js', 'jshint', 'concat', 'clean:templates', 'less:build',
+        'copy', 'bowercopy:build' ]);
+    grunt.registerTask('release', [ 'clean', 'html2js', 'jshint', 'concat', 'clean:templates', 'uglify', 'less:min',
+        'copy', 'bowercopy:release' ]);
     grunt.registerTask('server', [ 'default', 'express:dev', 'watch' ]);
 
     // Print a timestamp (useful for when watching)
@@ -27,7 +29,8 @@ module.exports = function(grunt) {
         pkg : grunt.file.readJSON('package.json'),
         banner:
             '/*\n' +
-            ' * <%= pkg.title || pkg.name %> - v<%= pkg.version %> - <%= grunt.template.today("dddd, mmmm dS, yyyy, h:MM:ss TT") %>\n' +
+            ' * <%= pkg.title || pkg.name %> - v<%= pkg.version %> -' +
+            ' <%= grunt.template.today("dddd, mmmm dS, yyyy, h:MM:ss TT") %>\n' +
             ' * Copyright (c) <%= grunt.template.today("yyyy") %> <%= pkg.author %>;\n' +
             ' * Licensed <%= _.pluck(pkg.licenses, "type").join(", ") %>\n */\n',
         src : {
@@ -49,9 +52,8 @@ module.exports = function(grunt) {
                     // Angular Bootstrap
                     'angular-bootstrap/ui-bootstrap-tpls.js' : 'angular-bootstrap/ui-bootstrap-tpls.js',
                     // Angular UI Router
-                    'angular-ui-router/release/angular-ui-router.js' : 'angular-ui-router/release/angular-ui-router.js',
-                    // Async
-                    'async/lib/async.js' : 'async/lib/async.js',
+                    'angular-ui-router/release/angular-ui-router.js' :
+                        'angular-ui-router/release/angular-ui-router.js',
                     // Boostrap
                     'bootstrap/dist/css/bootstrap.css' : 'bootstrap/dist/css/bootstrap.css',
                     'bootstrap/dist/fonts' : 'bootstrap/dist/fonts',
@@ -64,10 +66,8 @@ module.exports = function(grunt) {
                     // DC
                     'dc/dc.js' : 'dc/dc.js',
                     'dc/dc.css' : 'dc/dc.css',
-                    // Freebase API
-                    'freebase/client_side/freebase.js' : 'freebase/client_side/freebase.js',
                     // JQuery
-                    'jquery/jquery.js' : 'jquery/jquery.js',
+                    'jquery/dist/jquery.js' : 'jquery/dist/jquery.js',
                     // JQuery UI
                     'jquery-ui/ui/jquery-ui.js' : 'jquery-ui/ui/jquery-ui.js',
                     'jquery-ui/themes/base/jquery.ui.core.css' : 'jquery-ui/themes/base/jquery.ui.core.css',
@@ -83,8 +83,10 @@ module.exports = function(grunt) {
                     // TopoJson
                     'topojson/topojson.js' : 'topojson/topojson.js',
                     // TopoJson Exports
-                    'topojsonexports/world-atlas/topo/ne_50m_admin_0_countries_lakes.json' : 'topojsonexports/world-atlas/topo/ne_50m_admin_0_countries_lakes.json',
-                    'topojsonexports/world-atlas/topo/ne_50m_us_states_lakes.json' : 'topojsonexports/world-atlas/topo/ne_50m_us_states_lakes.json',
+                    'topojsonexports/world-atlas/topo/ne_50m_admin_0_countries_lakes.json' :
+                        'topojsonexports/world-atlas/topo/ne_50m_admin_0_countries_lakes.json',
+                    'topojsonexports/world-atlas/topo/ne_50m_us_states_lakes.json' :
+                        'topojsonexports/world-atlas/topo/ne_50m_us_states_lakes.json',
                     // Underscore
                     'underscore/underscore.js' : 'underscore/underscore.js'
                 }
@@ -96,9 +98,8 @@ module.exports = function(grunt) {
                     // Angular Bootstrap
                     'angular-bootstrap/ui-bootstrap-tpls.js' : 'angular-bootstrap/ui-bootstrap-tpls.min.js',
                     // Angular UI Router
-                    'angular-ui-router/release/angular-ui-router.js' : 'angular-ui-router/release/angular-ui-router.min.js',
-                    // Async
-                    'async/lib/async.js' : 'async/lib/async.js',
+                    'angular-ui-router/release/angular-ui-router.js' :
+                        'angular-ui-router/release/angular-ui-router.min.js',
                     // Boostrap
                     'bootstrap/dist/css/bootstrap.css' : 'bootstrap/dist/css/bootstrap.min.css',
                     'bootstrap/dist/fonts' : 'bootstrap/dist/fonts',
@@ -111,14 +112,14 @@ module.exports = function(grunt) {
                     // DC
                     'dc/dc.js' : 'dc/dc.min.js',
                     'dc/dc.css' : 'dc/dc.css',
-                    // Freebase API
-                    'freebase/client_side/freebase.js' : 'freebase/client_side/freebase.min.js',
                     // JQuery
-                    'jquery/jquery.js' : 'jquery/jquery.min.js',
+                    'jquery/dist/jquery.js' : 'jquery/dist/jquery.min.js',
                     // JQuery UI
                     'jquery-ui/ui/jquery-ui.js' : 'jquery-ui/ui/minified/jquery-ui.min.js',
-                    'jquery-ui/themes/base/jquery.ui.core.css' : 'jquery-ui/themes/base/minified/jquery.ui.core.min.css',
-                    'jquery-ui/themes/base/jquery.ui.resizable.css' : 'jquery-ui/themes/base/minified/jquery.ui.resizable.min.css',
+                    'jquery-ui/themes/base/jquery.ui.core.css' :
+                        'jquery-ui/themes/base/minified/jquery.ui.core.min.css',
+                    'jquery-ui/themes/base/jquery.ui.resizable.css' :
+                        'jquery-ui/themes/base/minified/jquery.ui.resizable.min.css',
                     // Math JS
                     'mathjs/dist/math.js' : 'mathjs/dist/math.min.js',
                     // Moment JS
@@ -130,8 +131,10 @@ module.exports = function(grunt) {
                     // TopoJson
                     'topojson/topojson.js' : 'topojson/topojson.js',
                     // TopoJson Exports
-                    'topojsonexports/world-atlas/topo/ne_50m_admin_0_countries_lakes.json' : 'topojsonexports/world-atlas/topo/ne_50m_admin_0_countries_lakes.json',
-                    'topojsonexports/world-atlas/topo/ne_50m_us_states_lakes.json' : 'topojsonexports/world-atlas/topo/ne_50m_us_states_lakes.json',
+                    'topojsonexports/world-atlas/topo/ne_50m_admin_0_countries_lakes.json' :
+                        'topojsonexports/world-atlas/topo/ne_50m_admin_0_countries_lakes.json',
+                    'topojsonexports/world-atlas/topo/ne_50m_us_states_lakes.json' :
+                        'topojsonexports/world-atlas/topo/ne_50m_us_states_lakes.json',
                     // Underscore
                     'underscore/underscore.js' : 'underscore/underscore.js'
                 }

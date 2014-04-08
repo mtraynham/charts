@@ -1,4 +1,5 @@
-angular.module('charts').controller('Example2Ctrl', ['$scope', 'CrossfilterService', function($scope, CrossfilterService) {
+angular.module('charts').controller('Example2Ctrl', ['$scope', 'CrossfilterService',
+    function($scope, CrossfilterService) {
 
     var timeFormat = d3.time.format("%b %e, %Y");
     var numberFormat = d3.format(".2f");
