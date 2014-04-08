@@ -230,8 +230,16 @@ module.exports = function(grunt) {
             }
         },
         jshint : {
-            files : [ '<%= src.js %>' ],
+            files : [ 'GruntFile.js', '<%= src.js %>' ],
             options : {
+                indent:4,
+                camelcase: true,
+                maxlen: 120,
+                multistr: true,
+                undef: true,
+                funcscope: true,
+                loopfunc: true,
+                asi: true,
                 curly : true,
                 eqeqeq : true,
                 immed : true,
@@ -241,7 +249,20 @@ module.exports = function(grunt) {
                 sub : true,
                 boss : true,
                 eqnull : true,
-                globals : {}
+                globals : {
+                    "angular": false,
+                    "colorbrewer": false,
+                    "crossfilter": false,
+                    "d3": false,
+                    "dc": false,
+                    "grunt": false,
+                    "module": false,
+                    "moment": false,
+                    "queue": false,
+                    "sprintf": false,
+                    "topojson": false,
+                    "_": false
+                }
             }
         }
     });

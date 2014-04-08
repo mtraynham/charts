@@ -38,7 +38,9 @@ angular.module('charts').controller('Example2Ctrl', ['$scope', 'CrossfilterServi
      */
     function parseData(data, callback) {
         d3.csv(data, function(row) {
+            /* jshint camelcase: false */
             row.critic_score = CrossfilterService.coerceNumber(row.critic_score);
+            /* jshint camelcase: true */
             row.genre = CrossfilterService.coerceArray(row.genre);
             row.platform = CrossfilterService.coerceString(row.platform);
             row.publisher = CrossfilterService.coerceString(row.publisher);
@@ -98,42 +100,42 @@ angular.module('charts').controller('Example2Ctrl', ['$scope', 'CrossfilterServi
         var dimension2 = index.dimension(platformAccessor),
             group2 = dimension2.group().reduce(function(p, v) {
                 ++p.count;
-                var critic_score = criticScoreAccessor(v);
-                if(critic_score) {
-                    ++p.critic_count;
-                    p.critic_sum += critic_score;
+                var criticScore = criticScoreAccessor(v);
+                if(criticScore) {
+                    ++p.criticCount;
+                    p.criticSum += criticScore;
                 }
-                var user_score = scoreAccessor(v);
-                if(user_score) {
-                    ++p.user_count;
-                    p.user_sum += user_score;
+                var userScore = scoreAccessor(v);
+                if(userScore) {
+                    ++p.userCount;
+                    p.userSum += userScore;
                 }
                 return p;
             }, function(p, v) {
                 --p.count;
-                var critic_score = criticScoreAccessor(v);
-                if(critic_score) {
-                    --p.critic_count;
-                    p.critic_sum -= critic_score;
+                var criticScore = criticScoreAccessor(v);
+                if(criticScore) {
+                    --p.criticCount;
+                    p.criticSum -= criticScore;
                 }
-                var user_score = scoreAccessor(v);
-                if(user_score) {
-                    --p.user_count;
-                    p.user_sum -= user_score;
+                var userScore = scoreAccessor(v);
+                if(userScore) {
+                    --p.userCount;
+                    p.userSum -= userScore;
                 }
                 return p;
             }, function() {
                 return {
                     count: 0,
-                    user_count: 0,
-                    user_sum: 0,
-                    user_avg : function() {
-                        return this.user_sum / this.user_count;
+                    userCount: 0,
+                    userSum: 0,
+                    userAvg : function() {
+                        return this.userSum / this.userCount;
                     },
-                    critic_count: 0,
-                    critic_sum: 0,
-                    critic_avg : function() {
-                        return this.critic_sum / this.critic_count;
+                    criticCount: 0,
+                    criticSum: 0,
+                    criticAvg : function() {
+                        return this.criticSum / this.criticCount;
                     }
                 };
             }),
@@ -143,10 +145,10 @@ angular.module('charts').controller('Example2Ctrl', ['$scope', 'CrossfilterServi
             .dimension(dimension2)
             .group(group2)
             .keyAccessor(function (p) {
-                return p.value.critic_avg();
+                return p.value.criticAvg();
             })
             .valueAccessor(function (p) {
-                return p.value.user_avg();
+                return p.value.userAvg();
             })
             .radiusValueAccessor(function (p) {
                 return p.value.count;
@@ -167,8 +169,8 @@ angular.module('charts').controller('Example2Ctrl', ['$scope', 'CrossfilterServi
             .title(function (p) {
                 return [p.key,
                    "# of Titles: " + p.value.count,
-                   "Average Critic Score: " + numberFormat(p.value.critic_avg()),
-                   "Average User Score: " + numberFormat(p.value.user_avg())]
+                   "Average Critic Score: " + numberFormat(p.value.criticAvg()),
+                   "Average User Score: " + numberFormat(p.value.userAvg())]
                    .join("\n");
             })
             .colorAccessor(function (d) {

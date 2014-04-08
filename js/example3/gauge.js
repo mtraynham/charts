@@ -2,6 +2,8 @@
     dc.gauge = function(parent, chartGroup) {
         var _chart = dc.colorMixin(dc.marginMixin(dc.baseMixin({})));
 
+        var _g;
+
         var _gaugeCssClass = "gauge";
         var _sliceCssClass = "pie-slice";
         var _sliceLabelsCssClass = "pie-slice-labels";
