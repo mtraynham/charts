@@ -1,9 +1,9 @@
-angular.module('charts').controller('Example3Ctrl', ['$scope', function($scope) {
+angular.module('charts').controller('Example3Ctrl', ['$scope', function ($scope) {
 
-    var Attribute = function(data) {
+    var Attribute = function (data) {
         angular.extend(this, data);
     };
-    Attribute.prototype.getValueOrDefault = function() {
+    Attribute.prototype.getValueOrDefault = function () {
         return this.value !== null && typeof this.value !== 'undefined' ? this.value : this.defaultValue;
     };
 
@@ -134,7 +134,7 @@ angular.module('charts').controller('Example3Ctrl', ['$scope', function($scope) 
         .dimension(dimension1)
         .group(group1);
 
-    $scope.updateAttributes = function(render) {
+    $scope.updateAttributes = function (render) {
         chart1.gap($scope.attributes.gap.getValueOrDefault());
         chart1.domain([ $scope.attributes.domainMin.getValueOrDefault(),
             $scope.attributes.domainMax.getValueOrDefault() ]);
@@ -159,7 +159,7 @@ angular.module('charts').controller('Example3Ctrl', ['$scope', function($scope) 
         chart1.textY($scope.attributes.textY.getValueOrDefault());
         chart1.textRotation($scope.attributes.textRotation.getValueOrDefault());
 
-        if(render) {
+        if (render) {
             chart1.render();
         } else {
             chart1.redraw();

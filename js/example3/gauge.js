@@ -1,5 +1,5 @@
-(function() {
-    dc.gauge = function(parent, chartGroup) {
+(function () {
+    dc.gauge = function (parent, chartGroup) {
         var _chart = dc.colorMixin(dc.marginMixin(dc.baseMixin({})));
 
         var _g;
@@ -34,8 +34,8 @@
 
         var numberFormat = d3.format("s");
 
-        _chart.margins({top:0, left: 0, right: 0, bottom: 35});
-        _chart.label(function(d) { return numberFormat(d); });
+        _chart.margins({top: 0, left: 0, right: 0, bottom: 35});
+        _chart.label(function (d) { return numberFormat(d); });
         _chart.data(null);
 
         function deg2rad(deg) {
@@ -55,7 +55,7 @@
         }
 
         function tweenPie(radius, innerRadius) {
-            return function(b) {
+            return function (b) {
                 b.innerRadius = innerRadius;
                 var current = this._current;
                 if (!current || isNaN(current.startAngle) || isNaN(current.endAngle)) {
@@ -66,14 +66,14 @@
                 }
                 var i = d3.interpolate(current, b);
                 this._current = i(0);
-                return function(t) {
+                return function (t) {
                     return safeArc(i(t), 0, d3.svg.arc().outerRadius(radius).innerRadius(innerRadius));
                 };
             };
         }
 
         function needlePath(value, domain, minAngle, maxAngle, length, radius) {
-            var thetaRadian = deg2rad((maxAngle - minAngle) *  (value - domain[0])/(domain[1] - domain[0]));
+            var thetaRadian = deg2rad((maxAngle - minAngle) *  (value - domain[0]) / (domain[1] - domain[0]));
 
             var topX = -length * Math.cos(thetaRadian),
                 topY = -length * Math.sin(thetaRadian),
@@ -86,13 +86,13 @@
         }
 
         function drawChart() {
-            if(!_g) {
+            if (!_g) {
                 return;
             }
 
             var width = _chart.width() / 2 - _chart.margins().left - _chart.margins().right;
             var height = _chart.height() - _chart.margins().top - _chart.margins().bottom;
-            var radius = (_radius ? _radius : Math.min( width, height )) - _externalRadiusPadding;
+            var radius = (_radius ? _radius : Math.min(width, height)) - _externalRadiusPadding;
 
             // TODO Smarter centering?
             _g.attr("transform", "translate(" + (_chart.width() / 2 + _chart.margins().left - _chart.margins().right) +
@@ -109,20 +109,20 @@
              * Slices
              *****************************************************************/
             var pie = d3.layout.pie().sort(null).startAngle(startRadian)
-                .endAngle(endRadian).value(function(d) { return d.value; });
-            var pieData = pie(d3.range(_slices).map(function(d, i) {
-                return { key: i, value: 1/_slices };
+                .endAngle(endRadian).value(function (d) { return d.value; });
+            var pieData = pie(d3.range(_slices).map(function (d, i) {
+                return { key: i, value: 1 / _slices };
             }));
-            if(_gap) {
+            if (_gap) {
                 // TODO Even padding?
                 //var padding = (_maxAngle - _minAngle)/_slices -
                 //  (_maxAngle - _minAngle - _gap * (_slices - 1)) / _slices;
                 var padding = deg2rad(_gap / 2);
-                pieData = pieData.map(function(datum, index, array) {
-                    if(index !== 0) {
+                pieData = pieData.map(function (datum, index, array) {
+                    if (index !== 0) {
                         datum.startAngle += padding;
                     }
-                    if(index !== array.length - 1) {
+                    if (index !== array.length - 1) {
                         datum.endAngle -= padding;
                     }
                     return datum;
@@ -134,22 +134,22 @@
             var slices = gauge.selectAll("g." + _sliceCssClass).data(pieData);
 
             // Create elements
-            var slicesEnter = slices.enter().append("g").attr("class", function(d, i) {
+            var slicesEnter = slices.enter().append("g").attr("class", function (d, i) {
                 return _sliceCssClass + " _" + i;
             });
-            var slicePath = slicesEnter.append("path").attr("fill", fill).attr("d", function(d, i) {
+            var slicePath = slicesEnter.append("path").attr("fill", fill).attr("d", function (d, i) {
                 return safeArc(d, i, arc);
             });
-            dc.transition(slicePath, _chart.transitionDuration(), function(s) {
+            dc.transition(slicePath, _chart.transitionDuration(), function (s) {
                 s.attrTween("d", tweenPie(radius, innerRadius, endRadian, endRadian));
             });
 
             // Update elements
             var slicePaths = gauge.selectAll("g." + _sliceCssClass)
-                .data(pieData).select("path").attr("d", function(d, i) {
+                .data(pieData).select("path").attr("d", function (d, i) {
                 return safeArc(d, i, arc);
             });
-            dc.transition(slicePaths, _chart.transitionDuration(), function(s) {
+            dc.transition(slicePaths, _chart.transitionDuration(), function (s) {
                 s.attrTween("d", tweenPie(radius, innerRadius));
             }).attr("fill", fill);
 
@@ -165,13 +165,13 @@
             // Update Labels
             var labels = gauge.selectAll("text." + _sliceLabelsCssClass)
                 .data(_chart.renderLabel() ? labelData : []);
-            var labelsEnter = labels.enter().append("text").attr("class", function(d, i) {
+            var labelsEnter = labels.enter().append("text").attr("class", function (d, i) {
                 return _sliceLabelsCssClass + " _" + i;
             });
-            dc.transition(labels, _chart.transitionDuration()).attr("transform", function(d) {
-                var newAngle = _minAngle + ( (_maxAngle - _minAngle) * labelScale(d));
+            dc.transition(labels, _chart.transitionDuration()).attr("transform", function (d) {
+                var newAngle = _minAngle + ((_maxAngle - _minAngle) * labelScale(d));
                 return 'rotate(' + newAngle + ') translate(0,' + -(radius + _labelPadding) + ')';
-            }).attr("text-anchor", "middle").text(function(d) {
+            }).attr("text-anchor", "middle").text(function (d) {
                 return _chart.label()(d);
             });
             labels.exit().remove();
@@ -180,10 +180,10 @@
              * Needle
              *****************************************************************/
             var needleValue = _chart.data();
-            if(needleValue) {
+            if (needleValue) {
                 needleValue = _chart.valueAccessor()(needleValue);
             }
-            if(!needleValue) {
+            if (!needleValue) {
                 needleValue = _needleValue;
             }
 
@@ -203,17 +203,17 @@
              *****************************************************************/
             // Update text
             var text = _g.select("text." + _gaugeTextCssClass);
-            dc.transition(text, _chart.transitionDuration()).attr("transform", function(d) {
+            dc.transition(text, _chart.transitionDuration()).attr("transform", function (d) {
                 return 'rotate(' + _textRotation + ') translate(' + _textX + ',' + _textY + ')';
             })
             .attr("text-anchor", "middle")
             .attr("fill", _textColor)
-            .text(function(d) {
+            .text(function (d) {
                 return _text;
             });
         }
 
-        _chart._doRender = function() {
+        _chart._doRender = function () {
             _chart.resetSvg();
             _g = _chart.svg().append("g");
             _g.append('g').attr('class', _gaugeCssClass);
@@ -228,12 +228,12 @@
             return _chart;
         };
 
-        _chart._doRedraw = function() {
+        _chart._doRedraw = function () {
             drawChart();
             return _chart;
         };
 
-        _chart.domain = function(_) {
+        _chart.domain = function (_) {
             if (!arguments.length) {
                 return _domain;
             }
@@ -241,7 +241,7 @@
             return _chart;
         };
 
-        _chart.externalRadiusPadding = function(_) {
+        _chart.externalRadiusPadding = function (_) {
             if (!arguments.length) {
                 return _externalRadiusPadding;
             }
@@ -249,7 +249,7 @@
             return _chart;
         };
 
-        _chart.gap = function(_) {
+        _chart.gap = function (_) {
             if (!arguments.length) {
                 return _gap;
             }
@@ -257,7 +257,7 @@
             return _chart;
         };
 
-        _chart.innerRadiusPercentage = function(_) {
+        _chart.innerRadiusPercentage = function (_) {
             if (!arguments.length) {
                 return _innerRadiusPercentage;
             }
@@ -265,7 +265,7 @@
             return _chart;
         };
 
-        _chart.labelPadding = function(_) {
+        _chart.labelPadding = function (_) {
             if (!arguments.length) {
                 return _labelPadding;
             }
@@ -273,7 +273,7 @@
             return _chart;
         };
 
-        _chart.maxAngle = function(_) {
+        _chart.maxAngle = function (_) {
             if (!arguments.length) {
                 return _maxAngle;
             }
@@ -281,7 +281,7 @@
             return _chart;
         };
 
-        _chart.minAngle = function(_) {
+        _chart.minAngle = function (_) {
             if (!arguments.length) {
                 return _minAngle;
             }
@@ -289,7 +289,7 @@
             return _chart;
         };
 
-        _chart.needleColor = function(_) {
+        _chart.needleColor = function (_) {
             if (!arguments.length) {
                 return _needleColor;
             }
@@ -297,7 +297,7 @@
             return _chart;
         };
 
-        _chart.needleLengthPercentage = function(_) {
+        _chart.needleLengthPercentage = function (_) {
             if (!arguments.length) {
                 return _needleLengthPercentage;
             }
@@ -305,7 +305,7 @@
             return _chart;
         };
 
-        _chart.needleRadius = function(_) {
+        _chart.needleRadius = function (_) {
             if (!arguments.length) {
                 return _needleRadius;
             }
@@ -313,7 +313,7 @@
             return _chart;
         };
 
-        _chart.needleValue = function(_) {
+        _chart.needleValue = function (_) {
             if (!arguments.length) {
                 return _needleValue;
             }
@@ -321,7 +321,7 @@
             return _chart;
         };
 
-        _chart.radius = function(_) {
+        _chart.radius = function (_) {
             if (!arguments.length) {
                 return _radius;
             }
@@ -329,7 +329,7 @@
             return _chart;
         };
 
-        _chart.slices = function(_) {
+        _chart.slices = function (_) {
             if (!arguments.length) {
                 return _slices;
             }
@@ -337,7 +337,7 @@
             return _chart;
         };
 
-        _chart.text = function(_) {
+        _chart.text = function (_) {
             if (!arguments.length) {
                 return _text;
             }
@@ -345,7 +345,7 @@
             return _chart;
         };
 
-        _chart.textColor = function(_) {
+        _chart.textColor = function (_) {
             if (!arguments.length) {
                 return _textColor;
             }
@@ -353,7 +353,7 @@
             return _chart;
         };
 
-        _chart.textX = function(_) {
+        _chart.textX = function (_) {
             if (!arguments.length) {
                 return _textX;
             }
@@ -361,7 +361,7 @@
             return _chart;
         };
 
-        _chart.textY = function(_) {
+        _chart.textY = function (_) {
             if (!arguments.length) {
                 return _textY;
             }
@@ -369,7 +369,7 @@
             return _chart;
         };
 
-        _chart.textRotation = function(_) {
+        _chart.textRotation = function (_) {
             if (!arguments.length) {
                 return _textRotation;
             }

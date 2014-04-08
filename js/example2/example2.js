@@ -1,5 +1,5 @@
 angular.module('charts').controller('Example2Ctrl', ['$scope', 'CrossfilterService',
-    function($scope, CrossfilterService) {
+    function ($scope, CrossfilterService) {
 
     var timeFormat = d3.time.format("%b %e, %Y");
     var numberFormat = d3.format(".2f");
@@ -37,7 +37,7 @@ angular.module('charts').controller('Example2Ctrl', ['$scope', 'CrossfilterServi
       * url: "/game/playstation-3/de"
      */
     function parseData(data, callback) {
-        d3.csv(data, function(row) {
+        d3.csv(data, function (row) {
             /* jshint camelcase: false */
             row.critic_score = CrossfilterService.coerceNumber(row.critic_score);
             /* jshint camelcase: true */
@@ -50,7 +50,7 @@ angular.module('charts').controller('Example2Ctrl', ['$scope', 'CrossfilterServi
             row.title = CrossfilterService.coerceString(row.title);
             row.url = CrossfilterService.coerceString(row.url);
             return row;
-        }, function(data) {
+        }, function (data) {
             callback(null, data);
         });
     }
@@ -66,11 +66,11 @@ angular.module('charts').controller('Example2Ctrl', ['$scope', 'CrossfilterServi
             publisherAccessor = CrossfilterService.accessor("publisher"),
             ratingAccessor = CrossfilterService.accessor("rating"),
             releaseAccessor = CrossfilterService.accessor("release"),
-            releaseByMonthAccessor = function(d) {
+            releaseByMonthAccessor = function (d) {
                 var date = releaseAccessor(d);
                 return new Date(date.getFullYear(), date.getMonth());
             },
-            releaseByYearAccessor = function(d) {
+            releaseByYearAccessor = function (d) {
                 return new Date(releaseAccessor(d).getFullYear());
             },
             scoreAccessor = CrossfilterService.accessor("score"),
@@ -91,50 +91,50 @@ angular.module('charts').controller('Example2Ctrl', ['$scope', 'CrossfilterServi
             .cap(20)
             .gap(1)
             .labelOffsetY(13)
-            .colors(function(d) {
+            .colors(function (d) {
                 return colors.get(d);
             });
         chart1.render();
 
         // Chart 2
         var dimension2 = index.dimension(platformAccessor),
-            group2 = dimension2.group().reduce(function(p, v) {
+            group2 = dimension2.group().reduce(function (p, v) {
                 ++p.count;
                 var criticScore = criticScoreAccessor(v);
-                if(criticScore) {
+                if (criticScore) {
                     ++p.criticCount;
                     p.criticSum += criticScore;
                 }
                 var userScore = scoreAccessor(v);
-                if(userScore) {
+                if (userScore) {
                     ++p.userCount;
                     p.userSum += userScore;
                 }
                 return p;
-            }, function(p, v) {
+            }, function (p, v) {
                 --p.count;
                 var criticScore = criticScoreAccessor(v);
-                if(criticScore) {
+                if (criticScore) {
                     --p.criticCount;
                     p.criticSum -= criticScore;
                 }
                 var userScore = scoreAccessor(v);
-                if(userScore) {
+                if (userScore) {
                     --p.userCount;
                     p.userSum -= userScore;
                 }
                 return p;
-            }, function() {
+            }, function () {
                 return {
                     count: 0,
                     userCount: 0,
                     userSum: 0,
-                    userAvg : function() {
+                    userAvg : function () {
                         return this.userSum / this.userCount;
                     },
                     criticCount: 0,
                     criticSum: 0,
-                    criticAvg : function() {
+                    criticAvg : function () {
                         return this.criticSum / this.criticCount;
                     }
                 };
@@ -176,7 +176,7 @@ angular.module('charts').controller('Example2Ctrl', ['$scope', 'CrossfilterServi
             .colorAccessor(function (d) {
                 return d.key;
             })
-            .colors(function(d) {
+            .colors(function (d) {
                 return colors.get(d);
             });
         chart2.render();
@@ -205,7 +205,7 @@ angular.module('charts').controller('Example2Ctrl', ['$scope', 'CrossfilterServi
             .colorAccessor(function (d) {
                 return d.key;
             })
-            .colors(function(d) {
+            .colors(function (d) {
                 return colors.get(d);
             });
         chart3.render();

@@ -1,4 +1,4 @@
-angular.module('charts').controller('Example1Ctrl', ['$scope', 'GeoService', function($scope, GeoService) {
+angular.module('charts').controller('Example1Ctrl', ['$scope', 'GeoService', function ($scope, GeoService) {
 
     // Ignored datums (Country Name)
     var ignoredDatums = d3.set([
@@ -56,27 +56,27 @@ angular.module('charts').controller('Example1Ctrl', ['$scope', 'GeoService', fun
      * Flattens keys of nest
      */
     function parseData(data, callback) {
-        d3.csv(data, function(row) {
-            if(ignoredDatums.has(row["Country Name"])) {
+        d3.csv(data, function (row) {
+            if (ignoredDatums.has(row["Country Name"])) {
                 return null;
             }
-            if(GeoService.countryISO3to2.has(row["Country Code"])) {
+            if (GeoService.countryISO3to2.has(row["Country Code"])) {
                 row["Country Code"] = GeoService.countryISO3to2.get(row["Country Code"]);
             }
             var years = [];
-            for(var key in row) {
-                if(key === "") {
+            for (var key in row) {
+                if (key === "") {
                     delete row[key];
-                } else if(!isNaN(key)) {
+                } else if (!isNaN(key)) {
                     years.push({year: key, value: !isNaN(row[key]) ? +row[key] : 0});
                     delete row[key];
                 }
             }
             row.years = years;
             return row;
-        }, function(data) {
-            data = data.reduce(function(previous, current) {
-                for(var i = 0; i < current.years.length; i++) {
+        }, function (data) {
+            data = data.reduce(function (previous, current) {
+                for (var i = 0; i < current.years.length; i++) {
                     previous.push({
                         "Country Name" : current["Country Name"],
                         "Country Code" : current["Country Code"],
@@ -89,20 +89,20 @@ angular.module('charts').controller('Example1Ctrl', ['$scope', 'GeoService', fun
                 return previous;
             }, []);
             data = d3.nest()
-                .key(function(d) { return d["Country Name"]; })
-                .key(function(d) { return d.Year; })
-                .rollup(function(values) {
-                    return values.reduce(function(previous, current) {
+                .key(function (d) { return d["Country Name"]; })
+                .key(function (d) { return d.Year; })
+                .rollup(function (values) {
+                    return values.reduce(function (previous, current) {
                         previous["Country Code"] = current["Country Code"];
                         previous[current["Indicator Name"]] = current.Value;
                         return previous;
                     }, {});
                 })
                 .entries(data);
-            data = data.reduce(function(previous, current) {
+            data = data.reduce(function (previous, current) {
                 var countryName = current.key;
                 var countryValues = current.values;
-                for(var i = 0; i < countryValues.length; i++) {
+                for (var i = 0; i < countryValues.length; i++) {
                     var year  = countryValues[i].key;
                     var yearValues = countryValues[i].values;
                     yearValues["Country Name"] = countryName;
@@ -121,8 +121,8 @@ angular.module('charts').controller('Example1Ctrl', ['$scope', 'GeoService', fun
     function render(error, data, worldGeoFeatures) {
 
         // Easy accessor function
-        var accessor = function(property) {
-            return function(d) {
+        var accessor = function (property) {
+            return function (d) {
                 return d[property];
             };
         };
@@ -216,10 +216,10 @@ angular.module('charts').controller('Example1Ctrl', ['$scope', 'GeoService', fun
                 .scale((chart5Width + 1) / 2 / Math.PI)
                 .translate([ chart5Width / 2, chart5Height / 1.8 ])
             );
-        chart5.on("preRender", function(chart) {
+        chart5.on("preRender", function (chart) {
             chart.colorDomain(d3.extent(chart.data(), chart.valueAccessor()));
         });
-        chart5.on("preRedraw", function(chart) {
+        chart5.on("preRedraw", function (chart) {
             chart.colorDomain(d3.extent(chart.data(), chart.valueAccessor()));
         });
         chart5.render();
@@ -245,10 +245,10 @@ angular.module('charts').controller('Example1Ctrl', ['$scope', 'GeoService', fun
                 .scale((chart6Width + 1) / 2 / Math.PI)
                 .translate([ chart6Width / 2, chart6Height / 1.8 ])
             );
-        chart6.on("preRender", function(chart) {
+        chart6.on("preRender", function (chart) {
             chart.colorDomain(d3.extent(chart.data(), chart.valueAccessor()));
         });
-        chart6.on("preRedraw", function(chart) {
+        chart6.on("preRedraw", function (chart) {
             chart.colorDomain(d3.extent(chart.data(), chart.valueAccessor()));
         });
         chart6.render();

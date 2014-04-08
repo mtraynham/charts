@@ -1,4 +1,4 @@
-module.exports = function(grunt) {
+module.exports = function (grunt) {
 
     grunt.loadNpmTasks('grunt-bowercopy');
     grunt.loadNpmTasks('grunt-contrib-concat');
@@ -19,7 +19,7 @@ module.exports = function(grunt) {
     grunt.registerTask('server', [ 'default', 'express:dev', 'watch' ]);
 
     // Print a timestamp (useful for when watching)
-    grunt.registerTask('timestamp', function() {
+    grunt.registerTask('timestamp', function () {
         grunt.log.subhead(Date());
     });
 
@@ -215,10 +215,10 @@ module.exports = function(grunt) {
                 dest: '<%= distdir %>/<%= pkg.name %>.min.js'
             }
         },
-        watch:{
+        watch: {
             build: {
-                files:['<%= src.js %>', '<%= src.tpl %>', '<%= src.html %>', '<%= src.lessWatch %>'],
-                tasks:['default', 'timestamp']
+                files: ['<%= src.js %>', '<%= src.tpl %>', '<%= src.html %>', '<%= src.lessWatch %>'],
+                tasks: ['default', 'timestamp']
             }
         },
         express : {
@@ -232,23 +232,24 @@ module.exports = function(grunt) {
         jshint : {
             files : [ 'GruntFile.js', '<%= src.js %>' ],
             options : {
-                indent:4,
-                camelcase: true,
-                maxlen: 120,
-                multistr: true,
-                undef: true,
-                funcscope: true,
-                loopfunc: true,
                 asi: true,
+                boss : true,
+                camelcase: true,
                 curly : true,
                 eqeqeq : true,
+                eqnull : true,
+                funcscope: true,
                 immed : true,
+                indent: 4,
                 latedef : true,
+                loopfunc: true,
+                maxlen: 120,
+                multistr: true,
                 newcap : true,
                 noarg : true,
                 sub : true,
-                boss : true,
-                eqnull : true,
+                undef: true,
+                white: true,
                 globals : {
                     "angular": false,
                     "colorbrewer": false,

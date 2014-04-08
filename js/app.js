@@ -1,5 +1,5 @@
 angular.module('charts').config(['$stateProvider', '$urlRouterProvider',
-    function($stateProvider, $urlRouterProvider) {
+    function ($stateProvider, $urlRouterProvider) {
 
     $stateProvider
         .state('example1', {
@@ -20,7 +20,7 @@ angular.module('charts').config(['$stateProvider', '$urlRouterProvider',
 
     $urlRouterProvider.otherwise("/example1");
 
-} ]).controller('AppCtrl', [ '$scope', '$state', function($scope, $state) {
+} ]).controller('AppCtrl', [ '$scope', '$state', function ($scope, $state) {
     $scope.$state = $state;
 
 } ]);
