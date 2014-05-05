@@ -16,6 +16,11 @@ angular.module('charts').config(['$stateProvider', '$urlRouterProvider',
             url: '/example3',
             templateUrl : 'example3/example3.tpl.html',
             controller : 'Example3Ctrl'
+        })
+        .state('example4', {
+            url: '/example4',
+            templateUrl : 'example4/example4.tpl.html',
+            controller : 'Example4Ctrl'
         });
 
     $urlRouterProvider.otherwise("/example1");

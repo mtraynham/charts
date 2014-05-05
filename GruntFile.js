@@ -82,11 +82,10 @@ module.exports = function (grunt) {
                     'sprintf/src/sprintf.js' : 'sprintf/src/sprintf.js',
                     // TopoJson
                     'topojson/topojson.js' : 'topojson/topojson.js',
-                    // TopoJson Exports
-                    'topojsonexports/world-atlas/topo/ne_50m_admin_0_countries_lakes.json' :
-                        'topojsonexports/world-atlas/topo/ne_50m_admin_0_countries_lakes.json',
-                    'topojsonexports/world-atlas/topo/ne_50m_us_states_lakes.json' :
-                        'topojsonexports/world-atlas/topo/ne_50m_us_states_lakes.json',
+                    // Topojson Exports
+                    'topojsonexports/world-atlas/topo' : 'topojsonexports/world-atlas/topo',
+                    // Natural Earth Topojson
+                    'natural-earth-topo/topojson' : 'natural-earth-topo/topojson',
                     // Underscore
                     'underscore/underscore.js' : 'underscore/underscore.js'
                 }
@@ -130,11 +129,10 @@ module.exports = function (grunt) {
                     'sprintf/src/sprintf.js' : 'sprintf/src/sprintf.min.js',
                     // TopoJson
                     'topojson/topojson.js' : 'topojson/topojson.js',
-                    // TopoJson Exports
-                    'topojsonexports/world-atlas/topo/ne_50m_admin_0_countries_lakes.json' :
-                        'topojsonexports/world-atlas/topo/ne_50m_admin_0_countries_lakes.json',
-                    'topojsonexports/world-atlas/topo/ne_50m_us_states_lakes.json' :
-                        'topojsonexports/world-atlas/topo/ne_50m_us_states_lakes.json',
+                    // Topojson Exports
+                    'topojsonexports/world-atlas/topo' : 'topojsonexports/world-atlas/topo',
+                    // Natural Earth Topojson
+                    'natural-earth-topo/topojson' : 'natural-earth-topo/topojson',
                     // Underscore
                     'underscore/underscore.js' : 'underscore/underscore.js'
                 }
