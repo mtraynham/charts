@@ -23,7 +23,7 @@ angular.module('charts').config(['$stateProvider', '$urlRouterProvider',
             controller : 'Example4Ctrl'
         });
 
-    $urlRouterProvider.otherwise("/example1");
+    $urlRouterProvider.otherwise("/example4");
 
 } ]).controller('AppCtrl', [ '$scope', '$state', function ($scope, $state) {
     $scope.$state = $state;
