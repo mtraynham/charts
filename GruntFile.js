@@ -130,7 +130,7 @@ module.exports = function (grunt) {
                     // Queue
                     'queue-async/queue.js' : 'queue-async/queue.min.js',
                     // Sprint F
-                    'sprintf/src/sprintf.js' : 'sprintf/src/sprintf.min.js',
+                    'sprintf/src/sprintf.js' : 'sprintf/dist/sprintf.min.js',
                     // TopoJson
                     'topojson/topojson.js' : 'topojson/topojson.js',
                     // Topojson Exports
