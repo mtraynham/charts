@@ -63,6 +63,8 @@ module.exports = function (grunt) {
                     'crossfilter/crossfilter.js' : 'crossfilter/crossfilter.js',
                     // D3
                     'd3/d3.js' : 'd3/d3.js',
+                    // D3 Geo Projection
+                    'd3-geo-projection/d3.geo.projection.js' : 'd3-geo-projection/d3.geo.projection.js',
                     // DC
                     'dc/dc.js' : 'dc/dc.js',
                     'dc/dc.css' : 'dc/dc.css',
@@ -108,6 +110,8 @@ module.exports = function (grunt) {
                     'crossfilter/crossfilter.js' : 'crossfilter/crossfilter.min.js',
                     // D3
                     'd3/d3.js' : 'd3/d3.min.js',
+                    // D3 Geo Projection
+                    'd3-geo-projection/d3.geo.projection.js' : 'd3-geo-projection/d3.geo.projection.min.js',
                     // DC
                     'dc/dc.js' : 'dc/dc.min.js',
                     'dc/dc.css' : 'dc/dc.css',
