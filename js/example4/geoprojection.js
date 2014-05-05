@@ -32,7 +32,7 @@ angular.module('charts').factory('GeoProjection', function () {
     };
 
     /**
-     * Scale the projection to the width and height
+     * Zoom the projection to the width and height
      *
      * Based on:
      * http://stackoverflow.com/questions/14492284/center-a-map-in-d3-given-a-geojson-object
@@ -44,7 +44,7 @@ angular.module('charts').factory('GeoProjection', function () {
      * @param {Float} scale
      * @return {d3.geo.projection}
      */
-    GeoProjection.prototype.scale = function (path, feature, width, height, scale) {
+    GeoProjection.prototype.zoom = function (path, feature, width, height, scale) {
         // Reset scale & translate
         path.projection().scale(1).translate([0, 0]);
         // Calculate new position
@@ -65,14 +65,19 @@ angular.module('charts').factory('GeoProjection', function () {
     Conic.prototype = Object.create(GeoProjection.prototype);
 
     /**
-     * Scale the projection to the width and height
+     * Zoom the projection to the width and height
+     *
+     * Based on:
+     * http://stackoverflow.com/questions/14492284/center-a-map-in-d3-given-a-geojson-object
+     *
+     *
      * @param {*} feature (topojson)
      * @param {Integer} width
      * #param {Integer} height
      * @param {Float} scale
      * @return {d3.geo.projection}
      */
-    Conic.prototype.scale = function (path, feature, width, height, scale) {
+    Conic.prototype.zoom = function (path, feature, width, height, scale) {
         // Reset scale & translate
         path.projection().scale(1).translate([0, 0]);
         // Calculate new position

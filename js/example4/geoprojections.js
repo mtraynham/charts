@@ -186,20 +186,20 @@ angular.module('charts').factory('Orthographic', ['GeoProjection', function (Geo
 }]);
 
 /**
- * Orthographic Projection
+ * Stereographic Projection
  */
-angular.module('charts').factory('Orthographic', ['GeoProjection', function (GeoProjection) {
+angular.module('analytics.core.geo').factory('Stereographic', ['GeoProjection', function (GeoProjection) {
 
-    var Orthographic = function (data) {
+    var Stereographic = function (data) {
         GeoProjection.call(this, data);
     };
-    Orthographic.prototype = Object.create(GeoProjection.prototype);
+    Stereographic.prototype = Object.create(GeoProjection.prototype);
 
-    Orthographic.type = Orthographic.prototype.type = "orthographic";
-    Orthographic.prototype.name = "Orthographic";
-    Orthographic.prototype.projection = d3.geo.orthographic();
+    Stereographic.type = Stereographic.prototype.type = "stereographic";
+    Stereographic.prototype.name = "Stereographic";
+    Stereographic.prototype.projection = d3.geo.stereographic();
 
-    return Orthographic;
+    return Stereographic;
 }]);
 
 /**
