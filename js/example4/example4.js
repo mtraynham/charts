@@ -1,3 +1,3 @@
-angular.module('charts').controller('Example4Ctrl', ['$scope', 'GeoService', function ($scope, GeoService) {
-    $scope.configs = GeoService.getConfigs();
+angular.module('charts').controller('Example4Ctrl', ['$scope', 'GeoConfigs', function ($scope, GeoConfigs) {
+    $scope.configs = GeoConfigs.getConfigs();
 }]);

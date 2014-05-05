@@ -188,7 +188,7 @@ angular.module('charts').factory('Orthographic', ['GeoProjection', function (Geo
 /**
  * Stereographic Projection
  */
-angular.module('analytics.core.geo').factory('Stereographic', ['GeoProjection', function (GeoProjection) {
+angular.module('charts').factory('Stereographic', ['GeoProjection', function (GeoProjection) {
 
     var Stereographic = function (data) {
         GeoProjection.call(this, data);
