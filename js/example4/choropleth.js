@@ -3,20 +3,21 @@
         var _chart = dc.colorMixin(dc.baseMixin({}));
 
         // PROPERTIES
-        var _layers = {},
+        var _allFeatures = [],
+            _layers = {},
             _graticule = d3.geo.graticule(),
             _projection = d3.geo.equirectangular(),
             _previousProjection = d3.geo.orthographic(),
             _path = d3.geo.path().projection(_projection),
             _projectionChanged = false,
-            _projectionZoom = function (path, features, height, width, scale) {
+            _projectionZoom = function (projection, features, height, width, scale) {
                 // Reset scale & translate
-                path.projection().scale(1).translate([0, 0]);
+                projection.scale(1).translate([0, 0]);
                 // Calculate new position
-                var b = path.bounds(features),
+                var b = d3.geo.path(projection).bounds(features),
                     s = (scale || 0.95) / Math.max((b[1][0] - b[0][0]) / width, (b[1][1] - b[0][1]) / height),
                     t = [(width - s * (b[1][0] + b[0][0])) / 2, (height - s * (b[1][1] + b[0][1])) / 2];
-                return path.projection().scale(s).translate(t);
+                return projection.scale(s).translate(t);
             },
             _title = function (layerName, data, titleFn) {
                 return function (d) {
@@ -66,6 +67,10 @@
             return getLayer(layerName).features;
         }
 
+        function getAllFeatures() {
+            return _allFeatures;
+        }
+
         function getLayer(layerName) {
             return _layers[layerName];
         }
@@ -80,11 +85,16 @@
                 name: name,
                 keyAccessor: keyAccessor
             };
+            _allFeatures = _allFeatures.concat(features);
             return _chart;
         };
 
         _chart.removeLayer = function (name) {
             delete _layers[name];
+            _allFeatures = [];
+            for (var key in _layers) {
+                _allFeatures = _allFeatures.concat(getFeatures(key));
+            }
         };
 
         // PROJECTION & PATH
