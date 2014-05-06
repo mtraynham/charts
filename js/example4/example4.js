@@ -185,6 +185,6 @@ angular.module('charts').controller('Example4Ctrl', ['$scope', 'GeoConfigs', 'Ge
 
     var q = queue();
     q.defer(parseData, 'data/14_Topic_en_csv_v2/14_Topic_en_csv_v2.csv');
-    GeoService.deferWorld50(q);
+    GeoService.deferUS50(q);
     q.await(render);
 }]);

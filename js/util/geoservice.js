@@ -14,7 +14,7 @@ angular.module('charts').service('GeoService', function () {
     this.deferUS50 = function (queue) {
         queue.defer(getTopoFeatures,
             'vendor/topojsonexports/world-atlas/topo/ne_50m_us_states_lakes.json',
-            'ne_50m_us_states_lakes');
+            'states');
     };
 
     var countryList = [

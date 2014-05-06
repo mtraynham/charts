@@ -146,19 +146,8 @@
             var data = _layeredData(_chart.data());
 
             for (var layerName in _layers) {
-                // Select layer
-                var layerG = _chart.svg().selectAll(layerSelector(layerName));
-
                 // Select path
-                var pathG = layerG.selectAll("path").data(getLayer(layerName).features);
-
-                // Add enter items
-                pathG.enter().append("path")
-                    .attr("fill", "white")
-                    .attr("d", _path)
-                    .on("click", function (d) {
-                        return _chart.onClick(d, layerName);
-                    }).append("title");
+                var pathG = _chart.svg().selectAll(layerSelector(layerName) + " path");
 
                 // Set selected color function
                 var hasData = isDataLayer(layerName);
@@ -173,27 +162,44 @@
                 });
 
                 // Update title
-                layerG.selectAll("path title").text(_chart.renderTitle() ?
+                pathG.selectAll("title").text(_chart.renderTitle() ?
                     _title(layerName, data, _chart.title()) : function () { return ""; });
             }
 
             // Update Paths
             if (_path.projection().alpha) {
-                var paths = _chart.svg().selectAll("path");
-                dc.transition(paths, _chart.transitionDuration()).attrTween("d", function () {
+                var g = _chart.svg().selectAll("g"),
+                    paths = g.selectAll("path"),
+                    n = 0;
+                dc.transition(g, _chart.transitionDuration()).tween("projection", function () {
                     return function (_) {
                         _path.projection().alpha(_);
-                        return _path;
+                        paths.attr('d', _path);
                     };
-                });
+                })
+                .each(function() { ++n; }) 
+                .each("end", function() { if (!--n) { _path.projection(_projection); } });
             }
         }
 
         _chart._doRender = function () {
             _chart.resetSvg();
-            _chart.svg().append("path").attr("class", "graticule").datum(_graticule).attr('d', _path);
+            var base = _chart.svg().append("g");
+
+            // Add graticule
+            base.append("path").attr("class", "graticule").datum(_graticule).attr('d', _path);
+
+            // Add layers
             for (var layerName in _layers) {
-                _chart.svg().append("g").attr("class", layerClass(layerName));
+                var pathG = base.append("g").attr("class", layerClass(layerName))
+                    .selectAll("path").data(getLayer(layerName).features)
+                    .enter()
+                        .append("path")
+                        .attr("fill", "white")
+                        .attr("d", _path)
+                        .on("click", function (d) {
+                            return _chart.onClick(d, layerName);
+                        }).append("title");
             }
             _chart._doRedraw();
         };
