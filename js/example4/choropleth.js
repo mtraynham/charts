@@ -165,9 +165,8 @@
                         t = _;
                         return path(d);
                     };
-                })
-                .each(function () { ++n; })
-                .each("end", function () { if (!--n) { _projectionChanged = false } });
+                });
+                _projectionChanged = false
             }
         }
 
