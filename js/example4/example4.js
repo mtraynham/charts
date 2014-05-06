@@ -1,9 +1,9 @@
 angular.module('charts').controller('Example4Ctrl', ['$scope', 'GeoConfigs', 'GeoProjectionFactory', 'GeoService',
     function ($scope, GeoConfigs, GeoProjectionFactory, GeoService) {
-    // $scope.configs = GeoConfigs.getConfigs();
-    // $scope.config = GeoConfigs.loadConfig($scope.configs.get('usStates'));
-    // $scope.projections = GeoProjectionFactory.types;
-    // $scope.projection = GeoProjectionFactory.create();
+
+    var chart = dc.choroplethChart("#chart")
+
+    $scope.projections = GeoProjectionFactory.types;
 
     // $scope.$watch('config', function (newConfig, oldConfig) {
     //     if (newConfig === oldConfig) {
@@ -13,14 +13,15 @@ angular.module('charts').controller('Example4Ctrl', ['$scope', 'GeoConfigs', 'Ge
     //     chart.redraw();
     // });
 
-    // $scope.$watch('projection', function (newProjection, oldProjection) {
-    //     if (newProjection === oldProjection) {
-    //         return;
-    //     }
-    //     chart.projection(newProjection);
-    //     chart.projectionZoom(newProjection.zoom);
-    //     chart.redraw();
-    // });
+    $scope.$watch('projectionType', function (newProjectionType, oldProjectionType) {
+        if (newProjectionType === oldProjectionType) {
+            return;
+        }
+        var projection = new GeoProjectionFactory.types[newProjectionType]()
+        chart.projection(projection.projection);
+        chart.projectionZoom(projection.zoom);
+        chart.redraw();
+    });
 
     // TESTING CHARTS
 
@@ -163,9 +164,8 @@ angular.module('charts').controller('Example4Ctrl', ['$scope', 'GeoConfigs', 'Ge
 
         // Chart
         var dimension = index.dimension(countryCodeAccessor),
-            group = dimension.group().reduceSum(receiptsAccessor),
-            chart = dc.choroplethChart("#chart")
-            .dimension(dimension)
+            group = dimension.group().reduceSum(receiptsAccessor);
+        chart.dimension(dimension)
             .group(group)
             .title(function (d) {
                 return "Country: " + GeoService.countryISO2toCountryName.get(d.key) +

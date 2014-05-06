@@ -176,6 +176,12 @@
                     return _chart.getColor(data[getKey(layerName, d)], i);
                 });
 
+                // Update path
+                //pathG.attr("d", _path);
+                // dc.transition(pathG, _chart.transitionDuration()).attr("d", function (d, i) {
+                //     return _chart.getColor(data[getKey(layerName, d)], i);
+                // });
+
                 // TODO Transition projection
 
                 layerG.selectAll("path title").text(_chart.renderTitle() ?

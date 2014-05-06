@@ -2,7 +2,12 @@
     <div class="row-fluid">
         <div class="col-sm-4">
             <form class="form-horizontal" role="form">
-
+                <div class="form-group">
+                    <label class="col-sm-5">Projection</label>
+                    <div class="col-sm-7">
+                        <select ng-model="projectionType" ng-options="key as key for (key, value) in projections"></select>
+                    </div>
+                </div>
             </form>
         </div>
         <div class="col-sm-8">
