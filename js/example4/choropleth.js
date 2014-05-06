@@ -2,44 +2,13 @@
     dc.choroplethChart = function (parent, chartGroup) {
         var _chart = dc.colorMixin(dc.baseMixin({}));
 
-        function interpolatedProjection(a, b) {
-            var α = 0,
-                projection = d3.geo.projection(function (λ, φ) {
-                    λ *= 180 / Math.PI;
-                    φ *= 180 / Math.PI;
-                    var pa = a([λ, φ]),
-                        pb = b([λ, φ]);
-                    return [(1 - α) * pa[0] + α * pb[0], (α - 1) * pa[1] - α * pb[1]];
-                }).scale(1),
-                center = projection.center,
-                translate = projection.translate;
-
-            projection.alpha = function (_) {
-                if (!arguments.length) {
-                    return α;
-                }
-                α = +_;
-                var ca = a.center(),
-                    cb = b.center(),
-                    ta = a.translate(),
-                    tb = b.translate();
-                center([(1 - α) * ca[0] + α * cb[0], (1 - α) * ca[1] + α * cb[1]]);
-                translate([(1 - α) * ta[0] + α * tb[0], (1 - α) * ta[1] + α * tb[1]]);
-                return projection;
-            };
-
-            delete projection.scale;
-            delete projection.translate;
-            delete projection.center;
-            return projection.alpha(0);
-        }
-
         // PROPERTIES
         var _layers = {},
             _graticule = d3.geo.graticule(),
             _projection = d3.geo.equirectangular(),
             _previousProjection = d3.geo.orthographic(),
             _path = d3.geo.path().projection(_projection),
+            _projectionChanged = false,
             _projectionZoom = function (path, features, height, width, scale) {
                 // Reset scale & translate
                 path.projection().scale(1).translate([0, 0]);
@@ -127,9 +96,9 @@
             if (!arguments.length) {
                 return _projection;
             }
+            _projectionChanged = true;
             _previousProjection = _projection;
             _projection = _;
-            _path.projection(interpolatedProjection(_previousProjection, _projection));
             return _chart;
         };
 
@@ -166,35 +135,42 @@
                     _title(layerName, data, _chart.title()) : function () { return ""; });
             }
 
-            // Update Paths
-            if (_path.projection().alpha) {
-                var g = _chart.svg().selectAll("g"),
-                    paths = g.selectAll("path"),
-                    n = 0;
-                dc.transition(g, _chart.transitionDuration()).tween("projection", function () {
+            if (_projectionChanged) {
+                var n = 0;
+                dc.transition(_chart.svg().selectAll("g path"), _chart.transitionDuration())
+                        .attrTween("d", function (d) {
+                    var t = 0,
+                        projection = d3.geo.projection(function (λ, φ) {
+                            λ *= 180 / Math.PI;
+                            φ *= 180 / Math.PI;
+                            var p0 = _previousProjection([λ, φ]),
+                                p1 = _projection([λ, φ]);
+                            return [(1 - t) * p0[0] + t * p1[0], (1 - t) * -p0[1] + t * -p1[1]];
+                        }).scale(1).translate([_chart.width() / 2, _chart.height() / 2]),
+                        path = d3.geo.path().projection(projection);
+
                     return function (_) {
-                        _path.projection().alpha(_);
-                        paths.attr('d', _path);
+                        t = _;
+                        return path(d);
                     };
                 })
-                .each(function() { ++n; }) 
-                .each("end", function() { if (!--n) { _path.projection(_projection); } });
+                .each(function () { ++n; })
+                .each("end", function () { if (!--n) { _path.projection(_projection); _projectionChanged = false } });
             }
         }
 
         _chart._doRender = function () {
             _chart.resetSvg();
-            var base = _chart.svg().append("g");
+            var _g = _chart.svg().append("g");
 
             // Add graticule
-            base.append("path").attr("class", "graticule").datum(_graticule).attr('d', _path);
+            _g.append("path").attr("class", "graticule").datum(_graticule).attr('d', _path);
 
             // Add layers
             for (var layerName in _layers) {
-                var pathG = base.append("g").attr("class", layerClass(layerName))
+                var pathG = _g.append("g").attr("class", layerClass(layerName))
                     .selectAll("path").data(getLayer(layerName).features)
-                    .enter()
-                        .append("path")
+                    .enter().append("path")
                         .attr("fill", "white")
                         .attr("d", _path)
                         .on("click", function (d) {
