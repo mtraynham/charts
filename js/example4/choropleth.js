@@ -186,7 +186,7 @@
             // Add layers
             for (var layerName in _layers) {
                 var pathG = _g.append("g").attr("class", layerClass(layerName))
-                    .selectAll("path").data(getLayer(layerName).features)
+                    .selectAll("path").data(getFeatures(layerName))
                     .enter().append("path")
                         .attr("fill", "white")
                         .attr("d", _path)
@@ -197,8 +197,8 @@
             _chart._doRedraw();
         };
 
-        _chart.onClick = function (d, layerIndex) {
-            var selectedRegion = getLayer(layerIndex).keyAccessor(d);
+        _chart.onClick = function (d, layerName) {
+            var selectedRegion = getKey(layerName, d);
             dc.events.trigger(function () {
                 _chart.filter(selectedRegion);
                 _chart.redrawGroup();
