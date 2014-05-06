@@ -15,12 +15,24 @@
                     s = (scale || 0.95) / Math.max((b[1][0] - b[0][0]) / width, (b[1][1] - b[0][1]) / height),
                     t = [(width - s * (b[1][0] + b[0][0])) / 2, (height - s * (b[1][1] + b[0][1])) / 2];
                 return path.projection().scale(s).translate(t);
+            },
+            _title = function (layerName, data, titleFn) {
+                return function (d) {
+                    var key = getKey(layerName, d),
+                        value = data[key];
+                    return titleFn({key: key, value: value});
+                };
             };
 
         // DEFAULTS
         _chart.colorAccessor(function (d) {
             return d || 0;
-        });
+        }).data(function (group) {
+            return group.all().reduce(function (previous, current) {
+                previous[_chart.keyAccessor()(current)] = _chart.valueAccessor()(current);
+                return previous;
+            }, {});
+        })
 
         // LAYER ACCESSORS
         function layerSelector(layerName) {
@@ -43,17 +55,12 @@
             return getLayer(layerName).keyAccessor(d);
         }
 
-        function getLayer(layerName) {
-            return _layers[layerName];
+        function getFeatures(layerName) {
+            return getLayer(layerName).features;
         }
 
-        function getLayeredData() {
-            var data = {};
-            var groupAll = _chart.data();
-            for (var i = 0; i < groupAll.length; ++i) {
-                data[_chart.keyAccessor()(groupAll[i])] = _chart.valueAccessor()(groupAll[i]);
-            }
-            return data;
+        function getLayer(layerName) {
+            return _layers[layerName];
         }
 
         _chart.getLayers = function () {
@@ -70,13 +77,7 @@
         };
 
         _chart.removeLayer = function (name) {
-            var index = _layers.length;
-            while (index--) {
-                if (_layers[index].name === name) {
-                    _layers.splice(index, 1);
-                    return;
-                }
-            }
+            delete _layers[name];
         };
 
         // PROJECTION & PATH
@@ -104,20 +105,20 @@
 
         // PLOT
         _chart._doRedraw = function () {
-            var data = getLayeredData();
+            var data = _chart.data();
 
             for (var layerName in _layers) {
-                if (isDataLayer(layerName)) {
-                    var regionG = _chart.svg()
-                        .selectAll(layerSelector(layerName))
-                        .classed("selected", function (d) {
+                var hasData = isDataLayer(layerName);
+                var regionG = _chart.svg().selectAll(layerSelector(layerName));
+                if (hasData) {
+                    regionG.classed("selected", function (d) {
                             return isSelected(layerName, d);
                         })
                         .classed("deselected", function (d) {
                             return isDeselected(layerName, d);
                         })
                         .attr("class", function (d) {
-                            var layerNameClass = getLayer(layerName).name;
+                            var layerNameClass = layerName;
                             var regionClass = dc.utils.nameToId(getLayer(layerName).keyAccessor(d));
                             var baseClasses = layerNameClass + " " + regionClass;
                             if (isSelected(layerName, d)) {
@@ -128,32 +129,27 @@
                             }
                             return baseClasses;
                         });
+                }
 
-                    var paths = regionG.select("path")
-                        .attr("fill", function () {
-                            var currentFill = d3.select(this).attr("fill");
-                            if (currentFill) {
-                                return currentFill;
-                            }
-                            return "none";
-                        })
-                        .attr("d", _path)
-                        .on("click", function (d) {
-                            return _chart.onClick(d, layerName);
-                        });
-
-                    dc.transition(paths, _chart.transitionDuration()).attr("fill", function (d, i) {
-                        return _chart.getColor(data[getLayer(layerName).keyAccessor(d)], i);
+                var paths = regionG.select("path")
+                    .attr("fill", function () {
+                        var currentFill = d3.select(this).attr("fill");
+                        if (currentFill) {
+                            return currentFill;
+                        }
+                        return "none";
+                    })
+                    .attr("d", _path)
+                    .on("click", function (d) {
+                        return _chart.onClick(d, layerName);
                     });
 
-                    if (_chart.renderTitle()) {
-                        regionG.selectAll("title").text(function (d) {
-                            var key = getKey(layerName, d);
-                            var value = data[key];
-                            return _chart.title()({key: key, value: value});
-                        });
-                    }
-                }
+                dc.transition(paths, _chart.transitionDuration()).attr("fill", function (d, i) {
+                    return _chart.getColor(data[getKey(layerName, d)], i);
+                });
+
+                regionG.selectAll("title").text(_chart.renderTitle() ?
+                    _title(layerName, data, _chart.title()) : function () { return ""; });
             }
         }
 
@@ -161,14 +157,9 @@
             _chart.resetSvg();
             for (var layerName in _layers) {
                 var layer = _chart.svg().append("g").attr("class", "layer" + layerName);
-                var region = layer.selectAll("g." + layerName)
-                    .data(getLayer(layerName).features)
-                    .enter()
-                    .append("g")
-                    .attr("class", layerName);
-                region.append("path")
-                    .attr("fill", "white")
-                    .attr("d", _path);
+                var region = layer.selectAll("g." + layerName);
+                region.enter().append("g").attr("class", layerName);
+                region.append("path").attr("fill", "white").attr("d", _path);
                 region.append("title");
             }
             _chart._doRedraw();
