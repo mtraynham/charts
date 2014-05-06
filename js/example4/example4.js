@@ -1,9 +1,9 @@
 angular.module('charts').controller('Example4Ctrl', ['$scope', 'GeoConfigs', 'GeoProjectionFactory',
     function ($scope, GeoConfigs, GeoProjectionFactory) {
-    $scope.configs = GeoConfigs.getConfigs();
-    $scope.config = GeoConfigs.loadConfig($scope.configs.get('usStates'));
-    $scope.projections = GeoProjectionFactory.types;
-    $scope.projection = GeoProjectionFactory.create();
+    // $scope.configs = GeoConfigs.getConfigs();
+    // $scope.config = GeoConfigs.loadConfig($scope.configs.get('usStates'));
+    // $scope.projections = GeoProjectionFactory.types;
+    // $scope.projection = GeoProjectionFactory.create();
 
     // Chart 6
     var chart = dc.choroplethChart("#chart")

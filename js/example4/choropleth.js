@@ -4,9 +4,9 @@
 
         // PROPERTIES
         var _layers = {},
-            _path = d3.geo.path(),
             _projection = d3.geo.mercator(),
             _previousProjection = d3.geo.mercator(),
+            _path = d3.geo.path().projection(_projection),
             _projectionZoom = function (path, features, height, width, scale) {
                 // Reset scale & translate
                 path.projection().scale(1).translate([0, 0]);
@@ -22,19 +22,54 @@
                         value = data[key];
                     return titleFn({key: key, value: value});
                 };
+            },
+            _layeredData = function (data) {
+                return data.reduce(function (previous, current) {
+                    previous[_chart.keyAccessor()(current)] = _chart.valueAccessor()(current);
+                    return previous;
+                }, {});
+            },
+            _interpolatedProjection = function (a, b) {
+                var projection = d3.geo.projection(function (λ, φ) {
+                        var pa = a([λ *= 180 / Math.PI, φ *= 180 / Math.PI]), pb = b([λ, φ]);
+                        return [(1 - α) * pa[0] + α * pb[0], (α - 1) * pa[1] - α * pb[1]];
+                    }).scale(1),
+                    center = projection.center,
+                    translate = projection.translate,
+                    α;
+
+                projection.alpha = function (_) {
+                    if (!arguments.length) {
+                        return α;
+                    }
+                    α = +_;
+                    var ca = a.center(), cb = b.center(),
+                        ta = a.translate(), tb = b.translate();
+                    center([(1 - α) * ca[0] + α * cb[0], (1 - α) * ca[1] + α * cb[1]]);
+                    translate([(1 - α) * ta[0] + α * tb[0], (1 - α) * ta[1] + α * tb[1]]);
+                    return projection;
+                };
+
+                delete projection.scale;
+                delete projection.translate;
+                delete projection.center;
+                return projection.alpha(0);
             };
 
         // DEFAULTS
         _chart.colorAccessor(function (d) {
             return d || 0;
-        }).data(function (group) {
-            return group.all().reduce(function (previous, current) {
-                previous[_chart.keyAccessor()(current)] = _chart.valueAccessor()(current);
-                return previous;
-            }, {});
-        })
+        });
+
+        function projectionTween(projection0, projection1) {
+
+        }
 
         // LAYER ACCESSORS
+        function layerClass(layerName) {
+            return "layer-" + layerName;
+        }
+
         function layerSelector(layerName) {
             return "g.layer-" + layerName;
         }
@@ -91,7 +126,7 @@
             }
             _previousProjection = _projection;
             _projection = _;
-            _path.projection(_);
+            _path.projection(_interpolatedProjection(_previousProjection, _projection));
             return _chart;
         };
 
@@ -105,50 +140,40 @@
 
         // PLOT
         _chart._doRedraw = function () {
-            var data = _chart.data();
+            var data = _layeredData(_chart.data());
 
             for (var layerName in _layers) {
-                var hasData = isDataLayer(layerName);
-                var regionG = _chart.svg().selectAll(layerSelector(layerName));
-                if (hasData) {
-                    regionG.classed("selected", function (d) {
-                            return isSelected(layerName, d);
-                        })
-                        .classed("deselected", function (d) {
-                            return isDeselected(layerName, d);
-                        })
-                        .attr("class", function (d) {
-                            var layerNameClass = layerName;
-                            var regionClass = dc.utils.nameToId(getLayer(layerName).keyAccessor(d));
-                            var baseClasses = layerNameClass + " " + regionClass;
-                            if (isSelected(layerName, d)) {
-                                baseClasses += " selected";
-                            }
-                            if (isDeselected(layerName, d)) {
-                                baseClasses += " deselected";
-                            }
-                            return baseClasses;
-                        });
-                }
+                // Select layer
+                var layerG = _chart.svg().selectAll(layerSelector(layerName));
 
-                var paths = regionG.select("path")
-                    .attr("fill", function () {
-                        var currentFill = d3.select(this).attr("fill");
-                        if (currentFill) {
-                            return currentFill;
-                        }
-                        return "none";
-                    })
+                // Select path
+                var pathG = layerG.selectAll("path")
+                    .data(getLayer(layerName).features);
+
+                // Add enter items
+                pathG.enter()
+                    .append("path")
+                    .attr("fill", "white")
                     .attr("d", _path)
                     .on("click", function (d) {
                         return _chart.onClick(d, layerName);
-                    });
+                    }).append("title");
 
-                dc.transition(paths, _chart.transitionDuration()).attr("fill", function (d, i) {
+                // Set selected color function
+                var hasData = isDataLayer(layerName);
+                pathG.classed("selected", hasData ? function (d) { return isSelected(layerName, d); } :
+                    function () { return false; })
+                    .classed("deselected", hasData ? function (d) { return isDeselected(layerName, d); } :
+                    function () { return false; });
+
+                // Update color
+                dc.transition(pathG, _chart.transitionDuration()).attr("fill", function (d, i) {
                     return _chart.getColor(data[getKey(layerName, d)], i);
                 });
 
-                regionG.selectAll("title").text(_chart.renderTitle() ?
+                // TODO Transition projection
+
+                layerG.selectAll("path title").text(_chart.renderTitle() ?
                     _title(layerName, data, _chart.title()) : function () { return ""; });
             }
         }
@@ -156,11 +181,7 @@
         _chart._doRender = function () {
             _chart.resetSvg();
             for (var layerName in _layers) {
-                var layer = _chart.svg().append("g").attr("class", "layer" + layerName);
-                var region = layer.selectAll("g." + layerName);
-                region.enter().append("g").attr("class", layerName);
-                region.append("path").attr("fill", "white").attr("d", _path);
-                region.append("title");
+                _chart.svg().append("g").attr("class", layerClass(layerName));
             }
             _chart._doRedraw();
         };
