@@ -95,6 +95,7 @@
             for (var key in _layers) {
                 _allFeatures = _allFeatures.concat(getFeatures(key));
             }
+            return _chart;
         };
 
         // PROJECTION & PATH

@@ -143,7 +143,7 @@ angular.module('charts').controller('Example4Ctrl', ['$scope', 'GeoConfigs', 'Ge
     /**
      * Rendering of data
      */
-    function render(error, data, worldGeoFeatures) {
+    function render(error, data, worldGeoFeatures, usGeoFeatures) {
 
         // Easy accessor function
         var accessor = function (property) {
@@ -171,7 +171,10 @@ angular.module('charts').controller('Example4Ctrl', ['$scope', 'GeoConfigs', 'Ge
                 return "Country: " + GeoService.countryISO2toCountryName.get(d.key) +
                     "\n" + "Value: " + d.value;
             })
-            .addLayer(worldGeoFeatures, "state", function (d) {
+            .addLayer(worldGeoFeatures, "world", function (d) {
+                return d.id;
+            })
+            .addLayer(usGeoFeatures, "state", function (d) {
                 return d.id;
             });
         chart.on("preRender", function (chart) {
@@ -186,5 +189,6 @@ angular.module('charts').controller('Example4Ctrl', ['$scope', 'GeoConfigs', 'Ge
     var q = queue();
     q.defer(parseData, 'data/14_Topic_en_csv_v2/14_Topic_en_csv_v2.csv');
     GeoService.deferWorld50(q);
+    GeoService.deferUS50(q);
     q.await(render);
 }]);
