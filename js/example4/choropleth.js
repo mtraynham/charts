@@ -109,6 +109,7 @@
             _projectionChanged = true;
             _previousProjection = _projection;
             _projection = _;
+            _path.projection(_projection);
             return _chart;
         };
 
@@ -165,12 +166,17 @@
                     };
                 })
                 .each(function () { ++n; })
-                .each("end", function () { if (!--n) { _path.projection(_projection); _projectionChanged = false } });
+                .each("end", function () { if (!--n) { _projectionChanged = false } });
             }
         }
 
         _chart._doRender = function () {
             _chart.resetSvg();
+
+            // Since we are rendering, no need to transform the projection
+            _projectionChanged = false;
+
+            // The graph
             var _g = _chart.svg().append("g");
 
             // Add graticule
