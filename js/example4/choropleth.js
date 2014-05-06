@@ -4,6 +4,7 @@
 
         // PROPERTIES
         var _layers = {},
+            _graticule = d3.geo.graticule(),
             _projection = d3.geo.mercator(),
             _previousProjection = d3.geo.mercator(),
             _path = d3.geo.path().projection(_projection),
@@ -98,7 +99,7 @@
             return _layers[layerName];
         }
 
-        _chart.getLayers = function () {
+        _chart.layers = function () {
             return _layers;
         }
 
@@ -126,7 +127,9 @@
             }
             _previousProjection = _projection;
             _projection = _;
-            _path.projection(_interpolatedProjection(_previousProjection, _projection));
+            _path.projection(_projection);
+            // TODO ADD BACK
+            // _path.projection(_interpolatedProjection(_previousProjection, _projection));
             return _chart;
         };
 
@@ -141,6 +144,8 @@
         // PLOT
         _chart._doRedraw = function () {
             var data = _layeredData(_chart.data());
+
+            _chart.svg().select('.graticule').datum(_graticule).attr("d", _path);
 
             for (var layerName in _layers) {
                 // Select layer
@@ -180,6 +185,7 @@
 
         _chart._doRender = function () {
             _chart.resetSvg();
+            _chart.svg().append("path").attr("class", "graticule")
             for (var layerName in _layers) {
                 _chart.svg().append("g").attr("class", layerClass(layerName));
             }
