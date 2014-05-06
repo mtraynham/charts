@@ -168,6 +168,7 @@
                 });
                 _projectionChanged = false
             }
+            return _chart;
         }
 
         _chart._doRender = function () {
@@ -193,7 +194,7 @@
                             return _chart.onClick(d, layerName);
                         }).append("title");
             }
-            _chart._doRedraw();
+            return _chart._doRedraw();
         };
 
         _chart.onClick = function (d, layerName) {
