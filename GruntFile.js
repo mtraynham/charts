@@ -1,21 +1,24 @@
 module.exports = function (grunt) {
 
     grunt.loadNpmTasks('grunt-bowercopy');
-    grunt.loadNpmTasks('grunt-contrib-concat');
-    grunt.loadNpmTasks('grunt-contrib-jshint');
-    grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-clean');
+    grunt.loadNpmTasks('grunt-contrib-coffee');
+    grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-copy');
-    grunt.loadNpmTasks('grunt-contrib-watch');
+    grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-contrib-less');
-    grunt.loadNpmTasks('grunt-html2js');
+    grunt.loadNpmTasks('grunt-contrib-uglify');
+    grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-express-server');
+    grunt.loadNpmTasks('grunt-html2js');
 
     // Default task.
-    grunt.registerTask('default', [ 'clean', 'html2js', 'jshint', 'concat', 'clean:templates', 'less:build',
-        'copy', 'bowercopy:build' ]);
-    grunt.registerTask('release', [ 'clean', 'html2js', 'jshint', 'concat', 'clean:templates', 'uglify', 'less:min',
-        'copy', 'bowercopy:release' ]);
+    grunt.registerTask('default', [ 'clean', 'html2js', 'jshint', 'concat:dist', 'concat:index', 'clean:templates',
+        'less:build', 'copy', 'bowercopy:build' ]);
+    grunt.registerTask('caffeine', [ 'clean', 'html2js', 'coffee', 'concat:coffee', 'concat:index', 'clean:templates',
+        'less:build', 'copy', 'bowercopy:build' ]);
+    grunt.registerTask('release', [ 'clean', 'html2js', 'jshint', 'concat:dist', 'concat:index', 'clean:templates',
+        'uglify', 'less:min', 'copy', 'bowercopy:release' ]);
     grunt.registerTask('server', [ 'default', 'express:dev', 'watch' ]);
 
     // Print a timestamp (useful for when watching)
@@ -34,6 +37,7 @@ module.exports = function (grunt) {
             ' * Copyright (c) <%= grunt.template.today("yyyy") %> <%= pkg.author %>;\n' +
             ' * Licensed <%= _.pluck(pkg.licenses, "type").join(", ") %>\n */\n',
         src : {
+            coffee: ['coffee/**/*.coffee'],
             js : [ 'js/**/*.js' ],
             jsTpl : [ '<%= distdir %>/templates/**/*.js' ],
             html : [ 'index.html' ],
@@ -150,6 +154,11 @@ module.exports = function (grunt) {
                 src: [ '<%= distdir %>/templates' ]
             }
         },
+        coffee : {
+            build: {
+                '<%= distdir %>/coffee/app.js': ['<%= src.coffee %>'],
+            }
+        },
         copy : {
             assets : {
                 files : [ {
@@ -171,6 +180,13 @@ module.exports = function (grunt) {
                     banner : "<%= banner %>"
                 },
                 src : [ '<%= src.js %>', '<%= distdir %>/templates/app.js' ],
+                dest : '<%= distdir %>/<%= pkg.name %>.js'
+            },
+            coffee : {
+                options : {
+                    banner : "<%= banner %>"
+                },
+                src : [ '<%= distdir %>/coffee/app.js', '<%= distdir %>/templates/app.js' ],
                 dest : '<%= distdir %>/<%= pkg.name %>.js'
             },
             index : {
