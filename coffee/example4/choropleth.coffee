@@ -1,3 +1,4 @@
+# coffeelint: disable=cyclomatic_complexity
 dc.choroplethChart = (parent, chartGroup) ->
     _chart = dc.colorMixin(dc.baseMixin({}))
     _allFeatures = []
@@ -33,7 +34,7 @@ dc.choroplethChart = (parent, chartGroup) ->
 
     layerClass = (layerName) -> "layer-" + layerName
     layerSelector = (layerName) -> "g.layer-" + layerName
-    isSelected = (layerName, d) -> _chart.hasFilter() and _chart.hasFilter getKey layerName, d;
+    isSelected = (layerName, d) -> _chart.hasFilter() and _chart.hasFilter getKey layerName, d
     isDeselected = (layerName, d) -> _chart.hasFilter() and !_chart.hasFilter getKey layerName, d
     isDataLayer = (layerName) -> getLayer(layerName) .keyAccessor
     getKey = (layerName, d) -> getLayer(layerName).keyAccessor d
@@ -67,7 +68,7 @@ dc.choroplethChart = (parent, chartGroup) ->
             _previousProjection = _projection
             _projection = _
             _path.projection _projection
-            _chart;
+            _chart
 
     _chart.projectionZoom = (_) ->
         if !arguments.length
@@ -90,21 +91,21 @@ dc.choroplethChart = (parent, chartGroup) ->
             if _projectionChanged
                 n = 0
                 dc.transition _chart.svg().selectAll('g path'), _chart.transitionDuration()
-                    .attrTween "d", (d) ->
-                        t = 0
-                        projection = d3.geo.projection (λ, φ) ->
-                            λ *= 180 / Math.PI
-                            φ *= 180 / Math.PI
-                            p0 = _previousProjection [λ, φ]
-                            p1 = _projection [λ, φ]
-                            [(1 - t) * p0[0] + t * p1[0], (1 - t) * -p0[1] + t * -p1[1]]
-                        projection.scale _projection.scale()
-                            .translate _projection.translate()
-                        path = d3.geo.path().projection projection
+                .attrTween "d", (d) ->
+                    t = 0
+                    projection = d3.geo.projection (λ, φ) ->
+                        λ *= 180 / Math.PI
+                        φ *= 180 / Math.PI
+                        p0 = _previousProjection [λ, φ]
+                        p1 = _projection [λ, φ]
+                        [(1 - t) * p0[0] + t * p1[0], (1 - t) * -p0[1] + t * -p1[1]]
+                    projection.scale _projection.scale()
+                        .translate _projection.translate()
+                    path = d3.geo.path().projection projection
 
-                        (_) ->
-                            t = _
-                            path(d)
+                    (_) ->
+                        t = _
+                        path(d)
         _chart
 
     _chart._doRedraw = ->
@@ -124,8 +125,7 @@ dc.choroplethChart = (parent, chartGroup) ->
                 .append 'path'
                 .attr 'fill', 'white'
                 .attr 'd', _path
-                .on 'click', (d) ->
-                    _chart.onClick d, layerName
+                .on 'click', (d) -> _chart.onClick d, layerName
                 .append('title')
         _chart._doRedraw()
 
@@ -137,3 +137,4 @@ dc.choroplethChart = (parent, chartGroup) ->
         _chart
 
     _chart.anchor parent, chartGroup
+# coffeelint: enable=cyclomatic_complexity

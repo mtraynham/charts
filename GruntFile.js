@@ -1,6 +1,7 @@
 module.exports = function (grunt) {
 
     grunt.loadNpmTasks('grunt-bowercopy');
+    grunt.loadNpmTasks('grunt-coffeelint');
     grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-contrib-coffee');
     grunt.loadNpmTasks('grunt-contrib-concat');
@@ -15,11 +16,14 @@ module.exports = function (grunt) {
     // Default task.
     grunt.registerTask('default', [ 'clean', 'html2js', 'jshint', 'concat:dist', 'concat:index', 'clean:templates',
         'less:build', 'copy', 'bowercopy:build' ]);
-    grunt.registerTask('caffeine', [ 'clean', 'html2js', 'coffee', 'concat:coffee', 'concat:index', 'clean:templates',
-        'less:build', 'copy', 'bowercopy:build' ]);
     grunt.registerTask('release', [ 'clean', 'html2js', 'jshint', 'concat:dist', 'concat:index', 'clean:templates',
         'uglify', 'less:min', 'copy', 'bowercopy:release' ]);
     grunt.registerTask('server', [ 'default', 'express:dev', 'watch' ]);
+
+    // Coffee versions
+    grunt.registerTask('caffeine', [ 'clean', 'html2js', 'coffeelint', 'coffee', 'concat:coffee', 'concat:index',
+        'clean:templates', 'less:build', 'copy', 'bowercopy:build' ]);
+    grunt.registerTask('caffeine-server', [ 'caffeine', 'express:dev', 'watch' ]);
 
     // Print a timestamp (useful for when watching)
     grunt.registerTask('timestamp', function () {
@@ -156,7 +160,12 @@ module.exports = function (grunt) {
         },
         coffee : {
             build: {
-                '<%= distdir %>/coffee/app.js': ['<%= src.coffee %>'],
+                options: {
+                    bare: true
+                },
+                files: {
+                    '<%= distdir %>/coffee/app.js': ['<%= src.coffee %>'],
+                }
             }
         },
         copy : {
@@ -247,42 +256,13 @@ module.exports = function (grunt) {
                 }
             }
         },
+        coffeelint: {
+            files : ['<%= src.coffee %>'],
+            options : grunt.file.readJSON('conf/coffee-lint.json')
+        },
         jshint : {
             files : [ 'GruntFile.js', '<%= src.js %>' ],
-            options : {
-                asi: true,
-                boss : true,
-                camelcase: true,
-                curly : true,
-                eqeqeq : true,
-                eqnull : true,
-                funcscope: true,
-                immed : true,
-                indent: 4,
-                latedef : true,
-                loopfunc: true,
-                maxlen: 120,
-                multistr: true,
-                newcap : true,
-                noarg : true,
-                sub : true,
-                undef: true,
-                white: true,
-                globals : {
-                    "angular": false,
-                    "colorbrewer": false,
-                    "crossfilter": false,
-                    "d3": false,
-                    "dc": false,
-                    "grunt": false,
-                    "module": false,
-                    "moment": false,
-                    "queue": false,
-                    "sprintf": false,
-                    "topojson": false,
-                    "_": false
-                }
-            }
+            options : grunt.file.readJSON('conf/jshint.json')
         }
     });
 };
