@@ -1,5 +1,5 @@
 angular.module 'charts', [
-    'charts.templates',
-    'ui.router',
+    'charts.templates'
+    'ui.router'
     'ui.bootstrap'
 ]
