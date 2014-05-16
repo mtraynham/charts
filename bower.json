@@ -19,7 +19,7 @@
         "momentjs": "~2.6.0",
         "queue-async": "~1.0.7",
         "sprintf": "*",
-        "topojson": "~1.6.11",
+        "topojson": "~1.6.13",
         "topojsonexports": "git://github.com/mtraynham/TopoJsonExports.git#master",
         "natural-earth-topo": "git://github.com/mtraynham/natural-earth-topo#master",
         "underscore": "~1.6.0"
