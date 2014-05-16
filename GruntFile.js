@@ -18,12 +18,12 @@ module.exports = function (grunt) {
         'less:build', 'copy', 'bowercopy:build' ]);
     grunt.registerTask('release', [ 'clean', 'html2js', 'jshint', 'concat:dist', 'concat:index', 'clean:templates',
         'uglify', 'less:min', 'copy', 'bowercopy:release' ]);
-    grunt.registerTask('server', [ 'default', 'express:dev', 'watch' ]);
+    grunt.registerTask('server', [ 'default', 'express:dev', 'watch:default' ]);
 
     // Coffee versions
     grunt.registerTask('caffeine', [ 'clean', 'html2js', 'coffeelint', 'coffee', 'concat:coffee', 'concat:index',
-        'clean:templates', 'less:build', 'copy', 'bowercopy:build' ]);
-    grunt.registerTask('caffeine-server', [ 'caffeine', 'express:dev', 'watch' ]);
+        'clean:coffee', 'clean:templates', 'less:build', 'copy', 'bowercopy:build' ]);
+    grunt.registerTask('caffeine-server', [ 'caffeine', 'express:dev', 'watch:coffee' ]);
 
     // Print a timestamp (useful for when watching)
     grunt.registerTask('timestamp', function () {
@@ -41,11 +41,11 @@ module.exports = function (grunt) {
             ' * Copyright (c) <%= grunt.template.today("yyyy") %> <%= pkg.author %>;\n' +
             ' * Licensed <%= _.pluck(pkg.licenses, "type").join(", ") %>\n */\n',
         src : {
-            coffee: ['coffee/**/*.coffee'],
-            js : [ 'js/**/*.js' ],
+            coffee: ['src/coffee/**/*.coffee'],
+            js : [ 'src/js/**/*.js' ],
             jsTpl : [ '<%= distdir %>/templates/**/*.js' ],
             html : [ 'index.html' ],
-            tpl : [ 'js/**/*.tpl.html' ],
+            tpl : [ 'src/js/**/*.tpl.html' ],
             less : [ 'less/stylesheet.less' ],
             lessWatch : [ 'less/**/*.less' ]
         },
@@ -154,6 +154,9 @@ module.exports = function (grunt) {
             build: {
                 src: [ '<%= distdir %>/*' ]
             },
+            coffee: {
+                src: [ '<%= distdir %>/coffee' ]
+            },
             templates: {
                 src: [ '<%= distdir %>/templates' ]
             }
@@ -209,7 +212,7 @@ module.exports = function (grunt) {
         html2js : {
             chart : {
                 options : {
-                    base : './js/'
+                    base : './src/js/'
                 },
                 src : [ '<%= src.tpl %>' ],
                 dest : '<%= distdir %>/templates/app.js',
@@ -243,9 +246,13 @@ module.exports = function (grunt) {
             }
         },
         watch: {
-            build: {
+            default: {
                 files: ['<%= src.js %>', '<%= src.tpl %>', '<%= src.html %>', '<%= src.lessWatch %>'],
                 tasks: ['default', 'timestamp']
+            },
+            coffee: {
+                files: ['<%= src.coffee %>', '<%= src.tpl %>', '<%= src.html %>', '<%= src.lessWatch %>'],
+                tasks: ['caffeine', 'timestamp']
             }
         },
         express : {

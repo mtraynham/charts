@@ -19,7 +19,7 @@ angular.module('charts').controller('Example4Ctrl', ['$scope', 'GeoConfigs', 'Ge
         }
         var projection = new GeoProjectionFactory.types[newProjectionType]()
         chart.projection(projection.projection);
-        chart.projectionZoom(projection.zoom);
+        // chart.projectionZoom(projection.zoom);
         chart.redraw();
     });
 
@@ -171,9 +171,9 @@ angular.module('charts').controller('Example4Ctrl', ['$scope', 'GeoConfigs', 'Ge
                 return "Country: " + GeoService.countryISO2toCountryName.get(d.key) +
                     "\n" + "Value: " + d.value;
             })
-            .addLayer(worldGeoFeatures, "world", function (d) {
-                return d.id;
-            })
+            // .addLayer(worldGeoFeatures, "world", function (d) {
+            //     return d.id;
+            // })
             .addLayer(usGeoFeatures, "state", function (d) {
                 return d.id;
             });
