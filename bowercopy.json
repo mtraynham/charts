@@ -1,0 +1,56 @@
+{
+    "js": {
+        "angular/angular.js" : "angular/angular.js",
+        "angular-bootstrap/ui-bootstrap-tpls.js" : "angular-bootstrap/ui-bootstrap-tpls.js",
+        "angular-ui-router/release/angular-ui-router.js" :
+            "angular-ui-router/release/angular-ui-router.js",
+        "bootstrap/dist/css/bootstrap.css" : "bootstrap/dist/css/bootstrap.css",
+        "bootstrap/dist/fonts" : "bootstrap/dist/fonts",
+        "colorbrewer/colorbrewer.js" : "colorbrewer/colorbrewer.js",
+        "crossfilter/crossfilter.js" : "crossfilter/crossfilter.js",
+        "d3/d3.js" : "d3/d3.js",
+        "d3-geo-projection/d3.geo.projection.js" : "d3-geo-projection/d3.geo.projection.js",
+        "dc/dc.js" : "dc/dc.js",
+        "dc/dc.css" : "dc/dc.css",
+        "jquery/dist/jquery.js" : "jquery/dist/jquery.js",
+        "jquery-ui/ui/jquery-ui.js" : "jquery-ui/ui/jquery-ui.js",
+        "jquery-ui/themes/base/jquery.ui.core.css" : "jquery-ui/themes/base/jquery.ui.core.css",
+        "jquery-ui/themes/base/jquery.ui.resizable.css" : "jquery-ui/themes/base/jquery.ui.resizable.css",
+        "mathjs/dist/math.js" : "mathjs/dist/math.js",
+        "momentjs/moment.js" : "momentjs/moment.js",
+        "queue-async/queue.js" : "queue-async/queue.js",
+        "sprintf/src/sprintf.js" : "sprintf/src/sprintf.js",
+        "topojson/topojson.js" : "topojson/topojson.js",
+        "topojsonexports/world-atlas/topo" : "topojsonexports/world-atlas/topo",
+        "natural-earth-topo/topojson" : "natural-earth-topo/topojson",
+        "underscore/underscore.js" : "underscore/underscore.js"
+    },
+    "min" : {
+        "angular/angular.js" : "angular/angular.min.js",
+        "angular-bootstrap/ui-bootstrap-tpls.js" : "angular-bootstrap/ui-bootstrap-tpls.min.js",
+        "angular-ui-router/release/angular-ui-router.js" :
+            "angular-ui-router/release/angular-ui-router.min.js",
+        "bootstrap/dist/css/bootstrap.css" : "bootstrap/dist/css/bootstrap.min.css",
+        "bootstrap/dist/fonts" : "bootstrap/dist/fonts",
+        "colorbrewer/colorbrewer.js" : "colorbrewer/colorbrewer.js",
+        "crossfilter/crossfilter.js" : "crossfilter/crossfilter.min.js",
+        "d3/d3.js" : "d3/d3.min.js",
+        "d3-geo-projection/d3.geo.projection.js" : "d3-geo-projection/d3.geo.projection.min.js",
+        "dc/dc.js" : "dc/dc.min.js",
+        "dc/dc.css" : "dc/dc.css",
+        "jquery/dist/jquery.js" : "jquery/dist/jquery.min.js",
+        "jquery-ui/ui/jquery-ui.js" : "jquery-ui/ui/minified/jquery-ui.min.js",
+        "jquery-ui/themes/base/jquery.ui.core.css" :
+            "jquery-ui/themes/base/minified/jquery.ui.core.min.css",
+        "jquery-ui/themes/base/jquery.ui.resizable.css" :
+            "jquery-ui/themes/base/minified/jquery.ui.resizable.min.css",
+        "mathjs/dist/math.js" : "mathjs/dist/math.min.js",
+        "momentjs/moment.js" : "momentjs/min/moment.min.js",
+        "queue-async/queue.js" : "queue-async/queue.min.js",
+        "sprintf/src/sprintf.js" : "sprintf/src/sprintf.min.js",
+        "topojson/topojson.js" : "topojson/topojson.js",
+        "topojsonexports/world-atlas/topo" : "topojsonexports/world-atlas/topo",
+        "natural-earth-topo/topojson" : "natural-earth-topo/topojson",
+        "underscore/underscore.js" : "underscore/underscore.js"
+    }
+}
