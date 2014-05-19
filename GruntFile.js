@@ -32,7 +32,7 @@ module.exports = function (grunt) {
 
     // Project configuration.
     grunt.initConfig({
-        bowerfiles: grunt.file.readJSON('bowercopy.json'),
+        bower: grunt.file.readJSON('bower.json'),
         distdir : 'dist',
         pkg : grunt.file.readJSON('package.json'),
         banner:
@@ -55,10 +55,10 @@ module.exports = function (grunt) {
                 destPrefix: '<%= distdir %>/vendor'
             },
             build: {
-                files: '<%= bowerfiles.js %>'
+                files: '<%= bower.copy.js %>'
             },
             release: {
-                files: '<%= bowerfiles.min %>'
+                files: '<%= bower.copy.min %>'
             }
         },
         clean : {
