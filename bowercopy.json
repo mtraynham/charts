@@ -47,7 +47,7 @@
         "mathjs/dist/math.js" : "mathjs/dist/math.min.js",
         "momentjs/moment.js" : "momentjs/min/moment.min.js",
         "queue-async/queue.js" : "queue-async/queue.min.js",
-        "sprintf/src/sprintf.js" : "sprintf/src/sprintf.min.js",
+        "sprintf/src/sprintf.js" : "sprintf/dist/sprintf.min.js",
         "topojson/topojson.js" : "topojson/topojson.js",
         "topojsonexports/world-atlas/topo" : "topojsonexports/world-atlas/topo",
         "natural-earth-topo/topojson" : "natural-earth-topo/topojson",
