@@ -176,11 +176,11 @@ module.exports = function (grunt) {
         },
         coffeelint: {
             files : ['<%= src.coffee %>'],
-            options : grunt.file.readJSON('conf/coffee-lint.json')
+            options : grunt.file.readJSON('.coffee-lint')
         },
         jshint : {
             files : [ 'GruntFile.js', '<%= src.js %>' ],
-            options : grunt.file.readJSON('conf/jshint.json')
+            options : grunt.file.readJSON('.jshintrc')
         }
     });
 };
