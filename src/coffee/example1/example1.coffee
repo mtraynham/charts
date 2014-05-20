@@ -137,8 +137,7 @@ angular.module('charts').controller 'Example1Ctrl', ['$scope', 'GeoService', ($s
             .dimension dimension1
             .group group1
             .elasticY true
-            .x d3.time.scale()
-                .domain d3.extent dimension1.top Number.POSITIVE_INFINITY, yearAccessor
+            .x d3.time.scale().domain d3.extent dimension1.top Number.POSITIVE_INFINITY, yearAccessor
                 .xUnits d3.time.years
         chart1.yAxis().tickFormat priceFormat
         chart1.render()
@@ -199,11 +198,11 @@ angular.module('charts').controller 'Example1Ctrl', ['$scope', 'GeoService', ($s
             .group group5
             .title (d) ->
                 'Country: ' + GeoService.countryISO2toCountryName.get(d.key) + '\n' + 'Value: ' + d.value
-            .overlayGeoJson worldGeoFeatures, 'state', (d) ->
-                d.id
-            .projection d3.geo.mercator()
-                .scale (chart5Width + 1) / 2 / Math.PI
-                .translate [ chart5Width / 2, chart5Height / 1.8 ]
+        projection5 = d3.geo.mercator()
+        projection5.scale (chart5Width + 1) / 2 / Math.PI
+        projection5.translate [ chart5Width / 2, chart5Height / 1.8 ]
+        chart5.projection projection5
+        chart5.overlayGeoJson worldGeoFeatures, 'state', (d) -> d.id
         chart5.on 'preRender', (chart) ->
             chart.colorDomain d3.extent chart.data(), chart.valueAccessor()
         chart5.on 'preRedraw', (chart) ->
@@ -222,11 +221,11 @@ angular.module('charts').controller 'Example1Ctrl', ['$scope', 'GeoService', ($s
             .group group6
             .title (d) ->
                 'Country: ' + GeoService.countryISO2toCountryName.get(d.key) + '\n' + 'Value: ' + d.value
-            .overlayGeoJson worldGeoFeatures, 'state', (d) ->
-                d.id
-            .projection d3.geo.mercator()
-                .scale (chart6Width + 1) / 2 / Math.PI
-                .translate [ chart6Width / 2, chart6Height / 1.8 ]
+        chart6.overlayGeoJson worldGeoFeatures, 'state', (d) -> d.id
+        projection6 = d3.geo.mercator()
+        projection6.scale (chart6Width + 1) / 2 / Math.PI
+        projection6.translate [ chart6Width / 2, chart6Height / 1.8 ]
+        chart6.projection projection6
         chart6.on 'preRender', (chart) ->
             chart.colorDomain d3.extent(chart.data(), chart.valueAccessor())
         chart6.on 'preRedraw', (chart) ->
