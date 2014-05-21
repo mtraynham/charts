@@ -19,6 +19,24 @@
                     t = [(width - s * (b[1][0] + b[0][0])) / 2, (height - s * (b[1][1] + b[0][1])) / 2];
                 return projection.scale(s).translate(t);
             },
+            _projectionTween = function (projectionA, projectionB) {
+                return function (d) {
+                    var t = 0,
+                        projection = d3.geo.projection(function (λ, φ) {
+                            λ *= 180 / Math.PI;
+                            φ *= 180 / Math.PI;
+                            var p0 = projectionA([λ, φ]),
+                                p1 = projectionB([λ, φ]);
+                            return [(1 - t) * p0[0] + t * p1[0], (1 - t) * -p0[1] + t * -p1[1]];
+                        }).scale(1).translate([_chart.width() / 2, _chart.height() / 2]),
+                        path = d3.geo.path().projection(projection);
+
+                    return function (_) {
+                        t = _;
+                        return path(d);
+                    };
+                };
+            },
             _title = function (layerName, data, titleFn) {
                 return function (d) {
                     var key = getKey(layerName, d),
@@ -148,24 +166,8 @@
             }
 
             if (_projectionChanged) {
-                var n = 0;
                 dc.transition(_chart.svg().selectAll("g path"), _chart.transitionDuration())
-                        .attrTween("d", function (d) {
-                    var t = 0,
-                        projection = d3.geo.projection(function (λ, φ) {
-                            λ *= 180 / Math.PI;
-                            φ *= 180 / Math.PI;
-                            var p0 = _previousProjection([λ, φ]),
-                                p1 = _projection([λ, φ]);
-                            return [(1 - t) * p0[0] + t * p1[0], (1 - t) * -p0[1] + t * -p1[1]];
-                        }).scale(1).translate([_chart.width() / 2, _chart.height() / 2]),
-                        path = d3.geo.path().projection(projection);
-
-                    return function (_) {
-                        t = _;
-                        return path(d);
-                    };
-                });
+                        .attrTween("d", _projectionTween(_previousProjection, _projection));
                 _projectionChanged = false
             }
             return _chart;
