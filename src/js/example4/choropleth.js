@@ -204,7 +204,7 @@
             var _g = _chart.svg().append("g");
 
             // Add graticule
-            if (_showGraticule) {
+            if (!_showGraticule) {
                 _g.append("path").attr("class", "graticule").datum(_graticule).attr('d', _path);
             }
 
