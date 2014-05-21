@@ -10,7 +10,8 @@ angular.module('charts.geo').service('GeoConfigs', ['GeoConfig', 'GeoProjection'
             name: 'US States',
             fileName: 'vendor/topojsonexports/world-atlas/topo/ne_50m_us_states_lakes.json',
             featureAccessor : function (d) { return d.objects.states; },
-            keyAccessor: function (d) { return d.id }
+            keyAccessor: function (d) { return d.id },
+            titleAccessor:  function (d) { return d.id }
         }),
         usStates1: new GeoConfig({
             name: 'US States 1',
@@ -22,7 +23,8 @@ angular.module('charts.geo').service('GeoConfigs', ['GeoConfig', 'GeoProjection'
                     });
                 return d.objects['ne_50m_admin_1_states_provinces_lakes_shp'];
             },
-            keyAccessor: function (d) { return d.properties.name }
+            keyAccessor: function (d) { return d.properties.name },
+            titleAccessor:  function (d) { return d.properties.name }
         }),
         canada: new GeoConfig({
             name: 'Canada',
@@ -34,7 +36,8 @@ angular.module('charts.geo').service('GeoConfigs', ['GeoConfig', 'GeoProjection'
                     });
                 return d.objects['ne_50m_admin_1_states_provinces_lakes_shp'];
             },
-            keyAccessor: function (d) { return d.properties.name }
+            keyAccessor: function (d) { return d.properties.name },
+            titleAccessor:  function (d) { return d.properties.name }
         }),
         australia: new GeoConfig({
             name: 'Australia',
@@ -46,7 +49,8 @@ angular.module('charts.geo').service('GeoConfigs', ['GeoConfig', 'GeoProjection'
                     });
                 return d.objects['ne_50m_admin_1_states_provinces_lakes_shp'];
             },
-            keyAccessor: function (d) { return d.properties.name }
+            keyAccessor: function (d) { return d.properties.name },
+            titleAccessor:  function (d) { return d.properties.name }
         })
     });
 

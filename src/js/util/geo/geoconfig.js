@@ -42,6 +42,14 @@ angular.module('charts.geo').factory('GeoConfig', function () {
     };
 
     /**
+     * Get title accessor
+     * @return {Function}
+     */
+    GeoConfig.prototype.getTitleAccessor = function () {
+        return this.titleAccessor;
+    };
+
+    /**
      * Set features
      * @param {[*]}
      */

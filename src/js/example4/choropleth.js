@@ -45,9 +45,11 @@
             },
             _title = function (layerName, data, titleFn) {
                 return function (d) {
-                    var key = getKey(layerName, d),
-                        value = data[key];
-                    return titleFn({key: key, value: value});
+                    return titleFn({
+                        key: getKey(layerName, d),
+                        title: getTitle(layerName, d),
+                        value: data[this.key]
+                    })
                 };
             },
             _showGraticule = false;
@@ -82,6 +84,10 @@
             return getLayer(layerName).keyAccessor(d);
         }
 
+        function getTitle(layerName, d) {
+            return getLayer(layerName).titleAccessor(d);
+        }
+
         function getFeatures(layerName) {
             return getLayer(layerName).features;
         }
@@ -98,11 +104,12 @@
             return _layers;
         }
 
-        _chart.addLayer = function (features, name, keyAccessor) {
+        _chart.addLayer = function (features, name, keyAccessor, titleAccessor) {
             _layers[name] = {
                 features: features,
                 name: name,
-                keyAccessor: keyAccessor
+                keyAccessor: keyAccessor,
+                titleAccessor: titleAccessor
             };
             _allFeatures = _allFeatures.concat(features);
             return _chart;
@@ -204,7 +211,7 @@
             var _g = _chart.svg().append("g");
 
             // Add graticule
-            if (!_showGraticule) {
+            if (_showGraticule) {
                 _g.append("path").attr("class", "graticule").datum(_graticule).attr('d', _path);
             }
 

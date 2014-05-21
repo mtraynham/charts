@@ -5,14 +5,6 @@ angular.module('charts').controller('Example4Ctrl', ['$scope', 'GeoConfigs', 'Ge
 
     $scope.projections = GeoProjectionFactory.types;
 
-    // $scope.$watch('config', function (newConfig, oldConfig) {
-    //     if (newConfig === oldConfig) {
-    //         return;
-    //     }
-    //     chart.addLayer(newConfig.getFeautres(), "Location", newConfig.getKeyAccessor())
-    //     chart.redraw();
-    // });
-
     $scope.$watch('projectionType', function (newProjectionType, oldProjectionType) {
         if (newProjectionType === oldProjectionType) {
             return;
@@ -168,27 +160,24 @@ angular.module('charts').controller('Example4Ctrl', ['$scope', 'GeoConfigs', 'Ge
         chart.dimension(dimension)
             .group(group)
             .title(function (d) {
-                return "Country: " + GeoService.countryISO2toCountryName.get(d.key) +
+                return "Country: " + d.title +
                     "\n" + "Value: " + d.value;
             })
-            // .addLayer(worldGeoFeatures, "world", function (d) {
-            //     return d.id;
-            // })
-            .addLayer(usGeoFeatures, "state", function (d) {
-                return d.id;
-            });
         chart.on("preRender", function (chart) {
             chart.colorDomain(d3.extent(chart.data(), chart.valueAccessor()));
         });
         chart.on("preRedraw", function (chart) {
             chart.colorDomain(d3.extent(chart.data(), chart.valueAccessor()));
         });
-        chart.render();
+
+        GeoConfigs.loadConfig(GeoConfigs.getConfig('usStates1'), function (config) {
+            chart.addLayer(config.getFeatures().features, 'usStates1', config.getKeyAccessor(),
+                config.getTitleAccessor());
+            chart.render();
+        });
     }
 
     var q = queue();
     q.defer(parseData, 'data/14_Topic_en_csv_v2/14_Topic_en_csv_v2.csv');
-    GeoService.deferWorld50(q);
-    GeoService.deferUS50(q);
     q.await(render);
 }]);
