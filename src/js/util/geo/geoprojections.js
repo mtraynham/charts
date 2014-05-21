@@ -1,7 +1,7 @@
 /**
  * Albers Projection
  */
-angular.module('charts').factory('Albers', ['GeoProjection', function (GeoProjection) {
+angular.module('charts.geo').factory('Albers', ['GeoProjection', function (GeoProjection) {
 
     var Albers = function (data) {
         GeoProjection.call(this, data);
@@ -18,7 +18,7 @@ angular.module('charts').factory('Albers', ['GeoProjection', function (GeoProjec
 /**
  * AlbersUSA Projection
  */
-angular.module('charts').factory('AlbersUSA', ['GeoProjection', function (GeoProjection) {
+angular.module('charts.geo').factory('AlbersUSA', ['GeoProjection', function (GeoProjection) {
 
     var AlbersUSA = function (data) {
         GeoProjection.call(this, data);
@@ -35,7 +35,7 @@ angular.module('charts').factory('AlbersUSA', ['GeoProjection', function (GeoPro
 /**
  * AzimuthalEqualArea Projection
  */
-angular.module('charts').factory('AzimuthalEqualArea', ['GeoProjection', function (GeoProjection) {
+angular.module('charts.geo').factory('AzimuthalEqualArea', ['GeoProjection', function (GeoProjection) {
 
     var AzimuthalEqualArea = function (data) {
         GeoProjection.call(this, data);
@@ -52,7 +52,7 @@ angular.module('charts').factory('AzimuthalEqualArea', ['GeoProjection', functio
 /**
  * AzimuthalEquiDistant Projection
  */
-angular.module('charts').factory('AzimuthalEquiDistant', ['GeoProjection', function (GeoProjection) {
+angular.module('charts.geo').factory('AzimuthalEquiDistant', ['GeoProjection', function (GeoProjection) {
 
     var AzimuthalEquiDistant = function (data) {
         GeoProjection.call(this, data);
@@ -69,7 +69,7 @@ angular.module('charts').factory('AzimuthalEquiDistant', ['GeoProjection', funct
 /**
  * Conic Conformal Projection
  */
-angular.module('charts').factory('ConicConformal', ['Conic', function (Conic) {
+angular.module('charts.geo').factory('ConicConformal', ['Conic', function (Conic) {
 
     var ConicConformal = function (data) {
         Conic.call(this, data);
@@ -86,7 +86,7 @@ angular.module('charts').factory('ConicConformal', ['Conic', function (Conic) {
 /**
  * Conic Equal Area Projection
  */
-angular.module('charts').factory('ConicEqualArea', ['Conic', function (Conic) {
+angular.module('charts.geo').factory('ConicEqualArea', ['Conic', function (Conic) {
 
     var ConicEqualArea = function (data) {
         Conic.call(this, data);
@@ -103,7 +103,7 @@ angular.module('charts').factory('ConicEqualArea', ['Conic', function (Conic) {
 /**
  * Conic Equi-Distant Projection
  */
-angular.module('charts').factory('ConicEquiDistant', ['Conic', function (Conic) {
+angular.module('charts.geo').factory('ConicEquiDistant', ['Conic', function (Conic) {
 
     var ConicEquiDistant = function (data) {
         Conic.call(this, data);
@@ -120,7 +120,7 @@ angular.module('charts').factory('ConicEquiDistant', ['Conic', function (Conic) 
 /**
  * Equi-Rectangular Projection
  */
-angular.module('charts').factory('EquiRectangular', ['GeoProjection', function (GeoProjection) {
+angular.module('charts.geo').factory('EquiRectangular', ['GeoProjection', function (GeoProjection) {
 
     var EquiRectangular = function (data) {
         GeoProjection.call(this, data);
@@ -137,7 +137,7 @@ angular.module('charts').factory('EquiRectangular', ['GeoProjection', function (
 /**
  * Gnomonic Projection
  */
-angular.module('charts').factory('Gnomonic', ['GeoProjection', function (GeoProjection) {
+angular.module('charts.geo').factory('Gnomonic', ['GeoProjection', function (GeoProjection) {
 
     var Gnomonic = function (data) {
         GeoProjection.call(this, data);
@@ -154,7 +154,7 @@ angular.module('charts').factory('Gnomonic', ['GeoProjection', function (GeoProj
 /**
  * Mercator Projection
  */
-angular.module('charts').factory('Mercator', ['GeoProjection', function (GeoProjection) {
+angular.module('charts.geo').factory('Mercator', ['GeoProjection', function (GeoProjection) {
 
     var Mercator = function (data) {
         GeoProjection.call(this, data);
@@ -171,7 +171,7 @@ angular.module('charts').factory('Mercator', ['GeoProjection', function (GeoProj
 /**
  * Orthographic Projection
  */
-angular.module('charts').factory('Orthographic', ['GeoProjection', function (GeoProjection) {
+angular.module('charts.geo').factory('Orthographic', ['GeoProjection', function (GeoProjection) {
 
     var Orthographic = function (data) {
         GeoProjection.call(this, data);
@@ -188,7 +188,7 @@ angular.module('charts').factory('Orthographic', ['GeoProjection', function (Geo
 /**
  * Stereographic Projection
  */
-angular.module('charts').factory('Stereographic', ['GeoProjection', function (GeoProjection) {
+angular.module('charts.geo').factory('Stereographic', ['GeoProjection', function (GeoProjection) {
 
     var Stereographic = function (data) {
         GeoProjection.call(this, data);
@@ -205,7 +205,7 @@ angular.module('charts').factory('Stereographic', ['GeoProjection', function (Ge
 /**
  * Transverse Mercator Projection
  */
-angular.module('charts').factory('TransverseMercator', ['GeoProjection', function (GeoProjection) {
+angular.module('charts.geo').factory('TransverseMercator', ['GeoProjection', function (GeoProjection) {
 
     var TransverseMercator = function (data) {
         GeoProjection.call(this, data);

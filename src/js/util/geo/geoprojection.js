@@ -1,7 +1,7 @@
 /**
  * GeoProjection
  */
-angular.module('charts').factory('GeoProjection', function () {
+angular.module('charts.geo').factory('GeoProjection', function () {
 
     var GeoProjection = function (data) {
         angular.extend(this, data);

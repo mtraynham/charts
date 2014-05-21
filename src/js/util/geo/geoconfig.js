@@ -1,7 +1,7 @@
 /**
  * GeoConfig
  */
-angular.module('charts').factory('GeoConfig', function () {
+angular.module('charts.geo').factory('GeoConfig', function () {
 
     var GeoConfig = function (data) {
         this.name = "location";

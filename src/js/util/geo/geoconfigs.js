@@ -1,7 +1,7 @@
 /**
  * GeoService
  */
-angular.module('charts').service('GeoConfigs', ['GeoConfig', 'GeoProjection',
+angular.module('charts.geo').service('GeoConfigs', ['GeoConfig', 'GeoProjection',
     function (GeoConfig, GeoProjection) {
 
     // All geo configs

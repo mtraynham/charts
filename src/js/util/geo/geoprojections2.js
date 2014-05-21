@@ -1,7 +1,7 @@
 /**
  * Airy Projection
  */
-angular.module('charts').factory('Airy', ['GeoProjection', function (GeoProjection) {
+angular.module('charts.geo').factory('Airy', ['GeoProjection', function (GeoProjection) {
 
     var Airy = function (data) {
         GeoProjection.call(this, data);
@@ -18,7 +18,7 @@ angular.module('charts').factory('Airy', ['GeoProjection', function (GeoProjecti
 /**
  * Aitoff Projection
  */
-angular.module('charts').factory('Aitoff', ['GeoProjection', function (GeoProjection) {
+angular.module('charts.geo').factory('Aitoff', ['GeoProjection', function (GeoProjection) {
 
     var Aitoff = function (data) {
         GeoProjection.call(this, data);
@@ -35,7 +35,7 @@ angular.module('charts').factory('Aitoff', ['GeoProjection', function (GeoProjec
 /**
  * Armadillo Projection
  */
-angular.module('charts').factory('Armadillo', ['GeoProjection', function (GeoProjection) {
+angular.module('charts.geo').factory('Armadillo', ['GeoProjection', function (GeoProjection) {
 
     var Armadillo = function (data) {
         GeoProjection.call(this, data);
@@ -52,7 +52,7 @@ angular.module('charts').factory('Armadillo', ['GeoProjection', function (GeoPro
 /**
  * August Projection
  */
-angular.module('charts').factory('August', ['GeoProjection', function (GeoProjection) {
+angular.module('charts.geo').factory('August', ['GeoProjection', function (GeoProjection) {
 
     var August = function (data) {
         GeoProjection.call(this, data);
@@ -69,7 +69,7 @@ angular.module('charts').factory('August', ['GeoProjection', function (GeoProjec
 /**
  * Baker Projection
  */
-angular.module('charts').factory('Baker', ['GeoProjection', function (GeoProjection) {
+angular.module('charts.geo').factory('Baker', ['GeoProjection', function (GeoProjection) {
 
     var Baker = function (data) {
         GeoProjection.call(this, data);
@@ -86,7 +86,7 @@ angular.module('charts').factory('Baker', ['GeoProjection', function (GeoProject
 /**
  * BerghausStar Projection
  */
-angular.module('charts').factory('BerghausStar', ['GeoProjection', function (GeoProjection) {
+angular.module('charts.geo').factory('BerghausStar', ['GeoProjection', function (GeoProjection) {
 
     var BerghausStar = function (data) {
         GeoProjection.call(this, data);
@@ -103,7 +103,7 @@ angular.module('charts').factory('BerghausStar', ['GeoProjection', function (Geo
 /**
  * BoggsEumorphic Projection
  */
-angular.module('charts').factory('BoggsEumorphic', ['GeoProjection', function (GeoProjection) {
+angular.module('charts.geo').factory('BoggsEumorphic', ['GeoProjection', function (GeoProjection) {
 
     var BoggsEumorphic = function (data) {
         GeoProjection.call(this, data);
@@ -120,7 +120,7 @@ angular.module('charts').factory('BoggsEumorphic', ['GeoProjection', function (G
 /**
  * Bonne Projection
  */
-angular.module('charts').factory('Bonne', ['GeoProjection', function (GeoProjection) {
+angular.module('charts.geo').factory('Bonne', ['GeoProjection', function (GeoProjection) {
 
     var Bonne = function (data) {
         GeoProjection.call(this, data);
@@ -137,7 +137,7 @@ angular.module('charts').factory('Bonne', ['GeoProjection', function (GeoProject
 /**
  * Bromley Projection
  */
-angular.module('charts').factory('Bromley', ['GeoProjection', function (GeoProjection) {
+angular.module('charts.geo').factory('Bromley', ['GeoProjection', function (GeoProjection) {
 
     var Bromley = function (data) {
         GeoProjection.call(this, data);
@@ -154,7 +154,7 @@ angular.module('charts').factory('Bromley', ['GeoProjection', function (GeoProje
 /**
  * Chamberlin Projection
  */
-angular.module('charts').factory('Chamberlin', ['GeoProjection', function (GeoProjection) {
+angular.module('charts.geo').factory('Chamberlin', ['GeoProjection', function (GeoProjection) {
 
     var Chamberlin = function (data) {
         GeoProjection.call(this, data);
@@ -171,7 +171,7 @@ angular.module('charts').factory('Chamberlin', ['GeoProjection', function (GeoPr
 /**
  * Collignon Projection
  */
-angular.module('charts').factory('Collignon', ['GeoProjection', function (GeoProjection) {
+angular.module('charts.geo').factory('Collignon', ['GeoProjection', function (GeoProjection) {
 
     var Collignon = function (data) {
         GeoProjection.call(this, data);
@@ -188,7 +188,7 @@ angular.module('charts').factory('Collignon', ['GeoProjection', function (GeoPro
 /**
  * Craig Projection
  */
-angular.module('charts').factory('Craig', ['GeoProjection', function (GeoProjection) {
+angular.module('charts.geo').factory('Craig', ['GeoProjection', function (GeoProjection) {
 
     var Craig = function (data) {
         GeoProjection.call(this, data);
@@ -205,7 +205,7 @@ angular.module('charts').factory('Craig', ['GeoProjection', function (GeoProject
 /**
  * Craster Projection
  */
-angular.module('charts').factory('Craster', ['GeoProjection', function (GeoProjection) {
+angular.module('charts.geo').factory('Craster', ['GeoProjection', function (GeoProjection) {
 
     var Craster = function (data) {
         GeoProjection.call(this, data);
@@ -222,7 +222,7 @@ angular.module('charts').factory('Craster', ['GeoProjection', function (GeoProje
 /**
  * CylindricalEqualArea Projection
  */
-angular.module('charts').factory('CylindricalEqualArea', ['GeoProjection', function (GeoProjection) {
+angular.module('charts.geo').factory('CylindricalEqualArea', ['GeoProjection', function (GeoProjection) {
 
     var CylindricalEqualArea = function (data) {
         GeoProjection.call(this, data);
@@ -239,7 +239,7 @@ angular.module('charts').factory('CylindricalEqualArea', ['GeoProjection', funct
 /**
  * CylindricalStereographic Projection
  */
-angular.module('charts').factory('CylindricalStereographic', ['GeoProjection', function (GeoProjection) {
+angular.module('charts.geo').factory('CylindricalStereographic', ['GeoProjection', function (GeoProjection) {
 
     var CylindricalStereographic = function (data) {
         GeoProjection.call(this, data);
@@ -256,7 +256,7 @@ angular.module('charts').factory('CylindricalStereographic', ['GeoProjection', f
 /**
  * Eckert1 Projection
  */
-angular.module('charts').factory('Eckert1', ['GeoProjection', function (GeoProjection) {
+angular.module('charts.geo').factory('Eckert1', ['GeoProjection', function (GeoProjection) {
 
     var Eckert1 = function (data) {
         GeoProjection.call(this, data);
@@ -273,7 +273,7 @@ angular.module('charts').factory('Eckert1', ['GeoProjection', function (GeoProje
 /**
  * Eckert2 Projection
  */
-angular.module('charts').factory('Eckert2', ['GeoProjection', function (GeoProjection) {
+angular.module('charts.geo').factory('Eckert2', ['GeoProjection', function (GeoProjection) {
 
     var Eckert2 = function (data) {
         GeoProjection.call(this, data);
@@ -290,7 +290,7 @@ angular.module('charts').factory('Eckert2', ['GeoProjection', function (GeoProje
 /**
  * Eckert3 Projection
  */
-angular.module('charts').factory('Eckert3', ['GeoProjection', function (GeoProjection) {
+angular.module('charts.geo').factory('Eckert3', ['GeoProjection', function (GeoProjection) {
 
     var Eckert3 = function (data) {
         GeoProjection.call(this, data);
@@ -307,7 +307,7 @@ angular.module('charts').factory('Eckert3', ['GeoProjection', function (GeoProje
 /**
  * Eckert4 Projection
  */
-angular.module('charts').factory('Eckert4', ['GeoProjection', function (GeoProjection) {
+angular.module('charts.geo').factory('Eckert4', ['GeoProjection', function (GeoProjection) {
 
     var Eckert4 = function (data) {
         GeoProjection.call(this, data);
@@ -324,7 +324,7 @@ angular.module('charts').factory('Eckert4', ['GeoProjection', function (GeoProje
 /**
  * Eckert5 Projection
  */
-angular.module('charts').factory('Eckert5', ['GeoProjection', function (GeoProjection) {
+angular.module('charts.geo').factory('Eckert5', ['GeoProjection', function (GeoProjection) {
 
     var Eckert5 = function (data) {
         GeoProjection.call(this, data);
@@ -341,7 +341,7 @@ angular.module('charts').factory('Eckert5', ['GeoProjection', function (GeoProje
 /**
  * Eckert6 Projection
  */
-angular.module('charts').factory('Eckert6', ['GeoProjection', function (GeoProjection) {
+angular.module('charts.geo').factory('Eckert6', ['GeoProjection', function (GeoProjection) {
 
     var Eckert6 = function (data) {
         GeoProjection.call(this, data);
@@ -358,7 +358,7 @@ angular.module('charts').factory('Eckert6', ['GeoProjection', function (GeoProje
 /**
  * Eisenlohr Projection
  */
-angular.module('charts').factory('Eisenlohr', ['GeoProjection', function (GeoProjection) {
+angular.module('charts.geo').factory('Eisenlohr', ['GeoProjection', function (GeoProjection) {
 
     var Eisenlohr = function (data) {
         GeoProjection.call(this, data);
@@ -375,7 +375,7 @@ angular.module('charts').factory('Eisenlohr', ['GeoProjection', function (GeoPro
 /**
  * Fahey Projection
  */
-angular.module('charts').factory('Fahey', ['GeoProjection', function (GeoProjection) {
+angular.module('charts.geo').factory('Fahey', ['GeoProjection', function (GeoProjection) {
 
     var Fahey = function (data) {
         GeoProjection.call(this, data);
@@ -392,7 +392,7 @@ angular.module('charts').factory('Fahey', ['GeoProjection', function (GeoProject
 /**
  * Foucaut Projection
  */
-angular.module('charts').factory('Foucaut', ['GeoProjection', function (GeoProjection) {
+angular.module('charts.geo').factory('Foucaut', ['GeoProjection', function (GeoProjection) {
 
     var Foucaut = function (data) {
         GeoProjection.call(this, data);
@@ -409,7 +409,7 @@ angular.module('charts').factory('Foucaut', ['GeoProjection', function (GeoProje
 /**
  * Gilbert Projection
  */
-angular.module('charts').factory('Gilbert', ['GeoProjection', function (GeoProjection) {
+angular.module('charts.geo').factory('Gilbert', ['GeoProjection', function (GeoProjection) {
 
     var Gilbert = function (data) {
         GeoProjection.call(this, data);
@@ -426,7 +426,7 @@ angular.module('charts').factory('Gilbert', ['GeoProjection', function (GeoProje
 /**
  * Ginzburg4 Projection
  */
-angular.module('charts').factory('Ginzburg4', ['GeoProjection', function (GeoProjection) {
+angular.module('charts.geo').factory('Ginzburg4', ['GeoProjection', function (GeoProjection) {
 
     var Ginzburg4 = function (data) {
         GeoProjection.call(this, data);
@@ -443,7 +443,7 @@ angular.module('charts').factory('Ginzburg4', ['GeoProjection', function (GeoPro
 /**
  * Ginzbug5 Projection
  */
-angular.module('charts').factory('Ginzbug5', ['GeoProjection', function (GeoProjection) {
+angular.module('charts.geo').factory('Ginzbug5', ['GeoProjection', function (GeoProjection) {
 
     var Ginzbug5 = function (data) {
         GeoProjection.call(this, data);
@@ -460,7 +460,7 @@ angular.module('charts').factory('Ginzbug5', ['GeoProjection', function (GeoProj
 /**
  * Ginzbug6 Projection
  */
-angular.module('charts').factory('Ginzbug6', ['GeoProjection', function (GeoProjection) {
+angular.module('charts.geo').factory('Ginzbug6', ['GeoProjection', function (GeoProjection) {
 
     var Ginzbug6 = function (data) {
         GeoProjection.call(this, data);
@@ -477,7 +477,7 @@ angular.module('charts').factory('Ginzbug6', ['GeoProjection', function (GeoProj
 /**
  * Ginzburg8 Projection
  */
-angular.module('charts').factory('Ginzburg8', ['GeoProjection', function (GeoProjection) {
+angular.module('charts.geo').factory('Ginzburg8', ['GeoProjection', function (GeoProjection) {
 
     var Ginzburg8 = function (data) {
         GeoProjection.call(this, data);
@@ -494,7 +494,7 @@ angular.module('charts').factory('Ginzburg8', ['GeoProjection', function (GeoPro
 /**
  * Ginzburg9 Projection
  */
-angular.module('charts').factory('Ginzburg9', ['GeoProjection', function (GeoProjection) {
+angular.module('charts.geo').factory('Ginzburg9', ['GeoProjection', function (GeoProjection) {
 
     var Ginzburg9 = function (data) {
         GeoProjection.call(this, data);
@@ -511,7 +511,7 @@ angular.module('charts').factory('Ginzburg9', ['GeoProjection', function (GeoPro
 /**
  * Gringorten Projection
  */
-angular.module('charts').factory('Gringorten', ['GeoProjection', function (GeoProjection) {
+angular.module('charts.geo').factory('Gringorten', ['GeoProjection', function (GeoProjection) {
 
     var Gringorten = function (data) {
         GeoProjection.call(this, data);
@@ -528,7 +528,7 @@ angular.module('charts').factory('Gringorten', ['GeoProjection', function (GeoPr
 /**
  * Guyou Projection
  */
-angular.module('charts').factory('Guyou', ['GeoProjection', function (GeoProjection) {
+angular.module('charts.geo').factory('Guyou', ['GeoProjection', function (GeoProjection) {
 
     var Guyou = function (data) {
         GeoProjection.call(this, data);
@@ -545,7 +545,7 @@ angular.module('charts').factory('Guyou', ['GeoProjection', function (GeoProject
 /**
  * Hammer Projection
  */
-angular.module('charts').factory('Hammer', ['GeoProjection', function (GeoProjection) {
+angular.module('charts.geo').factory('Hammer', ['GeoProjection', function (GeoProjection) {
 
     var Hammer = function (data) {
         GeoProjection.call(this, data);
@@ -562,7 +562,7 @@ angular.module('charts').factory('Hammer', ['GeoProjection', function (GeoProjec
 /**
  * HammerRetroazimuthal Projection
  */
-angular.module('charts').factory('HammerRetroazimuthal', ['GeoProjection', function (GeoProjection) {
+angular.module('charts.geo').factory('HammerRetroazimuthal', ['GeoProjection', function (GeoProjection) {
 
     var HammerRetroazimuthal = function (data) {
         GeoProjection.call(this, data);
@@ -579,7 +579,7 @@ angular.module('charts').factory('HammerRetroazimuthal', ['GeoProjection', funct
 /**
  * HEALPix Projection
  */
-angular.module('charts').factory('HEALPix', ['GeoProjection', function (GeoProjection) {
+angular.module('charts.geo').factory('HEALPix', ['GeoProjection', function (GeoProjection) {
 
     var HEALPix = function (data) {
         GeoProjection.call(this, data);
@@ -596,7 +596,7 @@ angular.module('charts').factory('HEALPix', ['GeoProjection', function (GeoProje
 /**
  * Hill Projection
  */
-angular.module('charts').factory('Hill', ['GeoProjection', function (GeoProjection) {
+angular.module('charts.geo').factory('Hill', ['GeoProjection', function (GeoProjection) {
 
     var Hill = function (data) {
         GeoProjection.call(this, data);
@@ -613,7 +613,7 @@ angular.module('charts').factory('Hill', ['GeoProjection', function (GeoProjecti
 /**
  * Homolosine Projection
  */
-angular.module('charts').factory('Homolosine', ['GeoProjection', function (GeoProjection) {
+angular.module('charts.geo').factory('Homolosine', ['GeoProjection', function (GeoProjection) {
 
     var Homolosine = function (data) {
         GeoProjection.call(this, data);
@@ -630,7 +630,7 @@ angular.module('charts').factory('Homolosine', ['GeoProjection', function (GeoPr
 /**
  * Kavrayskiy7 Projection
  */
-angular.module('charts').factory('Kavrayskiy7', ['GeoProjection', function (GeoProjection) {
+angular.module('charts.geo').factory('Kavrayskiy7', ['GeoProjection', function (GeoProjection) {
 
     var Kavrayskiy7 = function (data) {
         GeoProjection.call(this, data);
@@ -647,7 +647,7 @@ angular.module('charts').factory('Kavrayskiy7', ['GeoProjection', function (GeoP
 /**
  * Lagrange Projection
  */
-angular.module('charts').factory('Lagrange', ['GeoProjection', function (GeoProjection) {
+angular.module('charts.geo').factory('Lagrange', ['GeoProjection', function (GeoProjection) {
 
     var Lagrange = function (data) {
         GeoProjection.call(this, data);
@@ -664,7 +664,7 @@ angular.module('charts').factory('Lagrange', ['GeoProjection', function (GeoProj
 /**
  * Larrivee Projection
  */
-angular.module('charts').factory('Larrivee', ['GeoProjection', function (GeoProjection) {
+angular.module('charts.geo').factory('Larrivee', ['GeoProjection', function (GeoProjection) {
 
     var Larrivee = function (data) {
         GeoProjection.call(this, data);
@@ -681,7 +681,7 @@ angular.module('charts').factory('Larrivee', ['GeoProjection', function (GeoProj
 /**
  * Laskowski Projection
  */
-angular.module('charts').factory('Laskowski', ['GeoProjection', function (GeoProjection) {
+angular.module('charts.geo').factory('Laskowski', ['GeoProjection', function (GeoProjection) {
 
     var Laskowski = function (data) {
         GeoProjection.call(this, data);
@@ -698,7 +698,7 @@ angular.module('charts').factory('Laskowski', ['GeoProjection', function (GeoPro
 /**
  * Littrow Projection
  */
-angular.module('charts').factory('Littrow', ['GeoProjection', function (GeoProjection) {
+angular.module('charts.geo').factory('Littrow', ['GeoProjection', function (GeoProjection) {
 
     var Littrow = function (data) {
         GeoProjection.call(this, data);
@@ -715,7 +715,7 @@ angular.module('charts').factory('Littrow', ['GeoProjection', function (GeoProje
 /**
  * Loximuthal Projection
  */
-angular.module('charts').factory('Loximuthal', ['GeoProjection', function (GeoProjection) {
+angular.module('charts.geo').factory('Loximuthal', ['GeoProjection', function (GeoProjection) {
 
     var Loximuthal = function (data) {
         GeoProjection.call(this, data);
@@ -732,7 +732,7 @@ angular.module('charts').factory('Loximuthal', ['GeoProjection', function (GeoPr
 /**
  * Miller Projection
  */
-angular.module('charts').factory('Miller', ['GeoProjection', function (GeoProjection) {
+angular.module('charts.geo').factory('Miller', ['GeoProjection', function (GeoProjection) {
 
     var Miller = function (data) {
         GeoProjection.call(this, data);
@@ -749,7 +749,7 @@ angular.module('charts').factory('Miller', ['GeoProjection', function (GeoProjec
 /**
  * ModifiedStereoGraphic Projection
  */
-angular.module('charts').factory('ModifiedStereoGraphic', ['GeoProjection', function (GeoProjection) {
+angular.module('charts.geo').factory('ModifiedStereoGraphic', ['GeoProjection', function (GeoProjection) {
 
     var ModifiedStereoGraphic = function (data) {
         GeoProjection.call(this, data);
@@ -766,7 +766,7 @@ angular.module('charts').factory('ModifiedStereoGraphic', ['GeoProjection', func
 /**
  * Mollweide Projection
  */
-angular.module('charts').factory('Mollweide', ['GeoProjection', function (GeoProjection) {
+angular.module('charts.geo').factory('Mollweide', ['GeoProjection', function (GeoProjection) {
 
     var Mollweide = function (data) {
         GeoProjection.call(this, data);
@@ -783,7 +783,7 @@ angular.module('charts').factory('Mollweide', ['GeoProjection', function (GeoPro
 /**
  * MtFlatPolarParabolic Projection
  */
-angular.module('charts').factory('MtFlatPolarParabolic', ['GeoProjection', function (GeoProjection) {
+angular.module('charts.geo').factory('MtFlatPolarParabolic', ['GeoProjection', function (GeoProjection) {
 
     var MtFlatPolarParabolic = function (data) {
         GeoProjection.call(this, data);
@@ -800,7 +800,7 @@ angular.module('charts').factory('MtFlatPolarParabolic', ['GeoProjection', funct
 /**
  * MtFlatPolarQuartic Projection
  */
-angular.module('charts').factory('MtFlatPolarQuartic', ['GeoProjection', function (GeoProjection) {
+angular.module('charts.geo').factory('MtFlatPolarQuartic', ['GeoProjection', function (GeoProjection) {
 
     var MtFlatPolarQuartic = function (data) {
         GeoProjection.call(this, data);
@@ -817,7 +817,7 @@ angular.module('charts').factory('MtFlatPolarQuartic', ['GeoProjection', functio
 /**
  * MtFlatPolarSinusoidal Projection
  */
-angular.module('charts').factory('MtFlatPolarSinusoidal', ['GeoProjection', function (GeoProjection) {
+angular.module('charts.geo').factory('MtFlatPolarSinusoidal', ['GeoProjection', function (GeoProjection) {
 
     var MtFlatPolarSinusoidal = function (data) {
         GeoProjection.call(this, data);
@@ -834,7 +834,7 @@ angular.module('charts').factory('MtFlatPolarSinusoidal', ['GeoProjection', func
 /**
  * NaturalEarth Projection
  */
-angular.module('charts').factory('NaturalEarth', ['GeoProjection', function (GeoProjection) {
+angular.module('charts.geo').factory('NaturalEarth', ['GeoProjection', function (GeoProjection) {
 
     var NaturalEarth = function (data) {
         GeoProjection.call(this, data);
@@ -851,7 +851,7 @@ angular.module('charts').factory('NaturalEarth', ['GeoProjection', function (Geo
 /**
  * NellHammer Projection
  */
-angular.module('charts').factory('NellHammer', ['GeoProjection', function (GeoProjection) {
+angular.module('charts.geo').factory('NellHammer', ['GeoProjection', function (GeoProjection) {
 
     var NellHammer = function (data) {
         GeoProjection.call(this, data);
@@ -868,7 +868,7 @@ angular.module('charts').factory('NellHammer', ['GeoProjection', function (GeoPr
 /**
  * PericeQuincuncial Projection
  */
-angular.module('charts').factory('PericeQuincuncial', ['GeoProjection', function (GeoProjection) {
+angular.module('charts.geo').factory('PericeQuincuncial', ['GeoProjection', function (GeoProjection) {
 
     var PericeQuincuncial = function (data) {
         GeoProjection.call(this, data);
@@ -885,7 +885,7 @@ angular.module('charts').factory('PericeQuincuncial', ['GeoProjection', function
 /**
  * PolyConic Projection
  */
-angular.module('charts').factory('PolyConic', ['GeoProjection', function (GeoProjection) {
+angular.module('charts.geo').factory('PolyConic', ['GeoProjection', function (GeoProjection) {
 
     var PolyConic = function (data) {
         GeoProjection.call(this, data);
@@ -902,7 +902,7 @@ angular.module('charts').factory('PolyConic', ['GeoProjection', function (GeoPro
 /**
  * RectangularPolyconic Projection
  */
-angular.module('charts').factory('RectangularPolyconic', ['GeoProjection', function (GeoProjection) {
+angular.module('charts.geo').factory('RectangularPolyconic', ['GeoProjection', function (GeoProjection) {
 
     var RectangularPolyconic = function (data) {
         GeoProjection.call(this, data);
@@ -919,7 +919,7 @@ angular.module('charts').factory('RectangularPolyconic', ['GeoProjection', funct
 /**
  * Robinson Projection
  */
-angular.module('charts').factory('Robinson', ['GeoProjection', function (GeoProjection) {
+angular.module('charts.geo').factory('Robinson', ['GeoProjection', function (GeoProjection) {
 
     var Robinson = function (data) {
         GeoProjection.call(this, data);
@@ -936,7 +936,7 @@ angular.module('charts').factory('Robinson', ['GeoProjection', function (GeoProj
 /**
  * Satellite Projection
  */
-angular.module('charts').factory('Satellite', ['GeoProjection', function (GeoProjection) {
+angular.module('charts.geo').factory('Satellite', ['GeoProjection', function (GeoProjection) {
 
     var Satellite = function (data) {
         GeoProjection.call(this, data);
@@ -953,7 +953,7 @@ angular.module('charts').factory('Satellite', ['GeoProjection', function (GeoPro
 /**
  * Sinusoidal Projection
  */
-angular.module('charts').factory('Sinusoidal', ['GeoProjection', function (GeoProjection) {
+angular.module('charts.geo').factory('Sinusoidal', ['GeoProjection', function (GeoProjection) {
 
     var Sinusoidal = function (data) {
         GeoProjection.call(this, data);
@@ -970,7 +970,7 @@ angular.module('charts').factory('Sinusoidal', ['GeoProjection', function (GeoPr
 /**
  * SinuMollweide Projection
  */
-angular.module('charts').factory('SinuMollweide', ['GeoProjection', function (GeoProjection) {
+angular.module('charts.geo').factory('SinuMollweide', ['GeoProjection', function (GeoProjection) {
 
     var SinuMollweide = function (data) {
         GeoProjection.call(this, data);
@@ -987,7 +987,7 @@ angular.module('charts').factory('SinuMollweide', ['GeoProjection', function (Ge
 /**
  * Times Projection
  */
-angular.module('charts').factory('Times', ['GeoProjection', function (GeoProjection) {
+angular.module('charts.geo').factory('Times', ['GeoProjection', function (GeoProjection) {
 
     var Times = function (data) {
         GeoProjection.call(this, data);
@@ -1004,7 +1004,7 @@ angular.module('charts').factory('Times', ['GeoProjection', function (GeoProject
 /**
  * TwoPointAzimuthal Projection
  */
-angular.module('charts').factory('TwoPointAzimuthal', ['GeoProjection', function (GeoProjection) {
+angular.module('charts.geo').factory('TwoPointAzimuthal', ['GeoProjection', function (GeoProjection) {
 
     var TwoPointAzimuthal = function (data) {
         GeoProjection.call(this, data);
@@ -1021,7 +1021,7 @@ angular.module('charts').factory('TwoPointAzimuthal', ['GeoProjection', function
 /**
  * TwoPointEquidistant Projection
  */
-angular.module('charts').factory('TwoPointEquidistant', ['GeoProjection', function (GeoProjection) {
+angular.module('charts.geo').factory('TwoPointEquidistant', ['GeoProjection', function (GeoProjection) {
 
     var TwoPointEquidistant = function (data) {
         GeoProjection.call(this, data);
@@ -1038,7 +1038,7 @@ angular.module('charts').factory('TwoPointEquidistant', ['GeoProjection', functi
 /**
  * VanDerGrinten Projection
  */
-angular.module('charts').factory('VanDerGrinten', ['GeoProjection', function (GeoProjection) {
+angular.module('charts.geo').factory('VanDerGrinten', ['GeoProjection', function (GeoProjection) {
 
     var VanDerGrinten = function (data) {
         GeoProjection.call(this, data);
@@ -1055,7 +1055,7 @@ angular.module('charts').factory('VanDerGrinten', ['GeoProjection', function (Ge
 /**
  * VanDerGrinten2 Projection
  */
-angular.module('charts').factory('VanDerGrinten2', ['GeoProjection', function (GeoProjection) {
+angular.module('charts.geo').factory('VanDerGrinten2', ['GeoProjection', function (GeoProjection) {
 
     var VanDerGrinten2 = function (data) {
         GeoProjection.call(this, data);
@@ -1072,7 +1072,7 @@ angular.module('charts').factory('VanDerGrinten2', ['GeoProjection', function (G
 /**
  * VanDerGrinten3 Projection
  */
-angular.module('charts').factory('VanDerGrinten3', ['GeoProjection', function (GeoProjection) {
+angular.module('charts.geo').factory('VanDerGrinten3', ['GeoProjection', function (GeoProjection) {
 
     var VanDerGrinten3 = function (data) {
         GeoProjection.call(this, data);
@@ -1089,7 +1089,7 @@ angular.module('charts').factory('VanDerGrinten3', ['GeoProjection', function (G
 /**
  * VanDerGrinten4 Projection
  */
-angular.module('charts').factory('VanDerGrinten4', ['GeoProjection', function (GeoProjection) {
+angular.module('charts.geo').factory('VanDerGrinten4', ['GeoProjection', function (GeoProjection) {
 
     var VanDerGrinten4 = function (data) {
         GeoProjection.call(this, data);
@@ -1106,7 +1106,7 @@ angular.module('charts').factory('VanDerGrinten4', ['GeoProjection', function (G
 /**
  * Wagner4 Projection
  */
-angular.module('charts').factory('Wagner4', ['GeoProjection', function (GeoProjection) {
+angular.module('charts.geo').factory('Wagner4', ['GeoProjection', function (GeoProjection) {
 
     var Wagner4 = function (data) {
         GeoProjection.call(this, data);
@@ -1123,7 +1123,7 @@ angular.module('charts').factory('Wagner4', ['GeoProjection', function (GeoProje
 /**
  * Wagner6 Projection
  */
-angular.module('charts').factory('Wagner6', ['GeoProjection', function (GeoProjection) {
+angular.module('charts.geo').factory('Wagner6', ['GeoProjection', function (GeoProjection) {
 
     var Wagner6 = function (data) {
         GeoProjection.call(this, data);
@@ -1140,7 +1140,7 @@ angular.module('charts').factory('Wagner6', ['GeoProjection', function (GeoProje
 /**
  * Wagner7 Projection
  */
-angular.module('charts').factory('Wagner7', ['GeoProjection', function (GeoProjection) {
+angular.module('charts.geo').factory('Wagner7', ['GeoProjection', function (GeoProjection) {
 
     var Wagner7 = function (data) {
         GeoProjection.call(this, data);
@@ -1157,7 +1157,7 @@ angular.module('charts').factory('Wagner7', ['GeoProjection', function (GeoProje
 /**
  * Wiechel Projection
  */
-angular.module('charts').factory('Wiechel', ['GeoProjection', function (GeoProjection) {
+angular.module('charts.geo').factory('Wiechel', ['GeoProjection', function (GeoProjection) {
 
     var Wiechel = function (data) {
         GeoProjection.call(this, data);
@@ -1174,7 +1174,7 @@ angular.module('charts').factory('Wiechel', ['GeoProjection', function (GeoProje
 /**
  * Winkel3 Projection
  */
-angular.module('charts').factory('Winkel3', ['GeoProjection', function (GeoProjection) {
+angular.module('charts.geo').factory('Winkel3', ['GeoProjection', function (GeoProjection) {
 
     var Winkel3 = function (data) {
         GeoProjection.call(this, data);
