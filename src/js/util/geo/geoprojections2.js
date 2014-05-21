@@ -1096,9 +1096,9 @@ angular.module('charts.geo').factory('VanDerGrinten4', ['GeoProjection', functio
     };
     VanDerGrinten4.prototype = Object.create(GeoProjection.prototype);
 
-    VanDerGrinten4.type = VanDerGrinten4.prototype.type = "VanDerGrinten4";
+    VanDerGrinten4.type = VanDerGrinten4.prototype.type = "vanDerGrinten4";
     VanDerGrinten4.prototype.name = "VanDerGrinten4";
-    VanDerGrinten4.prototype.projection = d3.geo.VanDerGrinten4();
+    VanDerGrinten4.prototype.projection = d3.geo.vanDerGrinten4();
 
     return VanDerGrinten4;
 }]);

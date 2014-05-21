@@ -1,15 +1,15 @@
-angular.module('charts').controller('Example4Ctrl', ['$scope', 'GeoConfigs', 'GeoProjectionFactory', 'GeoService',
-    function ($scope, GeoConfigs, GeoProjectionFactory, GeoService) {
+angular.module('charts').controller('Example4Ctrl', ['$scope', 'GeoConfigs', 'GeoProjectionFactory2', 'GeoService',
+    function ($scope, GeoConfigs, GeoProjectionFactory2, GeoService) {
 
     var chart = dc.choroplethChart("#chart")
 
-    $scope.projections = GeoProjectionFactory.types;
+    $scope.projections = GeoProjectionFactory2.types;
 
     $scope.$watch('projectionType', function (newProjectionType, oldProjectionType) {
         if (newProjectionType === oldProjectionType) {
             return;
         }
-        var projection = new GeoProjectionFactory.types[newProjectionType]()
+        var projection = new GeoProjectionFactory2.types[newProjectionType]()
         chart.projection(projection.projection);
         // chart.projectionZoom(projection.zoom);
         chart.redraw();

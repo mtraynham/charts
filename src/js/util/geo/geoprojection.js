@@ -128,7 +128,7 @@ angular.module('charts.geo').factory('GeoProjection', function () {
 .factory('GeoProjectionFactory2', ['Airy', 'Aitoff', 'Armadillo', 'August', 'Baker', 'BerghausStar', 'BoggsEumorphic',
     'Bonne', 'Bromley', 'Chamberlin', 'Collignon', 'Craig', 'Craster', 'CylindricalEqualArea',
     'CylindricalStereographic', 'Eckert1', 'Eckert2', 'Eckert3', 'Eckert4', 'Eckert5', 'Eckert6', 'Eisenlohr', 'Fahey',
-    'Foucaut', 'Gilbert', 'Ginzburg4', 'Ginzbug5', 'Ginzbug6', 'Ginzburg8', 'Ginzburg9', 'Gringorten', 'Guyou',
+    'Foucaut', 'Ginzburg4', 'Ginzbug5', 'Ginzbug6', 'Ginzburg8', 'Ginzburg9', 'Gringorten', 'Guyou',
     'Hammer', 'HammerRetroazimuthal', 'HEALPix', 'Hill', 'Homolosine', 'Kavrayskiy7', 'Lagrange', 'Larrivee',
     'Laskowski', 'Littrow', 'Loximuthal', 'Miller', 'ModifiedStereoGraphic', 'Mollweide', 'MtFlatPolarParabolic',
     'MtFlatPolarQuartic', 'MtFlatPolarSinusoidal', 'NaturalEarth', 'NellHammer', 'PericeQuincuncial', 'PolyConic',
@@ -137,7 +137,7 @@ angular.module('charts.geo').factory('GeoProjection', function () {
     'Wagner7', 'Wiechel', 'Winkel3',
     function (Airy, Aitoff, Armadillo, August, Baker, BerghausStar, BoggsEumorphic, Bonne, Bromley, Chamberlin,
         Collignon, Craig, Craster, CylindricalEqualArea, CylindricalStereographic, Eckert1, Eckert2, Eckert3, Eckert4,
-        Eckert5, Eckert6, Eisenlohr, Fahey, Foucaut, Gilbert, Ginzburg4, Ginzbug5, Ginzbug6, Ginzburg8, Ginzburg9,
+        Eckert5, Eckert6, Eisenlohr, Fahey, Foucaut, Ginzburg4, Ginzbug5, Ginzbug6, Ginzburg8, Ginzburg9,
         Gringorten, Guyou, Hammer, HammerRetroazimuthal, HEALPix, Hill, Homolosine, Kavrayskiy7, Lagrange, Larrivee,
         Laskowski, Littrow, Loximuthal, Miller, ModifiedStereoGraphic, Mollweide, MtFlatPolarParabolic,
         MtFlatPolarQuartic, MtFlatPolarSinusoidal, NaturalEarth, NellHammer, PericeQuincuncial, PolyConic,
@@ -172,7 +172,7 @@ angular.module('charts.geo').factory('GeoProjection', function () {
     GeoProjectionFactory2.types[Eisenlohr.type] = Eisenlohr;
     GeoProjectionFactory2.types[Fahey.type] = Fahey;
     GeoProjectionFactory2.types[Foucaut.type] = Foucaut;
-    GeoProjectionFactory2.types[Gilbert.type] = Gilbert;
+    // GeoProjectionFactory2.types[Gilbert.type] = Gilbert;
     GeoProjectionFactory2.types[Ginzburg4.type] = Ginzburg4;
     GeoProjectionFactory2.types[Ginzbug5.type] = Ginzbug5;
     GeoProjectionFactory2.types[Ginzbug6.type] = Ginzbug6;
