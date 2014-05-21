@@ -103,7 +103,7 @@ angular.module('charts').factory('GeoProjection', function () {
 
     GeoProjectionFactory.types = {};
     GeoProjectionFactory.types[Mercator.type] = Mercator;
-    GeoProjectionFactory.types[AlbersUSA.type] = AlbersUSA;
+    // GeoProjectionFactory.types[AlbersUSA.type] = AlbersUSA;
     GeoProjectionFactory.types[Albers.type] = Albers;
     GeoProjectionFactory.types[AzimuthalEqualArea.type] = AzimuthalEqualArea;
     GeoProjectionFactory.types[AzimuthalEquiDistant.type] = AzimuthalEquiDistant;

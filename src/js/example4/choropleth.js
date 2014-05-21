@@ -5,6 +5,12 @@
         // PROPERTIES
         var _allFeatures = [],
             _layers = {},
+            _layeredData = function (data) {
+                return data.reduce(function (previous, current) {
+                    previous[_chart.keyAccessor()(current)] = _chart.valueAccessor()(current);
+                    return previous;
+                }, {});
+            },
             _graticule = d3.geo.graticule(),
             _projection = d3.geo.equirectangular(),
             _previousProjection = d3.geo.orthographic(),
@@ -44,12 +50,7 @@
                     return titleFn({key: key, value: value});
                 };
             },
-            _layeredData = function (data) {
-                return data.reduce(function (previous, current) {
-                    previous[_chart.keyAccessor()(current)] = _chart.valueAccessor()(current);
-                    return previous;
-                }, {});
-            };
+            _showGraticule = false;
 
         // DEFAULTS
         _chart.colorAccessor(function (d) {
@@ -140,6 +141,14 @@
             return _chart;
         }
 
+        _chart.showGraticule = function (_) {
+            if (!arguments.length) {
+                return _showGraticule;
+            }
+            _showGraticule = _;
+            return _chart;
+        }
+
         // PLOT
         _chart._doRedraw = function () {
             var data = _layeredData(_chart.data());
@@ -176,6 +185,18 @@
         _chart._doRender = function () {
             _chart.resetSvg();
 
+            _chart.svg().call(d3.behavior.zoom()
+                .translate(_projection.translate())
+                .scale(_projection.scale())
+                .on("zoom", function () {
+                    if (d3.event) {
+                        _projection
+                            .translate(d3.event.translate)
+                            .scale(d3.event.scale);
+                    }
+                    _chart.svg().selectAll("g path").attr("d", _path);
+                }));
+
             // Since we are rendering, no need to transform the projection
             _projectionChanged = false;
 
@@ -183,7 +204,9 @@
             var _g = _chart.svg().append("g");
 
             // Add graticule
-            _g.append("path").attr("class", "graticule").datum(_graticule).attr('d', _path);
+            if (_showGraticule) {
+                _g.append("path").attr("class", "graticule").datum(_graticule).attr('d', _path);
+            }
 
             // Add layers
             for (var layerName in _layers) {

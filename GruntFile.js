@@ -159,11 +159,13 @@ module.exports = function (grunt) {
         watch: {
             default: {
                 files: ['<%= src.js %>', '<%= src.tpl %>', '<%= src.html %>', '<%= src.lessWatch %>'],
-                tasks: ['default', 'timestamp']
+                tasks: ['html2js', 'jshint', 'concat:dist', 'concat:index', 'clean:templates', 'less:build', 'copy',
+                    'timestamp']
             },
             coffee: {
                 files: ['<%= src.coffee %>', '<%= src.tpl %>', '<%= src.html %>', '<%= src.lessWatch %>'],
-                tasks: ['caffeine', 'timestamp']
+                tasks: ['html2js', 'coffeelint', 'coffee', 'concat:coffee', 'concat:index', 'clean:coffee',
+                    'clean:templates', 'less:build', 'copy', 'timestamp']
             }
         },
         express : {
