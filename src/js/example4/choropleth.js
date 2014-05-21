@@ -16,7 +16,7 @@
             _previousProjection = d3.geo.orthographic(),
             _path = d3.geo.path().projection(_projection),
             _projectionChanged = false,
-            _projectionZoom = function (projection, features, height, width, scale) {
+            _projectionZoom = function (projection, features, width, height, scale) {
                 // Reset scale & translate
                 projection.scale(1).translate([0, 0]);
                 // Calculate new position
@@ -25,7 +25,7 @@
                     t = [(width - s * (b[1][0] + b[0][0])) / 2, (height - s * (b[1][1] + b[0][1])) / 2];
                 return projection.scale(s).translate(t);
             },
-            _projectionTween = function (projectionA, projectionB) {
+            _projectionTween = function (projectionA, projectionB, width, height) {
                 return function (d) {
                     var t = 0,
                         projection = d3.geo.projection(function (λ, φ) {
@@ -34,7 +34,7 @@
                             var p0 = projectionA([λ, φ]),
                                 p1 = projectionB([λ, φ]);
                             return [(1 - t) * p0[0] + t * p1[0], (1 - t) * -p0[1] + t * -p1[1]];
-                        }).scale(1).translate([_chart.width() / 2, _chart.height() / 2]),
+                        }).scale(1).translate([width / 2, height / 2]),
                         path = d3.geo.path().projection(projection);
 
                     return function (_) {
@@ -52,7 +52,8 @@
                     })
                 };
             },
-            _showGraticule = false;
+            _showGraticule = false,
+            _showSphere = false;
 
         // DEFAULTS
         _chart.colorAccessor(function (d) {
@@ -183,7 +184,8 @@
 
             if (_projectionChanged) {
                 dc.transition(_chart.svg().selectAll("g path"), _chart.transitionDuration())
-                        .attrTween("d", _projectionTween(_previousProjection, _projection));
+                    .attrTween("d", _projectionTween(_previousProjection,
+                        _projection, _chart.width(), _chart.height()));
                 _projectionChanged = false
             }
             return _chart;
@@ -213,6 +215,11 @@
             // Add graticule
             if (_showGraticule) {
                 _g.append("path").attr("class", "graticule").datum(_graticule).attr('d', _path);
+            }
+
+            // Add sphere
+            if (_showSphere) {
+                _g.append("path").attr("class", "sphere").datum({type: "Sphere"}).attr('d', _path);
             }
 
             // Add layers
