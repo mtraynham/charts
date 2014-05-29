@@ -3,7 +3,7 @@
         var _chart = dc.colorMixin(dc.baseMixin({}));
 
         // PROPERTIES
-        var _allFeatures = [],
+        var _allFeatures = {type: 'FeatureCollection', features: [] },
             _layers = {},
             _layeredData = function (data) {
                 return data.reduce(function (previous, current) {
@@ -16,14 +16,29 @@
             _previousProjection = d3.geo.orthographic(),
             _path = d3.geo.path().projection(_projection),
             _projectionChanged = false,
-            _projectionZoom = function (projection, features, width, height, scale) {
-                // Reset scale & translate
-                projection.scale(1).translate([0, 0]);
-                // Calculate new position
-                var b = d3.geo.path(projection).bounds(features),
-                    s = (scale || 0.95) / Math.max((b[1][0] - b[0][0]) / width, (b[1][1] - b[0][1]) / height),
-                    t = [(width - s * (b[1][0] + b[0][0])) / 2, (height - s * (b[1][1] + b[0][1])) / 2];
-                return projection.scale(s).translate(t);
+            _projectionZoom = function (path, features, width, height, scale) {
+                path.projection().scale(1).translate([0, 0]);
+                if (path.projection().rotate) {
+                    path.projection().rotate([0, 0]);
+                }
+                if (path.projection().center) {
+                    path.projection().center([0, 0]);
+                }
+                var b = path.bounds(features),
+                    s = (scale || 0.95) / Math.max((b[1][0] - b[0][0]) / width, (b[1][1] - b[0][1]) / height);
+                if (!path.projection().rotate || !path.projection().center) {
+                    var t = [(width - s * (b[1][0] + b[0][0])) / 2, (height - s * (b[1][1] + b[0][1])) / 2];
+                    path.projection()
+                        .translate(t)
+                        .scale(s);
+                } else {
+                    var bounds = d3.geo.bounds(features);
+                    path.projection()
+                        .rotate([-(bounds[0][0] + bounds[1][0]) / 2, 0])
+                        .center([0, (bounds[0][1] + bounds[1][1]) / 2])
+                        .translate([width / 2, height / 2])
+                        .scale(s);
+                }
             },
             _projectionTween = function (projectionA, projectionB, width, height) {
                 return function (d) {
@@ -52,8 +67,9 @@
                     })
                 };
             },
-            _showGraticule = false,
-            _showSphere = false;
+            _showGraticule = true,
+            _showSphere = true,
+            _zoom = d3.geo.zoom().projection(_projection);
 
         // DEFAULTS
         _chart.colorAccessor(function (d) {
@@ -103,7 +119,7 @@
 
         _chart.layers = function () {
             return _layers;
-        }
+        };
 
         _chart.addLayer = function (features, name, keyAccessor, titleAccessor) {
             _layers[name] = {
@@ -112,15 +128,15 @@
                 keyAccessor: keyAccessor,
                 titleAccessor: titleAccessor
             };
-            _allFeatures = _allFeatures.concat(features);
+            _allFeatures.features = _allFeatures.features.concat(features);
             return _chart;
         };
 
         _chart.removeLayer = function (name) {
             delete _layers[name];
-            _allFeatures = [];
+            _allFeatures.features = [];
             for (var key in _layers) {
-                _allFeatures = _allFeatures.concat(getFeatures(key));
+                _allFeatures.features = _allFeatures.features.concat(getFeatures(key));
             }
             return _chart;
         };
@@ -128,7 +144,7 @@
         // PROJECTION & PATH
         _chart.path = function () {
             return _path;
-        }
+        };
 
         _chart.projection = function (_) {
             if (!arguments.length) {
@@ -138,6 +154,7 @@
             _previousProjection = _projection;
             _projection = _;
             _path.projection(_projection);
+            _zoom.projection(_projection);
             return _chart;
         };
 
@@ -147,7 +164,15 @@
             }
             _projectionZoom = _;
             return _chart;
-        }
+        };
+
+        _chart.projectionTween = function (_) {
+            if (!arguments.length) {
+                return _projectionTween;
+            }
+            _projectionTween = _;
+            return _chart;
+        };
 
         _chart.showGraticule = function (_) {
             if (!arguments.length) {
@@ -155,7 +180,15 @@
             }
             _showGraticule = _;
             return _chart;
-        }
+        };
+
+        _chart.showSphere = function (_) {
+            if (!arguments.length) {
+                return _showSphere;
+            }
+            _showSphere = _;
+            return _chart;
+        };
 
         // PLOT
         _chart._doRedraw = function () {
@@ -182,28 +215,25 @@
                     _title(layerName, data, _chart.title()) : function () { return ""; });
             }
 
+            // Update the projection
             if (_projectionChanged) {
-                dc.transition(_chart.svg().selectAll("g path"), _chart.transitionDuration())
-                    .attrTween("d", _projectionTween(_previousProjection,
-                        _projection, _chart.width(), _chart.height()));
-                _projectionChanged = false
+                _projectionZoom(_path, _allFeatures, _chart.width(), _chart.height());
+                _chart.svg().selectAll("g path").attr("d", _path);
+                _projectionChanged = false;
             }
+
             return _chart;
-        }
+        };
 
         _chart._doRender = function () {
             _chart.resetSvg();
 
-            _chart.svg().call(d3.behavior.zoom()
+            _chart.svg().call(_zoom
                 .translate(_projection.translate())
                 .scale(_projection.scale())
-                .on("zoom", function () {
-                    if (d3.event) {
-                        _projection
-                            .translate(d3.event.translate)
-                            .scale(d3.event.scale);
-                    }
-                    _chart.svg().selectAll("g path").attr("d", _path);
+                .on("zoom.redraw", function () {
+                    d3.event.sourceEvent.preventDefault();
+                    _chart.svg().selectAll("path").attr("d", _path);
                 }));
 
             // Since we are rendering, no need to transform the projection
@@ -211,6 +241,9 @@
 
             // The graph
             var _g = _chart.svg().append("g");
+
+            // Zoom on the current features
+            _projectionZoom(_path, _allFeatures, _chart.width(), _chart.height());
 
             // Add graticule
             if (_showGraticule) {

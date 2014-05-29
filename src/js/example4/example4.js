@@ -1,9 +1,10 @@
-angular.module('charts').controller('Example4Ctrl', ['$scope', 'GeoConfigs', 'GeoProjectionFactory2', 'GeoService',
-    function ($scope, GeoConfigs, GeoProjectionFactory2, GeoService) {
+angular.module('charts').controller('Example4Ctrl', ['$scope', 'GeoConfigs', 'GeoProjectionFactory',
+    'GeoProjectionFactory2', 'GeoService',
+    function ($scope, GeoConfigs, GeoProjectionFactory, GeoProjectionFactory2, GeoService) {
 
     var chart = dc.choroplethChart("#chart")
 
-    $scope.projections = GeoProjectionFactory2.types;
+    $scope.projections = angular.extend({}, GeoProjectionFactory.types, GeoProjectionFactory2.types);
 
     $scope.$watch('projectionType', function (newProjectionType, oldProjectionType) {
         if (newProjectionType === oldProjectionType) {
@@ -11,7 +12,6 @@ angular.module('charts').controller('Example4Ctrl', ['$scope', 'GeoConfigs', 'Ge
         }
         var projection = new GeoProjectionFactory2.types[newProjectionType]()
         chart.projection(projection.projection);
-        // chart.projectionZoom(projection.zoom);
         chart.redraw();
     });
 
@@ -170,7 +170,7 @@ angular.module('charts').controller('Example4Ctrl', ['$scope', 'GeoConfigs', 'Ge
             chart.colorDomain(d3.extent(chart.data(), chart.valueAccessor()));
         });
 
-        GeoConfigs.loadConfig(GeoConfigs.getConfig('usStates1'), function (config) {
+        GeoConfigs.loadConfig(GeoConfigs.getConfig('australia'), function (config) {
             chart.addLayer(config.getFeatures().features, 'usStates1', config.getKeyAccessor(),
                 config.getTitleAccessor());
             chart.render();
