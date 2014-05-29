@@ -10,7 +10,12 @@ angular.module('charts').controller('Example4Ctrl', ['$scope', 'GeoConfigs', 'Ge
         if (newProjectionType === oldProjectionType) {
             return;
         }
-        var projection = new GeoProjectionFactory2.types[newProjectionType]()
+        var projection;
+        if (newProjectionType in GeoProjectionFactory.types) {
+            projection = new GeoProjectionFactory.types[newProjectionType]()
+        } else if (newProjectionType in GeoProjectionFactory2.types) {
+            projection = new GeoProjectionFactory2.types[newProjectionType]()
+        }
         chart.projection(projection.projection);
         chart.redraw();
     });
