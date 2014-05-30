@@ -175,7 +175,7 @@ angular.module('charts').controller('Example4Ctrl', ['$scope', 'GeoConfigs', 'Ge
             chart.colorDomain(d3.extent(chart.data(), chart.valueAccessor()));
         });
 
-        GeoConfigs.loadConfig(GeoConfigs.getConfig('europe'), function (config) {
+        GeoConfigs.loadConfig(GeoConfigs.getConfig('southAmerica'), function (config) {
             chart.addLayer(config.getFeatures().features, 'world', config.getKeyAccessor(),
                 config.getTitleAccessor());
             chart.render();

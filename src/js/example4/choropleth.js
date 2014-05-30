@@ -17,23 +17,30 @@
             _path = d3.geo.path().projection(_projection),
             _projectionChanged = false,
             _projectionZoom = function (path, features, width, height, scale) {
-                path.projection().scale(1).translate([0, 0]);
-                if (path.projection().rotate) {
-                    path.projection().rotate([0, 0]);
+                var projection = path.projection();
+                projection.scale(1).translate([0, 0]);
+                if (projection.rotate) {
+                    projection.rotate([0, 0]);
                 }
-                if (path.projection().center) {
-                    path.projection().center([0, 0]);
+                if (projection.center) {
+                    projection.center([0, 0]);
                 }
                 var b = path.bounds(features),
                     s = (scale || 0.95) / Math.max((b[1][0] - b[0][0]) / width, (b[1][1] - b[0][1]) / height);
-                if (!path.projection().rotate || !path.projection().center) {
+                if (!projection.rotate || !projection.center) {
                     var t = [(width - s * (b[1][0] + b[0][0])) / 2, (height - s * (b[1][1] + b[0][1])) / 2];
-                    path.projection()
-                        .translate(t)
-                        .scale(s);
+                    if (!isNaN(t[0]) && !isNaN(t[1])) {
+                        projection
+                            .translate(t)
+                            .scale(s);
+                    } else {
+                        projection
+                            .translate([ width / 2, height / 2 ])
+                            .scale(Math.min(width, height)  * 2);
+                    }
                 } else {
                     var bounds = d3.geo.bounds(features);
-                    path.projection()
+                    projection
                         .rotate([-(bounds[0][0] + bounds[1][0]) / 2, 0])
                         .center([0, (bounds[0][1] + bounds[1][1]) / 2])
                         .translate([width / 2, height / 2])
