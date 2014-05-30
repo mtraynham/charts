@@ -175,8 +175,8 @@ angular.module('charts').controller('Example4Ctrl', ['$scope', 'GeoConfigs', 'Ge
             chart.colorDomain(d3.extent(chart.data(), chart.valueAccessor()));
         });
 
-        GeoConfigs.loadConfig(GeoConfigs.getConfig('australia'), function (config) {
-            chart.addLayer(config.getFeatures().features, 'usStates1', config.getKeyAccessor(),
+        GeoConfigs.loadConfig(GeoConfigs.getConfig('europe'), function (config) {
+            chart.addLayer(config.getFeatures().features, 'world', config.getKeyAccessor(),
                 config.getTitleAccessor());
             chart.render();
         });

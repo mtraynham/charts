@@ -7,13 +7,6 @@ angular.module('charts.geo').service('GeoConfigs', ['GeoConfig', 'GeoProjection'
     // All geo configs
     var configs = d3.map({
         usStates: new GeoConfig({
-            name: 'US States',
-            fileName: 'vendor/topojsonexports/world-atlas/topo/ne_50m_us_states_lakes.json',
-            featureAccessor : function (d) { return d.objects.states; },
-            keyAccessor: function (d) { return d.id },
-            titleAccessor:  function (d) { return d.id }
-        }),
-        usStates1: new GeoConfig({
             name: 'US States 1',
             fileName: 'vendor/natural-earth-topo/topojson/ne_50m_admin_1_states_provinces_lakes_shp.json',
             featureAccessor : function (d) {
@@ -48,6 +41,93 @@ angular.module('charts.geo').service('GeoConfigs', ['GeoConfig', 'GeoProjection'
                         return geo.properties.admin === "Australia";
                     });
                 return d.objects['ne_50m_admin_1_states_provinces_lakes_shp'];
+            },
+            keyAccessor: function (d) { return d.properties.name },
+            titleAccessor:  function (d) { return d.properties.name }
+        }),
+        world: new GeoConfig({
+            name: 'World',
+            fileName: 'vendor/natural-earth-topo/topojson/ne_110m_admin_0_countries_lakes.json',
+            featureAccessor : function (d) {
+                return d.objects['ne_110m_admin_0_countries_lakes'];
+            },
+            keyAccessor: function (d) { return d.properties.name },
+            titleAccessor:  function (d) { return d.properties.name }
+        }),
+        northAmerica: new GeoConfig({
+            name: 'World',
+            fileName: 'vendor/natural-earth-topo/topojson/ne_110m_admin_0_countries_lakes.json',
+            featureAccessor : function (d) {
+                d.objects['ne_110m_admin_0_countries_lakes'].geometries =
+                    d.objects['ne_110m_admin_0_countries_lakes'].geometries.filter(function (geo) {
+                        return geo.properties.continent === "North America";
+                    });
+                return d.objects['ne_110m_admin_0_countries_lakes'];
+            },
+            keyAccessor: function (d) { return d.properties.name },
+            titleAccessor:  function (d) { return d.properties.name }
+        }),
+        southAmerica: new GeoConfig({
+            name: 'World',
+            fileName: 'vendor/natural-earth-topo/topojson/ne_110m_admin_0_countries_lakes.json',
+            featureAccessor : function (d) {
+                d.objects['ne_110m_admin_0_countries_lakes'].geometries =
+                    d.objects['ne_110m_admin_0_countries_lakes'].geometries.filter(function (geo) {
+                        return geo.properties.continent === "South America";
+                    });
+                return d.objects['ne_110m_admin_0_countries_lakes'];
+            },
+            keyAccessor: function (d) { return d.properties.name },
+            titleAccessor:  function (d) { return d.properties.name }
+        }),
+        europe: new GeoConfig({
+            name: 'World',
+            fileName: 'vendor/natural-earth-topo/topojson/ne_110m_admin_0_countries_lakes.json',
+            featureAccessor : function (d) {
+                d.objects['ne_110m_admin_0_countries_lakes'].geometries =
+                    d.objects['ne_110m_admin_0_countries_lakes'].geometries.filter(function (geo) {
+                        return geo.properties.continent === "Europe";
+                    });
+                return d.objects['ne_110m_admin_0_countries_lakes'];
+            },
+            keyAccessor: function (d) { return d.properties.name },
+            titleAccessor:  function (d) { return d.properties.name }
+        }),
+        asia: new GeoConfig({
+            name: 'World',
+            fileName: 'vendor/natural-earth-topo/topojson/ne_110m_admin_0_countries_lakes.json',
+            featureAccessor : function (d) {
+                d.objects['ne_110m_admin_0_countries_lakes'].geometries =
+                    d.objects['ne_110m_admin_0_countries_lakes'].geometries.filter(function (geo) {
+                        return geo.properties.continent === "Asia";
+                    });
+                return d.objects['ne_110m_admin_0_countries_lakes'];
+            },
+            keyAccessor: function (d) { return d.properties.name },
+            titleAccessor:  function (d) { return d.properties.name }
+        }),
+        africa: new GeoConfig({
+            name: 'World',
+            fileName: 'vendor/natural-earth-topo/topojson/ne_110m_admin_0_countries_lakes.json',
+            featureAccessor : function (d) {
+                d.objects['ne_110m_admin_0_countries_lakes'].geometries =
+                    d.objects['ne_110m_admin_0_countries_lakes'].geometries.filter(function (geo) {
+                        return geo.properties.continent === "Africa";
+                    });
+                return d.objects['ne_110m_admin_0_countries_lakes'];
+            },
+            keyAccessor: function (d) { return d.properties.name },
+            titleAccessor:  function (d) { return d.properties.name }
+        }),
+        antarctica: new GeoConfig({
+            name: 'World',
+            fileName: 'vendor/natural-earth-topo/topojson/ne_110m_admin_0_countries_lakes.json',
+            featureAccessor : function (d) {
+                d.objects['ne_110m_admin_0_countries_lakes'].geometries =
+                    d.objects['ne_110m_admin_0_countries_lakes'].geometries.filter(function (geo) {
+                        return geo.properties.continent === "Antarctica";
+                    });
+                return d.objects['ne_110m_admin_0_countries_lakes'];
             },
             keyAccessor: function (d) { return d.properties.name },
             titleAccessor:  function (d) { return d.properties.name }

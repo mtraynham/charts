@@ -67,7 +67,7 @@
                     })
                 };
             },
-            _showGraticule = false,
+            _showGraticule = true,
             _showSphere = false,
             _zoom = d3.geo.zoom().projection(_projection);
 
