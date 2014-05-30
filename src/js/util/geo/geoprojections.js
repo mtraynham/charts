@@ -69,12 +69,12 @@ angular.module('charts.geo').factory('AzimuthalEquiDistant', ['GeoProjection', f
 /**
  * Conic Conformal Projection
  */
-angular.module('charts.geo').factory('ConicConformal', ['Conic', function (Conic) {
+angular.module('charts.geo').factory('ConicConformal', ['GeoProjection', function (GeoProjection) {
 
     var ConicConformal = function (data) {
-        Conic.call(this, data);
+        GeoProjection.call(this, data);
     };
-    ConicConformal.prototype = Object.create(Conic.prototype);
+    ConicConformal.prototype = Object.create(GeoProjection.prototype);
 
     ConicConformal.type = ConicConformal.prototype.type = "conicConformal";
     ConicConformal.prototype.name = "Conic Conformal";
@@ -86,12 +86,12 @@ angular.module('charts.geo').factory('ConicConformal', ['Conic', function (Conic
 /**
  * Conic Equal Area Projection
  */
-angular.module('charts.geo').factory('ConicEqualArea', ['Conic', function (Conic) {
+angular.module('charts.geo').factory('ConicEqualArea', ['GeoProjection', function (GeoProjection) {
 
     var ConicEqualArea = function (data) {
-        Conic.call(this, data);
+        GeoProjection.call(this, data);
     };
-    ConicEqualArea.prototype = Object.create(Conic.prototype);
+    ConicEqualArea.prototype = Object.create(GeoProjection.prototype);
 
     ConicEqualArea.type = ConicEqualArea.prototype.type = "conicEqualArea";
     ConicEqualArea.prototype.name = "Conic Equal Area";
@@ -103,12 +103,12 @@ angular.module('charts.geo').factory('ConicEqualArea', ['Conic', function (Conic
 /**
  * Conic Equi-Distant Projection
  */
-angular.module('charts.geo').factory('ConicEquiDistant', ['Conic', function (Conic) {
+angular.module('charts.geo').factory('ConicEquiDistant', ['GeoProjection', function (GeoProjection) {
 
     var ConicEquiDistant = function (data) {
-        Conic.call(this, data);
+        GeoProjection.call(this, data);
     };
-    ConicEquiDistant.prototype = Object.create(Conic.prototype);
+    ConicEquiDistant.prototype = Object.create(GeoProjection.prototype);
 
     ConicEquiDistant.type = ConicEquiDistant.prototype.type = "conicEquidistant";
     ConicEquiDistant.prototype.name = "Conic Equi-Distant";
