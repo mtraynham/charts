@@ -7,7 +7,7 @@ angular.module('charts.geo').service('GeoConfigs', ['GeoConfig', 'GeoProjection'
     // All geo configs
     var configs = d3.map({
         usStates: new GeoConfig({
-            name: 'US States 1',
+            name: 'US States',
             fileName: 'vendor/natural-earth-topo/topojson/ne_50m_admin_1_states_provinces_lakes_shp.json',
             featureAccessor : function (d) {
                 d.objects['ne_50m_admin_1_states_provinces_lakes_shp'].geometries =
@@ -55,7 +55,7 @@ angular.module('charts.geo').service('GeoConfigs', ['GeoConfig', 'GeoProjection'
             titleAccessor:  function (d) { return d.properties.name }
         }),
         northAmerica: new GeoConfig({
-            name: 'World',
+            name: 'North America',
             fileName: 'vendor/natural-earth-topo/topojson/ne_110m_admin_0_countries_lakes.json',
             featureAccessor : function (d) {
                 d.objects['ne_110m_admin_0_countries_lakes'].geometries =
@@ -68,7 +68,7 @@ angular.module('charts.geo').service('GeoConfigs', ['GeoConfig', 'GeoProjection'
             titleAccessor:  function (d) { return d.properties.name }
         }),
         southAmerica: new GeoConfig({
-            name: 'World',
+            name: 'South America',
             fileName: 'vendor/natural-earth-topo/topojson/ne_110m_admin_0_countries_lakes.json',
             featureAccessor : function (d) {
                 d.objects['ne_110m_admin_0_countries_lakes'].geometries =
@@ -81,7 +81,7 @@ angular.module('charts.geo').service('GeoConfigs', ['GeoConfig', 'GeoProjection'
             titleAccessor:  function (d) { return d.properties.name }
         }),
         europe: new GeoConfig({
-            name: 'World',
+            name: 'Europe',
             fileName: 'vendor/natural-earth-topo/topojson/ne_110m_admin_0_countries_lakes.json',
             featureAccessor : function (d) {
                 d.objects['ne_110m_admin_0_countries_lakes'].geometries =
@@ -94,7 +94,7 @@ angular.module('charts.geo').service('GeoConfigs', ['GeoConfig', 'GeoProjection'
             titleAccessor:  function (d) { return d.properties.name }
         }),
         asia: new GeoConfig({
-            name: 'World',
+            name: 'Asia',
             fileName: 'vendor/natural-earth-topo/topojson/ne_110m_admin_0_countries_lakes.json',
             featureAccessor : function (d) {
                 d.objects['ne_110m_admin_0_countries_lakes'].geometries =
@@ -107,7 +107,7 @@ angular.module('charts.geo').service('GeoConfigs', ['GeoConfig', 'GeoProjection'
             titleAccessor:  function (d) { return d.properties.name }
         }),
         africa: new GeoConfig({
-            name: 'World',
+            name: 'Africa',
             fileName: 'vendor/natural-earth-topo/topojson/ne_110m_admin_0_countries_lakes.json',
             featureAccessor : function (d) {
                 d.objects['ne_110m_admin_0_countries_lakes'].geometries =
@@ -120,7 +120,7 @@ angular.module('charts.geo').service('GeoConfigs', ['GeoConfig', 'GeoProjection'
             titleAccessor:  function (d) { return d.properties.name }
         }),
         antarctica: new GeoConfig({
-            name: 'World',
+            name: 'Antarctica',
             fileName: 'vendor/natural-earth-topo/topojson/ne_110m_admin_0_countries_lakes.json',
             featureAccessor : function (d) {
                 d.objects['ne_110m_admin_0_countries_lakes'].geometries =
@@ -131,6 +131,15 @@ angular.module('charts.geo').service('GeoConfigs', ['GeoConfig', 'GeoProjection'
             },
             keyAccessor: function (d) { return d.properties.name },
             titleAccessor:  function (d) { return d.properties.name }
+        }),
+        timeZones: new GeoConfig({
+            name: 'Time Zones',
+            fileName: 'vendor/natural-earth-topo/topojson/ne_10m_time_zones.json',
+            featureAccessor : function (d) {
+                return d.objects['ne_10m_time_zones'];
+            },
+            keyAccessor: function (d) { return d.properties.name },
+            titleAccessor:  function (d) { return d.properties["time_zone"] }
         })
     });
 

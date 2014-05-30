@@ -28,10 +28,9 @@
                 var b = path.bounds(features),
                     s = (scale || 0.95) / Math.max((b[1][0] - b[0][0]) / width, (b[1][1] - b[0][1]) / height);
                 if (!projection.rotate || !projection.center) {
-                    var t = [(width - s * (b[1][0] + b[0][0])) / 2, (height - s * (b[1][1] + b[0][1])) / 2];
-                    if (!isNaN(t[0]) && !isNaN(t[1])) {
+                    if (s !== 0) {
                         projection
-                            .translate(t)
+                            .translate([(width - s * (b[1][0] + b[0][0])) / 2, (height - s * (b[1][1] + b[0][1])) / 2])
                             .scale(s);
                     } else {
                         projection
