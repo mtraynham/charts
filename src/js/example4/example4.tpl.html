@@ -3,9 +3,27 @@
         <div class="col-sm-4">
             <form class="form-horizontal" role="form">
                 <div class="form-group">
+                    <label class="col-sm-5">Graticule</label>
+                    <div class="col-sm-7">
+                        <input class="form-control" type="checkbox" ng-model="graticule"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-5">Sphere</label>
+                    <div class="col-sm-7">
+                        <input class="form-control" type="checkbox" ng-model="sphere"/>
+                    </div>
+                </div>
+                <div class="form-group">
                     <label class="col-sm-5">Projection</label>
                     <div class="col-sm-7">
-                        <select ng-model="projectionType" ng-options="key as key for (key, value) in projections"></select>
+                        <select class="form-control" ng-model="projection" ng-options="key as key for (key, value) in projections"></select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-5">Location</label>
+                    <div class="col-sm-7">
+                        <select class="form-control" ng-model="location" ng-options="loc.name for loc in locations"></select>
                     </div>
                 </div>
             </form>

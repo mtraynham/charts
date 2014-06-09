@@ -5,8 +5,9 @@ angular.module('charts.geo').service('GeoConfigs', ['GeoConfig', 'GeoProjection'
     function (GeoConfig, GeoProjection) {
 
     // All geo configs
-    var configs = d3.map({
-        usStates: new GeoConfig({
+    var configList = [
+        new GeoConfig({
+            id: 'usStates',
             name: 'US States',
             fileName: 'vendor/natural-earth-topo/topojson/ne_50m_admin_1_states_provinces_lakes_shp.json',
             featureAccessor : function (d) {
@@ -17,9 +18,10 @@ angular.module('charts.geo').service('GeoConfigs', ['GeoConfig', 'GeoProjection'
                 return d.objects['ne_50m_admin_1_states_provinces_lakes_shp'];
             },
             keyAccessor: function (d) { return d.properties.name },
-            titleAccessor:  function (d) { return d.properties.name }
+            titleAccessor:  function (d) { return 'State: ' + d.properties.name }
         }),
-        canada: new GeoConfig({
+        new GeoConfig({
+            id: 'canada',
             name: 'Canada',
             fileName: 'vendor/natural-earth-topo/topojson/ne_50m_admin_1_states_provinces_lakes_shp.json',
             featureAccessor : function (d) {
@@ -30,9 +32,10 @@ angular.module('charts.geo').service('GeoConfigs', ['GeoConfig', 'GeoProjection'
                 return d.objects['ne_50m_admin_1_states_provinces_lakes_shp'];
             },
             keyAccessor: function (d) { return d.properties.name },
-            titleAccessor:  function (d) { return d.properties.name }
+            titleAccessor:  function (d) { return 'Province: ' + d.properties.name }
         }),
-        australia: new GeoConfig({
+        new GeoConfig({
+            id: 'australia',
             name: 'Australia',
             fileName: 'vendor/natural-earth-topo/topojson/ne_50m_admin_1_states_provinces_lakes_shp.json',
             featureAccessor : function (d) {
@@ -43,18 +46,20 @@ angular.module('charts.geo').service('GeoConfigs', ['GeoConfig', 'GeoProjection'
                 return d.objects['ne_50m_admin_1_states_provinces_lakes_shp'];
             },
             keyAccessor: function (d) { return d.properties.name },
-            titleAccessor:  function (d) { return d.properties.name }
+            titleAccessor:  function (d) { return 'Province: ' + d.properties.name }
         }),
-        world: new GeoConfig({
+        new GeoConfig({
+            id: 'world',
             name: 'World',
             fileName: 'vendor/natural-earth-topo/topojson/ne_110m_admin_0_countries_lakes.json',
             featureAccessor : function (d) {
                 return d.objects['ne_110m_admin_0_countries_lakes'];
             },
             keyAccessor: function (d) { return d.properties.name },
-            titleAccessor:  function (d) { return d.properties.name }
+            titleAccessor:  function (d) { return 'Country: ' + d.properties.name }
         }),
-        northAmerica: new GeoConfig({
+        new GeoConfig({
+            id: 'northAmerica',
             name: 'North America',
             fileName: 'vendor/natural-earth-topo/topojson/ne_110m_admin_0_countries_lakes.json',
             featureAccessor : function (d) {
@@ -65,9 +70,10 @@ angular.module('charts.geo').service('GeoConfigs', ['GeoConfig', 'GeoProjection'
                 return d.objects['ne_110m_admin_0_countries_lakes'];
             },
             keyAccessor: function (d) { return d.properties.name },
-            titleAccessor:  function (d) { return d.properties.name }
+            titleAccessor:  function (d) { return 'Country: ' + d.properties.name }
         }),
-        southAmerica: new GeoConfig({
+        new GeoConfig({
+            id: 'southAmerica',
             name: 'South America',
             fileName: 'vendor/natural-earth-topo/topojson/ne_110m_admin_0_countries_lakes.json',
             featureAccessor : function (d) {
@@ -78,9 +84,10 @@ angular.module('charts.geo').service('GeoConfigs', ['GeoConfig', 'GeoProjection'
                 return d.objects['ne_110m_admin_0_countries_lakes'];
             },
             keyAccessor: function (d) { return d.properties.name },
-            titleAccessor:  function (d) { return d.properties.name }
+            titleAccessor:  function (d) { return 'Country: ' + d.properties.name }
         }),
-        europe: new GeoConfig({
+        new GeoConfig({
+            id: 'europe',
             name: 'Europe',
             fileName: 'vendor/natural-earth-topo/topojson/ne_110m_admin_0_countries_lakes.json',
             featureAccessor : function (d) {
@@ -91,9 +98,10 @@ angular.module('charts.geo').service('GeoConfigs', ['GeoConfig', 'GeoProjection'
                 return d.objects['ne_110m_admin_0_countries_lakes'];
             },
             keyAccessor: function (d) { return d.properties.name },
-            titleAccessor:  function (d) { return d.properties.name }
+            titleAccessor:  function (d) { return 'Country: ' + d.properties.name }
         }),
-        asia: new GeoConfig({
+        new GeoConfig({
+            id: 'asia',
             name: 'Asia',
             fileName: 'vendor/natural-earth-topo/topojson/ne_110m_admin_0_countries_lakes.json',
             featureAccessor : function (d) {
@@ -104,9 +112,10 @@ angular.module('charts.geo').service('GeoConfigs', ['GeoConfig', 'GeoProjection'
                 return d.objects['ne_110m_admin_0_countries_lakes'];
             },
             keyAccessor: function (d) { return d.properties.name },
-            titleAccessor:  function (d) { return d.properties.name }
+            titleAccessor:  function (d) { return 'Country: ' + d.properties.name }
         }),
-        africa: new GeoConfig({
+        new GeoConfig({
+            id: 'africa',
             name: 'Africa',
             fileName: 'vendor/natural-earth-topo/topojson/ne_110m_admin_0_countries_lakes.json',
             featureAccessor : function (d) {
@@ -117,9 +126,10 @@ angular.module('charts.geo').service('GeoConfigs', ['GeoConfig', 'GeoProjection'
                 return d.objects['ne_110m_admin_0_countries_lakes'];
             },
             keyAccessor: function (d) { return d.properties.name },
-            titleAccessor:  function (d) { return d.properties.name }
+            titleAccessor:  function (d) { return 'Country: ' + d.properties.name }
         }),
-        antarctica: new GeoConfig({
+        new GeoConfig({
+            id: 'antarctica',
             name: 'Antarctica',
             fileName: 'vendor/natural-earth-topo/topojson/ne_110m_admin_0_countries_lakes.json',
             featureAccessor : function (d) {
@@ -130,18 +140,24 @@ angular.module('charts.geo').service('GeoConfigs', ['GeoConfig', 'GeoProjection'
                 return d.objects['ne_110m_admin_0_countries_lakes'];
             },
             keyAccessor: function (d) { return d.properties.name },
-            titleAccessor:  function (d) { return d.properties.name }
+            titleAccessor:  function (d) { return 'Country: ' + d.properties.name }
         }),
-        timeZones: new GeoConfig({
+        new GeoConfig({
+            id: 'timeZones',
             name: 'Time Zones',
             fileName: 'vendor/natural-earth-topo/topojson/ne_10m_time_zones.json',
             featureAccessor : function (d) {
                 return d.objects['ne_10m_time_zones'];
             },
             keyAccessor: function (d) { return d.properties.name },
-            titleAccessor:  function (d) { return d.properties["time_zone"] }
+            titleAccessor:  function (d) { return 'TimeZone: ' + d.properties["time_zone"] }
         })
-    });
+    ];
+
+    var configs = d3.map(configList.reduce(function (previous, current) {
+        previous[current.getId()] = current;
+        return previous;
+    }, {}));
 
     /**
      * Load a GeoConfig

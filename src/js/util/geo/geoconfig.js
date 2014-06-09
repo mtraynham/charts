@@ -10,6 +10,14 @@ angular.module('charts.geo').factory('GeoConfig', function () {
     };
 
     /**
+     * Get id
+     * @return {String}
+     */
+    GeoConfig.prototype.getId = function () {
+        return this.id;
+    };
+
+    /**
      * Get name
      * @return {String}
      */

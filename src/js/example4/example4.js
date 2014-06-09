@@ -4,17 +4,48 @@ angular.module('charts').controller('Example4Ctrl', ['$scope', 'GeoConfigs', 'Ge
 
     var chart = dc.choroplethChart("#chart")
 
+    $scope.graticule = false;
+    $scope.sphere = false;
+    $scope.locations = GeoConfigs.getConfigs().values();
     $scope.projections = angular.extend({}, GeoProjectionFactory.types, GeoProjectionFactory2.types);
 
-    $scope.$watch('projectionType', function (newProjectionType, oldProjectionType) {
-        if (newProjectionType === oldProjectionType) {
+    $scope.$watch('graticule', function (newGraticule, oldGraticule) {
+        if (newGraticule === oldGraticule) {
+            return;
+        }
+        chart.showGraticule(newGraticule);
+        chart.render();
+    });
+
+    $scope.$watch('sphere', function (newSphere, oldSphere) {
+        if (newSphere === oldSphere) {
+            return;
+        }
+        chart.showSphere(newSphere);
+        chart.render();
+    });
+
+    $scope.$watch('location', function (newLocation, oldLocation) {
+        if (newLocation === oldLocation) {
+            return;
+        }
+        GeoConfigs.loadConfig(GeoConfigs.getConfig(newLocation.getId()), function (config) {
+            chart.removeLayer('location');
+            chart.addLayer(config.getFeatures().features, 'location', config.getKeyAccessor(),
+                config.getTitleAccessor());
+            chart.render();
+        });
+    });
+
+    $scope.$watch('projection', function (newProjection, oldProjection) {
+        if (newProjection === oldProjection) {
             return;
         }
         var projection;
-        if (newProjectionType in GeoProjectionFactory.types) {
-            projection = new GeoProjectionFactory.types[newProjectionType]()
-        } else if (newProjectionType in GeoProjectionFactory2.types) {
-            projection = new GeoProjectionFactory2.types[newProjectionType]()
+        if (newProjection in GeoProjectionFactory.types) {
+            projection = new GeoProjectionFactory.types[newProjection]()
+        } else if (newProjection in GeoProjectionFactory2.types) {
+            projection = new GeoProjectionFactory2.types[newProjection]()
         }
         chart.projection(projection.projection);
         chart.redraw();
@@ -165,7 +196,7 @@ angular.module('charts').controller('Example4Ctrl', ['$scope', 'GeoConfigs', 'Ge
         chart.dimension(dimension)
             .group(group)
             .title(function (d) {
-                return "Country: " + d.title +
+                return d.title +
                     "\n" + "Value: " + d.value;
             })
         chart.on("preRender", function (chart) {
@@ -176,7 +207,7 @@ angular.module('charts').controller('Example4Ctrl', ['$scope', 'GeoConfigs', 'Ge
         });
 
         GeoConfigs.loadConfig(GeoConfigs.getConfig('usStates'), function (config) {
-            chart.addLayer(config.getFeatures().features, 'world', config.getKeyAccessor(),
+            chart.addLayer(config.getFeatures().features, 'location', config.getKeyAccessor(),
                 config.getTitleAccessor());
             chart.render();
         });
