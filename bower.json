@@ -13,13 +13,9 @@
         "d3": "~3.4.8",
         "d3-geo-projection": "git://github.com/mtraynham/d3-geo-projection.git#master",
         "dc": "git://github.com/dc-js/dc.js.git#master",
-        "mathjs": "~0.21.1",
-        "momentjs": "~2.6.0",
         "queue-async": "~1.0.7",
-        "sprintf": "~1.0.0",
         "topojson": "~1.6.13",
-        "natural-earth-topo": "git://github.com/mtraynham/natural-earth-topo#master",
-        "underscore": "~1.6.0"
+        "natural-earth-topo": "git://github.com/mtraynham/natural-earth-topo#master"
     },
     "resolutions": {
         "crossfilter": "master"
