@@ -25,5 +25,25 @@
     },
     "resolutions": {
         "crossfilter": "master"
+    },
+    "overrides": {
+        "bootstrap": {
+            "main": "dist/css/bootstrap.css"
+        },
+        "d3-geo-projection": {
+            "main": "d3.geo.projection.js"
+        },
+        "jquery-ui": {
+            "main": [
+                "themes/base/jquery.ui.core.css",
+                "themes/base/jquery.ui.resizable.css",
+                "ui/jquery.ui.core.js",
+                "ui/jquery.ui.widget.js",
+                "ui/jquery.ui.mouse.js",
+                "ui/jquery.ui.draggable.js",
+                "ui/jquery.ui.droppable.js",
+                "ui/jquery.ui.resizable.js"
+            ]
+        }
     }
 }

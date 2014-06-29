@@ -75,7 +75,7 @@ module.exports = function (grunt) {
                         '*.ico',
                         'fonts/*',
                         'images/*',
-                        'data/*'
+                        'data/**/*'
                     ]
                 }, {
                     expand: true,
