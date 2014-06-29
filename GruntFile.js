@@ -38,11 +38,6 @@ module.exports = function (grunt) {
             }
         },
 
-        coffeelint: {
-            files : ['<%= conf.app %>/scripts/coffee/**/*.coffee'],
-            options : grunt.file.readJSON('.coffee-lint')
-        },
-
         jshint : {
             options: {
                 jshintrc: '.jshintrc',
@@ -65,19 +60,7 @@ module.exports = function (grunt) {
                 },
                 src : [ '<%= conf.app %>/scripts/**/*.tpl.html' ],
                 dest : '.tmp/templates/app.js',
-                module : 'analytics.builder.templates'
-            }
-        },
-
-        coffee : {
-            build: {
-                options: {
-                    bare: true
-                },
-                files: {
-                    '<%= conf.dist %>/scripts/coffee/<%= conf.pkg.name %>.js':
-                        ['<%= conf.app %>/scripts/coffee/**/*.coffee'],
-                }
+                module : 'charts.templates'
             }
         },
 
@@ -136,7 +119,7 @@ module.exports = function (grunt) {
                     banner : '<%= conf.banner %>'
                 },
                 src: [ '<%= conf.app %>/scripts/**/*.js', '.tmp/templates/**/*.js' ],
-                dest: '<%= conf.dist %>/scripts/js/<%= conf.pkg.name %>.js'
+                dest: '<%= conf.dist %>/scripts/<%= conf.pkg.name %>.js'
             },
             index: {
                 options : {
@@ -196,12 +179,8 @@ module.exports = function (grunt) {
                 banner : '<%= conf.banner %>'
             },
             dist: {
-                src: [ '<%= conf.dist %>/scripts/js/<%= conf.pkg.name %>.js' ],
-                dest: '<%= conf.dist %>/scripts/js/<%= conf.pkg.name %>.js'
-            },
-            distCoffee: {
-                src: [ '<%= conf.dist %>/scripts/coffee/<%= conf.pkg.name %>.js' ],
-                dest: '<%= conf.dist %>/scripts/coffee/<%= conf.pkg.name %>.js'
+                src: [ '<%= conf.dist %>/scripts/<%= conf.pkg.name %>.js' ],
+                dest: '<%= conf.dist %>/scripts/<%= conf.pkg.name %>.js'
             }
         },
 
@@ -254,8 +233,6 @@ module.exports = function (grunt) {
         'timestamp',
         'clean',
         'jshint',
-        'coffeelint',
-        'coffee',
         'html2js',
         'less',
         'concat:dist',
