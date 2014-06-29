@@ -21,7 +21,7 @@ module.exports = function (grunt) {
 
         watch: {
             maven: {
-                files: ['<%= conf.maven.filesToWatch %>'],
+                files: ['<%= conf.app %>'],
                 tasks : [ 'default' ]
             }
         },
@@ -39,7 +39,7 @@ module.exports = function (grunt) {
         },
 
         coffeelint: {
-            files : ['<%= src.coffee %>'],
+            files : ['<%= conf.app %>/scripts/coffee/**/*.coffee'],
             options : grunt.file.readJSON('.coffee-lint')
         },
 
@@ -75,7 +75,8 @@ module.exports = function (grunt) {
                     bare: true
                 },
                 files: {
-                    '<%= distdir %>/coffee/app.js': ['<%= src.coffee %>'],
+                    '<%= conf.dist %>/scripts/coffee/<%= conf.pkg.name %>.js':
+                        ['<%= conf.app %>/scripts/coffee/**/*.coffee'],
                 }
             }
         },
@@ -90,7 +91,8 @@ module.exports = function (grunt) {
                     src: [
                         '*.ico',
                         'fonts/*',
-                        'images/*'
+                        'images/*',
+                        'data/*'
                     ]
                 }, {
                     expand: true,
@@ -134,7 +136,7 @@ module.exports = function (grunt) {
                     banner : '<%= conf.banner %>'
                 },
                 src: [ '<%= conf.app %>/scripts/**/*.js', '.tmp/templates/**/*.js' ],
-                dest: '<%= conf.dist %>/scripts/<%= conf.pkg.name %>.js'
+                dest: '<%= conf.dist %>/scripts/js/<%= conf.pkg.name %>.js'
             },
             index: {
                 options : {
@@ -155,10 +157,10 @@ module.exports = function (grunt) {
 
         wiredep: {
             options: {
-                cwd: '<%= conf.app %>'
+                cwd: '<%= conf.dist %>'
             },
             app: {
-                src: ['<%= conf.app %>/index.html'],
+                src: ['<%= conf.dist %>/index.html'],
                 ignorePath:  /..\//
             }
         },
@@ -194,8 +196,12 @@ module.exports = function (grunt) {
                 banner : '<%= conf.banner %>'
             },
             dist: {
-                src: [ '<%= conf.dist %>/scripts/<%= conf.pkg.name %>.js' ],
-                dest: '<%= conf.dist %>/scripts/<%= conf.pkg.name %>.js'
+                src: [ '<%= conf.dist %>/scripts/js/<%= conf.pkg.name %>.js' ],
+                dest: '<%= conf.dist %>/scripts/js/<%= conf.pkg.name %>.js'
+            },
+            distCoffee: {
+                src: [ '<%= conf.dist %>/scripts/coffee/<%= conf.pkg.name %>.js' ],
+                dest: '<%= conf.dist %>/scripts/coffee/<%= conf.pkg.name %>.js'
             }
         },
 
@@ -235,7 +241,7 @@ module.exports = function (grunt) {
                     middleware: function (connect) {
                         return [
                             connect().use('/bower_components', connect.static('./bower_components')),
-                            connect.static(appConfig.app)
+                            connect.static(appConfig.dist)
                         ];
                     }
                 }
@@ -248,13 +254,13 @@ module.exports = function (grunt) {
         'timestamp',
         'clean',
         'jshint',
-        //'coffeelint',
-        'wiredep',
+        'coffeelint',
+        'coffee',
         'html2js',
-        //'coffee',
         'less',
         'concat:dist',
         'concat:index',
+        'wiredep',
         'copy:assets'
     ]);
 

@@ -9,7 +9,7 @@ angular.module('charts.geo').service('GeoConfigs', ['GeoConfig',
         new GeoConfig({
             id: 'usStates',
             name: 'US States',
-            fileName: 'vendor/natural-earth-topo/topojson/ne_50m_admin_1_states_provinces_lakes_shp.json',
+            fileName: './assets/topojson/ne_50m_admin_1_states_provinces_lakes_shp.json',
             featureAccessor : function (d) {
                 d.objects['ne_50m_admin_1_states_provinces_lakes_shp'].geometries =
                     d.objects['ne_50m_admin_1_states_provinces_lakes_shp'].geometries.filter(function (geo) {
@@ -23,7 +23,7 @@ angular.module('charts.geo').service('GeoConfigs', ['GeoConfig',
         new GeoConfig({
             id: 'canada',
             name: 'Canada',
-            fileName: 'vendor/natural-earth-topo/topojson/ne_50m_admin_1_states_provinces_lakes_shp.json',
+            fileName: './assets/topojson/ne_50m_admin_1_states_provinces_lakes_shp.json',
             featureAccessor : function (d) {
                 d.objects['ne_50m_admin_1_states_provinces_lakes_shp'].geometries =
                     d.objects['ne_50m_admin_1_states_provinces_lakes_shp'].geometries.filter(function (geo) {
@@ -37,7 +37,7 @@ angular.module('charts.geo').service('GeoConfigs', ['GeoConfig',
         new GeoConfig({
             id: 'australia',
             name: 'Australia',
-            fileName: 'vendor/natural-earth-topo/topojson/ne_50m_admin_1_states_provinces_lakes_shp.json',
+            fileName: './assets/topojson/ne_50m_admin_1_states_provinces_lakes_shp.json',
             featureAccessor : function (d) {
                 d.objects['ne_50m_admin_1_states_provinces_lakes_shp'].geometries =
                     d.objects['ne_50m_admin_1_states_provinces_lakes_shp'].geometries.filter(function (geo) {
@@ -51,7 +51,7 @@ angular.module('charts.geo').service('GeoConfigs', ['GeoConfig',
         new GeoConfig({
             id: 'world',
             name: 'World',
-            fileName: 'vendor/natural-earth-topo/topojson/ne_110m_admin_0_countries_lakes.json',
+            fileName: './assets/topojson/ne_110m_admin_0_countries_lakes.json',
             featureAccessor : function (d) {
                 return d.objects['ne_110m_admin_0_countries_lakes'];
             },
@@ -61,7 +61,7 @@ angular.module('charts.geo').service('GeoConfigs', ['GeoConfig',
         new GeoConfig({
             id: 'northAmerica',
             name: 'North America',
-            fileName: 'vendor/natural-earth-topo/topojson/ne_110m_admin_0_countries_lakes.json',
+            fileName: './assets/topojson/ne_110m_admin_0_countries_lakes.json',
             featureAccessor : function (d) {
                 d.objects['ne_110m_admin_0_countries_lakes'].geometries =
                     d.objects['ne_110m_admin_0_countries_lakes'].geometries.filter(function (geo) {
@@ -75,7 +75,7 @@ angular.module('charts.geo').service('GeoConfigs', ['GeoConfig',
         new GeoConfig({
             id: 'southAmerica',
             name: 'South America',
-            fileName: 'vendor/natural-earth-topo/topojson/ne_110m_admin_0_countries_lakes.json',
+            fileName: './assets/topojson/ne_110m_admin_0_countries_lakes.json',
             featureAccessor : function (d) {
                 d.objects['ne_110m_admin_0_countries_lakes'].geometries =
                     d.objects['ne_110m_admin_0_countries_lakes'].geometries.filter(function (geo) {
@@ -89,7 +89,7 @@ angular.module('charts.geo').service('GeoConfigs', ['GeoConfig',
         new GeoConfig({
             id: 'europe',
             name: 'Europe',
-            fileName: 'vendor/natural-earth-topo/topojson/ne_110m_admin_0_countries_lakes.json',
+            fileName: './assets/topojson/ne_110m_admin_0_countries_lakes.json',
             featureAccessor : function (d) {
                 d.objects['ne_110m_admin_0_countries_lakes'].geometries =
                     d.objects['ne_110m_admin_0_countries_lakes'].geometries.filter(function (geo) {
@@ -103,7 +103,7 @@ angular.module('charts.geo').service('GeoConfigs', ['GeoConfig',
         new GeoConfig({
             id: 'asia',
             name: 'Asia',
-            fileName: 'vendor/natural-earth-topo/topojson/ne_110m_admin_0_countries_lakes.json',
+            fileName: './assets/topojson/ne_110m_admin_0_countries_lakes.json',
             featureAccessor : function (d) {
                 d.objects['ne_110m_admin_0_countries_lakes'].geometries =
                     d.objects['ne_110m_admin_0_countries_lakes'].geometries.filter(function (geo) {
@@ -117,7 +117,7 @@ angular.module('charts.geo').service('GeoConfigs', ['GeoConfig',
         new GeoConfig({
             id: 'africa',
             name: 'Africa',
-            fileName: 'vendor/natural-earth-topo/topojson/ne_110m_admin_0_countries_lakes.json',
+            fileName: './assets/topojson/ne_110m_admin_0_countries_lakes.json',
             featureAccessor : function (d) {
                 d.objects['ne_110m_admin_0_countries_lakes'].geometries =
                     d.objects['ne_110m_admin_0_countries_lakes'].geometries.filter(function (geo) {
@@ -131,7 +131,7 @@ angular.module('charts.geo').service('GeoConfigs', ['GeoConfig',
         new GeoConfig({
             id: 'antarctica',
             name: 'Antarctica',
-            fileName: 'vendor/natural-earth-topo/topojson/ne_110m_admin_0_countries_lakes.json',
+            fileName: './assets/topojson/ne_110m_admin_0_countries_lakes.json',
             featureAccessor : function (d) {
                 d.objects['ne_110m_admin_0_countries_lakes'].geometries =
                     d.objects['ne_110m_admin_0_countries_lakes'].geometries.filter(function (geo) {
@@ -145,7 +145,7 @@ angular.module('charts.geo').service('GeoConfigs', ['GeoConfig',
         new GeoConfig({
             id: 'timeZones',
             name: 'Time Zones',
-            fileName: 'vendor/natural-earth-topo/topojson/ne_10m_time_zones.json',
+            fileName: './assets/topojson/ne_10m_time_zones.json',
             featureAccessor : function (d) {
                 return d.objects['ne_10m_time_zones'];
             },
