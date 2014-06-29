@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="charts">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="cache-control" content="max-age=0" />
+    <meta http-equiv="cache-control" content="no-cache" />
+    <meta http-equiv="expires" content="0" />
+    <meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT" />
+    <meta http-equiv="pragma" content="no-cache" />
+
+    <title>Charts</title>
+
+    <!-- build:css(.) styles/vendor.css -->
+    <!-- bower:css -->
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="bower_components/dc/dc.css" />
+    <!-- endbower -->
+    <!-- endbuild -->
+    <link rel="stylesheet" href="styles/<%= grunt.config.get('conf.pkg.name') %>.css">
+</head>
+<body ng-controller="AppCtrl">
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="col-lg-2 tabbable" vertical="true" type="navType">
+                <ul class="nav nav-pills nav-stacked admin-list">
+                    <li ng-class="{ active: $state.includes('example1') }">
+                        <a ui-sref="example1">Example 1</a>
+                    </li>
+                    <li ng-class="{ active: $state.includes('example2') }">
+                        <a ui-sref="example2">Example 2</a>
+                    </li>
+                    <li ng-class="{ active: $state.includes('example3') }">
+                        <a ui-sref="example3">Example 3</a>
+                    </li>
+                    <li ng-class="{ active: $state.includes('example4') }">
+                        <a ui-sref="example4">Example 4</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-lg-10 tab-content" ui-view></div>
+        </div>
+    </div>
+
+    <!-- build:js(.) scripts/vendor.js -->
+    <!-- bower:js -->
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+    <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="bower_components/colorbrewer/colorbrewer.js"></script>
+    <script src="bower_components/crossfilter/crossfilter.js"></script>
+    <script src="bower_components/d3/d3.js"></script>
+    <script src="bower_components/dc/dc.js"></script>
+    <script src="bower_components/jquery-ui/ui/jquery-ui.js"></script>
+    <script src="bower_components/mathjs/dist/math.js"></script>
+    <script src="bower_components/momentjs/moment.js"></script>
+    <script src="bower_components/queue-async/queue.js"></script>
+    <script src="bower_components/sprintf/src/sprintf.js"></script>
+    <script src="bower_components/topojson/topojson.js"></script>
+    <script src="bower_components/underscore/underscore.js"></script>
+    <!-- endbower -->
+    <!-- endbuild -->
+    <script type="text/javascript" src="scripts/<%= grunt.config.get('conf.pkg.name') %>.js"></script>
+</body>
+</html>

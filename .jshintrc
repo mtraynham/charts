@@ -1,5 +1,6 @@
 {
     "asi": true,
+    "browser": true,
     "boss": true,
     "camelcase": true,
     "curly": true,
@@ -14,8 +15,11 @@
     "multistr": true,
     "newcap": true,
     "noarg": true,
+    "quotmark": "single",
     "sub": true,
     "undef": true,
+    "unused": true,
+    "trailing": true,
     "white": true,
     "globals" : {
         "angular": false,
@@ -27,6 +31,7 @@
         "module": false,
         "moment": false,
         "queue": false,
+        "require": false,
         "sprintf": false,
         "topojson": false,
         "_": false

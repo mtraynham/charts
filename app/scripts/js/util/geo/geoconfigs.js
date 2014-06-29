@@ -1,8 +1,8 @@
 /**
  * GeoService
  */
-angular.module('charts.geo').service('GeoConfigs', ['GeoConfig', 'GeoProjection',
-    function (GeoConfig, GeoProjection) {
+angular.module('charts.geo').service('GeoConfigs', ['GeoConfig',
+    function (GeoConfig) {
 
     // All geo configs
     var configList = [
@@ -13,7 +13,7 @@ angular.module('charts.geo').service('GeoConfigs', ['GeoConfig', 'GeoProjection'
             featureAccessor : function (d) {
                 d.objects['ne_50m_admin_1_states_provinces_lakes_shp'].geometries =
                     d.objects['ne_50m_admin_1_states_provinces_lakes_shp'].geometries.filter(function (geo) {
-                        return geo.properties.admin === "United States of America";
+                        return geo.properties.admin === 'United States of America';
                     });
                 return d.objects['ne_50m_admin_1_states_provinces_lakes_shp'];
             },
@@ -27,7 +27,7 @@ angular.module('charts.geo').service('GeoConfigs', ['GeoConfig', 'GeoProjection'
             featureAccessor : function (d) {
                 d.objects['ne_50m_admin_1_states_provinces_lakes_shp'].geometries =
                     d.objects['ne_50m_admin_1_states_provinces_lakes_shp'].geometries.filter(function (geo) {
-                        return geo.properties.admin === "Canada";
+                        return geo.properties.admin === 'Canada';
                     });
                 return d.objects['ne_50m_admin_1_states_provinces_lakes_shp'];
             },
@@ -41,7 +41,7 @@ angular.module('charts.geo').service('GeoConfigs', ['GeoConfig', 'GeoProjection'
             featureAccessor : function (d) {
                 d.objects['ne_50m_admin_1_states_provinces_lakes_shp'].geometries =
                     d.objects['ne_50m_admin_1_states_provinces_lakes_shp'].geometries.filter(function (geo) {
-                        return geo.properties.admin === "Australia";
+                        return geo.properties.admin === 'Australia';
                     });
                 return d.objects['ne_50m_admin_1_states_provinces_lakes_shp'];
             },
@@ -65,7 +65,7 @@ angular.module('charts.geo').service('GeoConfigs', ['GeoConfig', 'GeoProjection'
             featureAccessor : function (d) {
                 d.objects['ne_110m_admin_0_countries_lakes'].geometries =
                     d.objects['ne_110m_admin_0_countries_lakes'].geometries.filter(function (geo) {
-                        return geo.properties.continent === "North America";
+                        return geo.properties.continent === 'North America';
                     });
                 return d.objects['ne_110m_admin_0_countries_lakes'];
             },
@@ -79,7 +79,7 @@ angular.module('charts.geo').service('GeoConfigs', ['GeoConfig', 'GeoProjection'
             featureAccessor : function (d) {
                 d.objects['ne_110m_admin_0_countries_lakes'].geometries =
                     d.objects['ne_110m_admin_0_countries_lakes'].geometries.filter(function (geo) {
-                        return geo.properties.continent === "South America";
+                        return geo.properties.continent === 'South America';
                     });
                 return d.objects['ne_110m_admin_0_countries_lakes'];
             },
@@ -93,7 +93,7 @@ angular.module('charts.geo').service('GeoConfigs', ['GeoConfig', 'GeoProjection'
             featureAccessor : function (d) {
                 d.objects['ne_110m_admin_0_countries_lakes'].geometries =
                     d.objects['ne_110m_admin_0_countries_lakes'].geometries.filter(function (geo) {
-                        return geo.properties.continent === "Europe";
+                        return geo.properties.continent === 'Europe';
                     });
                 return d.objects['ne_110m_admin_0_countries_lakes'];
             },
@@ -107,7 +107,7 @@ angular.module('charts.geo').service('GeoConfigs', ['GeoConfig', 'GeoProjection'
             featureAccessor : function (d) {
                 d.objects['ne_110m_admin_0_countries_lakes'].geometries =
                     d.objects['ne_110m_admin_0_countries_lakes'].geometries.filter(function (geo) {
-                        return geo.properties.continent === "Asia";
+                        return geo.properties.continent === 'Asia';
                     });
                 return d.objects['ne_110m_admin_0_countries_lakes'];
             },
@@ -121,7 +121,7 @@ angular.module('charts.geo').service('GeoConfigs', ['GeoConfig', 'GeoProjection'
             featureAccessor : function (d) {
                 d.objects['ne_110m_admin_0_countries_lakes'].geometries =
                     d.objects['ne_110m_admin_0_countries_lakes'].geometries.filter(function (geo) {
-                        return geo.properties.continent === "Africa";
+                        return geo.properties.continent === 'Africa';
                     });
                 return d.objects['ne_110m_admin_0_countries_lakes'];
             },
@@ -135,7 +135,7 @@ angular.module('charts.geo').service('GeoConfigs', ['GeoConfig', 'GeoProjection'
             featureAccessor : function (d) {
                 d.objects['ne_110m_admin_0_countries_lakes'].geometries =
                     d.objects['ne_110m_admin_0_countries_lakes'].geometries.filter(function (geo) {
-                        return geo.properties.continent === "Antarctica";
+                        return geo.properties.continent === 'Antarctica';
                     });
                 return d.objects['ne_110m_admin_0_countries_lakes'];
             },
@@ -150,7 +150,7 @@ angular.module('charts.geo').service('GeoConfigs', ['GeoConfig', 'GeoProjection'
                 return d.objects['ne_10m_time_zones'];
             },
             keyAccessor: function (d) { return d.properties.name },
-            titleAccessor:  function (d) { return 'TimeZone: ' + d.properties["time_zone"] }
+            titleAccessor:  function (d) { return 'TimeZone: ' + d.properties['time_zone'] }
         })
     ];
 
@@ -163,9 +163,8 @@ angular.module('charts.geo').service('GeoConfigs', ['GeoConfig', 'GeoProjection'
      * Load a GeoConfig
      * @param  {GeoConfig} geoConfig
      * @param  {Function} successcb
-     * @param  {Function} errorcb
     */
-    this.loadConfig = function (geoConfig, successcb, errorcb) {
+    this.loadConfig = function (geoConfig, successcb) {
         if (typeof geoConfig.getFeatures() !== 'undefined') {
             successcb(geoConfig)
             return;
@@ -191,6 +190,6 @@ angular.module('charts.geo').service('GeoConfigs', ['GeoConfig', 'GeoProjection'
      */
     this.getConfig = function (configName) {
         var p = configs.get(configName);
-        return p || configs.get("usStates");
+        return p || configs.get('usStates');
     };
 }]);

@@ -4,7 +4,7 @@
 angular.module('charts.geo').factory('GeoConfig', function () {
 
     var GeoConfig = function (data) {
-        this.name = "location";
+        this.name = 'location';
 
         angular.extend(this, data);
     };

@@ -9,118 +9,118 @@ angular.module('charts').controller('Example3Ctrl', ['$scope', function ($scope)
 
     $scope.attributes = {
         gap : new Attribute({
-            name : "Gap",
+            name : 'Gap',
             defaultValue : 5,
             min : 0,
-            type: "number"
+            type: 'number'
         }),
         externalRadiusPadding : new Attribute({
-            name : "External Radius Padding",
+            name : 'External Radius Padding',
             defaultValue : 30,
-            type: "number"
+            type: 'number'
         }),
         innerRadiusPercentage : new Attribute({
-            name : "Inner Radius Percentage",
+            name : 'Inner Radius Percentage',
             defaultValue : 0.9,
             min: 0,
             max: 1,
             step: 0.05,
-            type: "number"
+            type: 'number'
         }),
         domainMax : new Attribute({
-            name : "Maximum Value",
+            name : 'Maximum Value',
             defaultValue : 100,
-            type: "number"
+            type: 'number'
         }),
         domainMin : new Attribute({
-            name : "Minimum Value",
+            name : 'Minimum Value',
             defaultValue : 0,
-            type: "number"
+            type: 'number'
         }),
         labelPadding : new Attribute({
-            name : "Label Padding",
+            name : 'Label Padding',
             defaultValue : 3,
-            type: "number"
+            type: 'number'
         }),
         marginTop : new Attribute({
-            name : "Margin Top",
+            name : 'Margin Top',
             defaultValue : 0,
-            type: "number"
+            type: 'number'
         }),
         marginBottom : new Attribute({
-            name : "Margin Bottom",
+            name : 'Margin Bottom',
             defaultValue : 35,
-            type: "number"
+            type: 'number'
         }),
         marginLeft : new Attribute({
-            name : "Margin Left",
+            name : 'Margin Left',
             defaultValue : 0,
-            type: "number"
+            type: 'number'
         }),
         marginRight : new Attribute({
-            name : "Margin Right",
+            name : 'Margin Right',
             defaultValue : 0,
-            type: "number"
+            type: 'number'
         }),
         maxAngle : new Attribute({
-            name : "Maximum Angle",
+            name : 'Maximum Angle',
             defaultValue : 90,
-            type: "number"
+            type: 'number'
         }),
         minAngle : new Attribute({
-            name : "Minimum Angle",
+            name : 'Minimum Angle',
             defaultValue : -90,
-            type: "number"
+            type: 'number'
         }),
         needleLengthPercentage : new Attribute({
-            name : "Needle Length (% of Radius)",
+            name : 'Needle Length (% of Radius)',
             defaultValue : 0.9,
             min: 0,
             max: 1,
             step: 0.05,
-            type: "number"
+            type: 'number'
         }),
         needleRadius : new Attribute({
-            name : "Needle Radius",
+            name : 'Needle Radius',
             defaultValue : 15,
             min: 0,
-            type: "number"
+            type: 'number'
         }),
         renderLabel : new Attribute({
-            name : "Render Labels",
+            name : 'Render Labels',
             defaultValue : true,
-            type: "checkbox"
+            type: 'checkbox'
         }),
         slices : new Attribute({
-            name : "Slices",
+            name : 'Slices',
             defaultValue : 5,
             min : 0,
-            type: "number"
+            type: 'number'
         }),
         text : new Attribute({
-            name : "Text",
-            defaultValue : "Foo Bar",
-            type: "text"
+            name : 'Text',
+            defaultValue : 'Foo Bar',
+            type: 'text'
         }),
         textX : new Attribute({
-            name : "Text X",
+            name : 'Text X',
             defaultValue : 0,
-            type: "number"
+            type: 'number'
         }),
         textY : new Attribute({
-            name : "Text Y",
+            name : 'Text Y',
             defaultValue : 30,
-            type: "number"
+            type: 'number'
         }),
         textRotation : new Attribute({
-            name : "Text Rotation",
+            name : 'Text Rotation',
             defaultValue : 0,
-            type: "number"
+            type: 'number'
         }),
         value : new Attribute({
-            name : "Value",
+            name : 'Value',
             defaultValue : 50,
-            type: "number"
+            type: 'number'
         })
     };
 
@@ -128,7 +128,7 @@ angular.module('charts').controller('Example3Ctrl', ['$scope', function ($scope)
     var index = crossfilter([]);
     var dimension1 = index,
         group1 = dimension1.groupAll(),
-        chart1 = dc.gauge("#chart1")
+        chart1 = dc.gauge('#chart1')
         .width(700)
         .height(600)
         .dimension(dimension1)

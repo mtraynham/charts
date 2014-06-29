@@ -40,7 +40,7 @@ angular.module('charts.geo').factory('GeoProjection', function () {
     function (Albers, AlbersUSA, AzimuthalEqualArea, AzimuthalEquiDistant, ConicConformal, ConicEqualArea,
         ConicEquiDistant, EquiRectangular, Gnomonic, Mercator, Orthographic, Stereographic, TransverseMercator) {
 
-    var GeoProjectionFactory = function (data) {};
+    var GeoProjectionFactory = function () {};
 
     GeoProjectionFactory.types = {};
     GeoProjectionFactory.types[Mercator.type] = Mercator;
@@ -86,7 +86,7 @@ angular.module('charts.geo').factory('GeoProjection', function () {
         TwoPointEquidistant, VanDerGrinten, VanDerGrinten2, VanDerGrinten3, VanDerGrinten4, Wagner4, Wagner6, Wagner7,
         Wiechel, Winkel3) {
 
-    var GeoProjectionFactory2 = function (data) {};
+    var GeoProjectionFactory2 = function () {};
 
     GeoProjectionFactory2.types = {};
     GeoProjectionFactory2.types[Airy.type] = Airy;

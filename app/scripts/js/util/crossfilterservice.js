@@ -9,7 +9,7 @@ angular.module('charts').service('CrossfilterService', function () {
     };
 
     this.coerceArray = function (array) {
-        return array ? array.split(",").reduce(function (previous, current) {
+        return array ? array.split(',').reduce(function (previous, current) {
             previous[current.trim()] = true;
             return previous;
         }, {}) : null;
@@ -34,7 +34,7 @@ angular.module('charts').service('CrossfilterService', function () {
             p.count--;
             p.sum -= accessor(v);
             return p;
-        }, function (p) {
+        }, function () {
             return { count: 0, sum: 0, valueOf: function () {
                 return this.count !== 0 ? this.sum / this.count : 0;
             }};
@@ -42,11 +42,11 @@ angular.module('charts').service('CrossfilterService', function () {
     };
 
     this.reduceCount = function (group) {
-        return group.reduce(function (p, v) {
+        return group.reduce(function (p) {
             return ++p;
-        }, function (p, v) {
-            return --p;
         }, function (p) {
+            return --p;
+        }, function () {
             return 0;
         });
     };
@@ -58,7 +58,7 @@ angular.module('charts').service('CrossfilterService', function () {
         }, function (p, v) {
             var val = accessor(v);
             return val !== null ? p -= val : p;
-        }, function (p) {
+        }, function () {
             return 0;
         });
     };
@@ -76,8 +76,8 @@ angular.module('charts').service('CrossfilterService', function () {
                 topSet = d3.set(topKeys),
                 others = allKeys.filter(function (d) { return !topSet.has(d); });
             if (allRowsSum > topRowsSum) {
-                return topRows.concat([{"others": others, "key": _chart.othersLabel(),
-                    "value": (allRowsSum - topRowsSum) / (allRowsCount - topRowsCount)}]);
+                return topRows.concat([{'others': others, 'key': _chart.othersLabel(),
+                    'value': (allRowsSum - topRowsSum) / (allRowsCount - topRowsCount)}]);
             }
             return topRows;
         };

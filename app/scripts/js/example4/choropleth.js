@@ -84,11 +84,11 @@
 
         // LAYER ACCESSORS
         function layerClass(layerName) {
-            return "layer-" + layerName;
+            return 'layer-' + layerName;
         }
 
         function layerSelector(layerName) {
-            return "g.layer-" + layerName;
+            return 'g.layer-' + layerName;
         }
 
         function isSelected(layerName, d) {
@@ -115,9 +115,9 @@
             return getLayer(layerName).features;
         }
 
-        function getAllFeatures() {
-            return _allFeatures;
-        }
+        //function getAllFeatures() {
+        //    return _allFeatures;
+        //}
 
         function getLayer(layerName) {
             return _layers[layerName];
@@ -202,29 +202,29 @@
 
             for (var layerName in _layers) {
                 // Select path
-                var pathG = _chart.svg().selectAll(layerSelector(layerName) + " path");
+                var pathG = _chart.svg().selectAll(layerSelector(layerName) + ' path');
 
                 // Set selected color function
                 var hasData = isDataLayer(layerName);
-                pathG.classed("selected", hasData ? function (d) { return isSelected(layerName, d); } :
+                pathG.classed('selected', hasData ? function (d) { return isSelected(layerName, d); } :
                     function () { return false; })
-                    .classed("deselected", hasData ? function (d) { return isDeselected(layerName, d); } :
+                    .classed('deselected', hasData ? function (d) { return isDeselected(layerName, d); } :
                     function () { return false; });
 
                 // Update color
-                dc.transition(pathG, _chart.transitionDuration()).attr("fill", function (d, i) {
+                dc.transition(pathG, _chart.transitionDuration()).attr('fill', function (d, i) {
                     return _chart.getColor(data[getKey(layerName, d)], i);
                 });
 
                 // Update title
-                pathG.selectAll("title").text(_chart.renderTitle() ?
-                    _title(layerName, data, _chart.title()) : function () { return ""; });
+                pathG.selectAll('title').text(_chart.renderTitle() ?
+                    _title(layerName, data, _chart.title()) : function () { return ''; });
             }
 
             // Update the projection
             if (_projectionChanged) {
                 _projectionZoom(_path, _allFeatures, _chart.width(), _chart.height());
-                _chart.svg().selectAll("g path").attr("d", _path);
+                _chart.svg().selectAll('g path').attr('d', _path);
                 _projectionChanged = false;
             }
 
@@ -237,40 +237,40 @@
             _chart.svg().call(_zoom
                 .translate(_projection.translate())
                 .scale(_projection.scale())
-                .on("zoom.redraw", function () {
+                .on('zoom.redraw', function () {
                     d3.event.sourceEvent.preventDefault();
-                    _chart.svg().selectAll("path").attr("d", _path);
+                    _chart.svg().selectAll('path').attr('d', _path);
                 }));
 
             // Since we are rendering, no need to transform the projection
             _projectionChanged = false;
 
             // The graph
-            var _g = _chart.svg().append("g");
+            var _g = _chart.svg().append('g');
 
             // Zoom on the current features
             _projectionZoom(_path, _allFeatures, _chart.width(), _chart.height());
 
             // Add graticule
             if (_showGraticule) {
-                _g.append("path").attr("class", "graticule").datum(_graticule).attr('d', _path);
+                _g.append('path').attr('class', 'graticule').datum(_graticule).attr('d', _path);
             }
 
             // Add sphere
             if (_showSphere) {
-                _g.append("path").attr("class", "sphere").datum({type: "Sphere"}).attr('d', _path);
+                _g.append('path').attr('class', 'sphere').datum({type: 'Sphere'}).attr('d', _path);
             }
 
             // Add layers
             for (var layerName in _layers) {
-                var pathG = _g.append("g").attr("class", layerClass(layerName))
-                    .selectAll("path").data(getFeatures(layerName))
-                    .enter().append("path")
-                        .attr("fill", "white")
-                        .attr("d", _path)
-                        .on("click", function (d) {
+                _g.append('g').attr('class', layerClass(layerName))
+                    .selectAll('path').data(getFeatures(layerName))
+                    .enter().append('path')
+                        .attr('fill', 'white')
+                        .attr('d', _path)
+                        .on('click', function (d) {
                             return _chart.onClick(d, layerName);
-                        }).append("title");
+                        }).append('title');
             }
             return _chart._doRedraw();
         };

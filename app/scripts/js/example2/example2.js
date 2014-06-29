@@ -1,40 +1,40 @@
 angular.module('charts').controller('Example2Ctrl', ['$scope', 'CrossfilterService',
     function ($scope, CrossfilterService) {
 
-    var timeFormat = d3.time.format("%b %e, %Y");
-    var numberFormat = d3.format(".2f");
+    var timeFormat = d3.time.format('%b %e, %Y');
+    var numberFormat = d3.format('.2f');
     var colors = d3.map({
         // Dreamcast
-        "dreamcast": colorbrewer.Oranges[9][5],
+        'dreamcast': colorbrewer.Oranges[9][5],
         // PC
-        "pc": colorbrewer.Purples[9][2],
+        'pc': colorbrewer.Purples[9][2],
         // Nintendo
-        "n64": colorbrewer.Reds[9][3],
-        "gamecube": colorbrewer.Reds[9][4],
-        "wii": colorbrewer.Reds[9][5],
-        "wii-u": colorbrewer.Reds[9][6],
+        'n64': colorbrewer.Reds[9][3],
+        'gamecube': colorbrewer.Reds[9][4],
+        'wii': colorbrewer.Reds[9][5],
+        'wii-u': colorbrewer.Reds[9][6],
         // Playstation
-        "ps": colorbrewer.Blues[9][3],
-        "ps2": colorbrewer.Blues[9][4],
-        "ps3": colorbrewer.Blues[9][5],
-        "ps4": colorbrewer.Blues[9][6],
+        'ps': colorbrewer.Blues[9][3],
+        'ps2': colorbrewer.Blues[9][4],
+        'ps3': colorbrewer.Blues[9][5],
+        'ps4': colorbrewer.Blues[9][6],
         // XBox
-        "xbox": colorbrewer.Greens[9][3],
-        "xbox360": colorbrewer.Greens[9][4],
-        "xboxone": colorbrewer.Greens[9][5]
+        'xbox': colorbrewer.Greens[9][3],
+        'xbox360': colorbrewer.Greens[9][4],
+        'xboxone': colorbrewer.Greens[9][5]
     });
 
     /**
      * Handles parsing of CSV data.
-     *  critic_score: "46"
-     *  genre: "Miscellaneous, Rhythm, Music, Music"
-     *  platform: "ps3"
-     *  publisher: "SCEA"
-     *  rating: "E"
-     *  release: "Oct 15, 2009"
-     *  score: "3.9"
-     *  title: ".detuned"
-      * url: "/game/playstation-3/de"
+     *  critic_score: '46'
+     *  genre: 'Miscellaneous, Rhythm, Music, Music'
+     *  platform: 'ps3'
+     *  publisher: 'SCEA'
+     *  rating: 'E'
+     *  release: 'Oct 15, 2009'
+     *  score: '3.9'
+     *  title: '.detuned'
+      * url: '/game/playstation-3/de'
      */
     function parseData(data, callback) {
         d3.csv(data, function (row) {
@@ -60,21 +60,21 @@ angular.module('charts').controller('Example2Ctrl', ['$scope', 'CrossfilterServi
      */
     function render(error, data) {
         // Accessors
-        var criticScoreAccessor = CrossfilterService.accessor("critic_score"),
-            genreAccessor = CrossfilterService.accessor("genre"),
-            platformAccessor = CrossfilterService.accessor("platform"),
-            publisherAccessor = CrossfilterService.accessor("publisher"),
-            ratingAccessor = CrossfilterService.accessor("rating"),
-            releaseAccessor = CrossfilterService.accessor("release"),
-            releaseByMonthAccessor = function (d) {
-                var date = releaseAccessor(d);
-                return new Date(date.getFullYear(), date.getMonth());
-            },
-            releaseByYearAccessor = function (d) {
-                return new Date(releaseAccessor(d).getFullYear());
-            },
-            scoreAccessor = CrossfilterService.accessor("score"),
-            titleAccessor = CrossfilterService.accessor("title");
+        var criticScoreAccessor = CrossfilterService.accessor('critic_score'),
+            //genreAccessor = CrossfilterService.accessor('genre'),
+            platformAccessor = CrossfilterService.accessor('platform'),
+            //publisherAccessor = CrossfilterService.accessor('publisher'),
+            //ratingAccessor = CrossfilterService.accessor('rating'),
+            releaseAccessor = CrossfilterService.accessor('release'),
+            //releaseByMonthAccessor = function (d) {
+            //    var date = releaseAccessor(d);
+            //    return new Date(date.getFullYear(), date.getMonth());
+            //},
+            //releaseByYearAccessor = function (d) {
+            //    return new Date(releaseAccessor(d).getFullYear());
+            //},
+            scoreAccessor = CrossfilterService.accessor('score');
+            //titleAccessor = CrossfilterService.accessor('title');
 
         // Crossfilter Index
         var index = crossfilter(data);
@@ -82,7 +82,7 @@ angular.module('charts').controller('Example2Ctrl', ['$scope', 'CrossfilterServi
         // Chart 1
         var dimension1 = index.dimension(platformAccessor),
             group1 = CrossfilterService.reduceCount(dimension1.group()),
-            chart1 = dc.rowChart("#chart1")
+            chart1 = dc.rowChart('#chart1')
             .width(1000)
             .height(300)
             .dimension(dimension1)
@@ -139,7 +139,7 @@ angular.module('charts').controller('Example2Ctrl', ['$scope', 'CrossfilterServi
                     }
                 };
             }),
-            chart2 = dc.bubbleChart("#chart2")
+            chart2 = dc.bubbleChart('#chart2')
             .width(1000)
             .height(400)
             .dimension(dimension2)
@@ -168,10 +168,10 @@ angular.module('charts').controller('Example2Ctrl', ['$scope', 'CrossfilterServi
             .renderTitle(true)
             .title(function (p) {
                 return [p.key,
-                   "# of Titles: " + p.value.count,
-                   "Average Critic Score: " + numberFormat(p.value.criticAvg()),
-                   "Average User Score: " + numberFormat(p.value.userAvg())]
-                   .join("\n");
+                   '# of Titles: ' + p.value.count,
+                   'Average Critic Score: ' + numberFormat(p.value.criticAvg()),
+                   'Average User Score: ' + numberFormat(p.value.userAvg())]
+                   .join('\n');
             })
             .colorAccessor(function (d) {
                 return d.key;
@@ -185,16 +185,16 @@ angular.module('charts').controller('Example2Ctrl', ['$scope', 'CrossfilterServi
         var dimension3 = index.dimension(releaseAccessor),
             group3Critic = CrossfilterService.reduceAvg(dimension2.group(), criticScoreAccessor),
             group3User = CrossfilterService.reduceAvg(dimension2.group(), scoreAccessor),
-            chart3 = dc.lineChart("#chart3")
+            chart3 = dc.lineChart('#chart3')
             .width(1000)
             .height(400)
             .dimension(dimension3)
-            .group(group3Critic, "Average Critic Score")
+            .group(group3Critic, 'Average Critic Score')
             .x(d3.time.scale().domain(d3.extent(dimension3.top(Number.POSITIVE_INFINITY), releaseAccessor)))
             .round(d3.time.month.round)
             .xUnits(d3.time.months)
             .y(d3.scale.linear().domain([0, 20]))
-            .stack(group3User, "Average User Score")
+            .stack(group3User, 'Average User Score')
             .elasticY(true)
             .xAxisLabel('Release Date')
             .yAxisLabel('Score')

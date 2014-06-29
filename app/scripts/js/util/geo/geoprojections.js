@@ -8,8 +8,8 @@ angular.module('charts.geo').factory('Albers', ['GeoProjection', function (GeoPr
     };
     Albers.prototype = Object.create(GeoProjection.prototype);
 
-    Albers.type = Albers.prototype.type = "albers";
-    Albers.prototype.name = "Albers";
+    Albers.type = Albers.prototype.type = 'albers';
+    Albers.prototype.name = 'Albers';
     Albers.prototype.projection = d3.geo.albers();
 
     return Albers;
@@ -25,8 +25,8 @@ angular.module('charts.geo').factory('AlbersUSA', ['GeoProjection', function (Ge
     };
     AlbersUSA.prototype = Object.create(GeoProjection.prototype);
 
-    AlbersUSA.type = AlbersUSA.prototype.type = "albersUsa";
-    AlbersUSA.prototype.name = "Albers USA";
+    AlbersUSA.type = AlbersUSA.prototype.type = 'albersUsa';
+    AlbersUSA.prototype.name = 'Albers USA';
     AlbersUSA.prototype.projection = d3.geo.albersUsa();
 
     return AlbersUSA;
@@ -42,8 +42,8 @@ angular.module('charts.geo').factory('AzimuthalEqualArea', ['GeoProjection', fun
     };
     AzimuthalEqualArea.prototype = Object.create(GeoProjection.prototype);
 
-    AzimuthalEqualArea.type = AzimuthalEqualArea.prototype.type = "azimuthalEqualArea";
-    AzimuthalEqualArea.prototype.name = "Azimuthal Equal Area";
+    AzimuthalEqualArea.type = AzimuthalEqualArea.prototype.type = 'azimuthalEqualArea';
+    AzimuthalEqualArea.prototype.name = 'Azimuthal Equal Area';
     AzimuthalEqualArea.prototype.projection = d3.geo.azimuthalEqualArea();
 
     return AzimuthalEqualArea;
@@ -59,8 +59,8 @@ angular.module('charts.geo').factory('AzimuthalEquiDistant', ['GeoProjection', f
     };
     AzimuthalEquiDistant.prototype = Object.create(GeoProjection.prototype);
 
-    AzimuthalEquiDistant.type = AzimuthalEquiDistant.prototype.type = "azimuthalEquidistant";
-    AzimuthalEquiDistant.prototype.name = "Azimuthal Equi-Distant";
+    AzimuthalEquiDistant.type = AzimuthalEquiDistant.prototype.type = 'azimuthalEquidistant';
+    AzimuthalEquiDistant.prototype.name = 'Azimuthal Equi-Distant';
     AzimuthalEquiDistant.prototype.projection = d3.geo.azimuthalEquidistant();
 
     return AzimuthalEquiDistant;
@@ -76,8 +76,8 @@ angular.module('charts.geo').factory('ConicConformal', ['GeoProjection', functio
     };
     ConicConformal.prototype = Object.create(GeoProjection.prototype);
 
-    ConicConformal.type = ConicConformal.prototype.type = "conicConformal";
-    ConicConformal.prototype.name = "Conic Conformal";
+    ConicConformal.type = ConicConformal.prototype.type = 'conicConformal';
+    ConicConformal.prototype.name = 'Conic Conformal';
     ConicConformal.prototype.projection = d3.geo.conicConformal();
 
     return ConicConformal;
@@ -93,8 +93,8 @@ angular.module('charts.geo').factory('ConicEqualArea', ['GeoProjection', functio
     };
     ConicEqualArea.prototype = Object.create(GeoProjection.prototype);
 
-    ConicEqualArea.type = ConicEqualArea.prototype.type = "conicEqualArea";
-    ConicEqualArea.prototype.name = "Conic Equal Area";
+    ConicEqualArea.type = ConicEqualArea.prototype.type = 'conicEqualArea';
+    ConicEqualArea.prototype.name = 'Conic Equal Area';
     ConicEqualArea.prototype.projection = d3.geo.conicEqualArea();
 
     return ConicEqualArea;
@@ -110,8 +110,8 @@ angular.module('charts.geo').factory('ConicEquiDistant', ['GeoProjection', funct
     };
     ConicEquiDistant.prototype = Object.create(GeoProjection.prototype);
 
-    ConicEquiDistant.type = ConicEquiDistant.prototype.type = "conicEquidistant";
-    ConicEquiDistant.prototype.name = "Conic Equi-Distant";
+    ConicEquiDistant.type = ConicEquiDistant.prototype.type = 'conicEquidistant';
+    ConicEquiDistant.prototype.name = 'Conic Equi-Distant';
     ConicEquiDistant.prototype.projection = d3.geo.conicEquidistant();
 
     return ConicEquiDistant;
@@ -127,8 +127,8 @@ angular.module('charts.geo').factory('EquiRectangular', ['GeoProjection', functi
     };
     EquiRectangular.prototype = Object.create(GeoProjection.prototype);
 
-    EquiRectangular.type = EquiRectangular.prototype.type = "equirectangular";
-    EquiRectangular.prototype.name = "Equi-Rectangular";
+    EquiRectangular.type = EquiRectangular.prototype.type = 'equirectangular';
+    EquiRectangular.prototype.name = 'Equi-Rectangular';
     EquiRectangular.prototype.projection = d3.geo.equirectangular();
 
     return EquiRectangular;
@@ -144,8 +144,8 @@ angular.module('charts.geo').factory('Gnomonic', ['GeoProjection', function (Geo
     };
     Gnomonic.prototype = Object.create(GeoProjection.prototype);
 
-    Gnomonic.type = Gnomonic.prototype.type = "gnomonic";
-    Gnomonic.prototype.name = "Gnomonic";
+    Gnomonic.type = Gnomonic.prototype.type = 'gnomonic';
+    Gnomonic.prototype.name = 'Gnomonic';
     Gnomonic.prototype.projection = d3.geo.gnomonic();
 
     return Gnomonic;
@@ -161,8 +161,8 @@ angular.module('charts.geo').factory('Mercator', ['GeoProjection', function (Geo
     };
     Mercator.prototype = Object.create(GeoProjection.prototype);
 
-    Mercator.type = Mercator.prototype.type = "mercator";
-    Mercator.prototype.name = "Mercator";
+    Mercator.type = Mercator.prototype.type = 'mercator';
+    Mercator.prototype.name = 'Mercator';
     Mercator.prototype.projection = d3.geo.mercator();
 
     return Mercator;
@@ -178,8 +178,8 @@ angular.module('charts.geo').factory('Orthographic', ['GeoProjection', function 
     };
     Orthographic.prototype = Object.create(GeoProjection.prototype);
 
-    Orthographic.type = Orthographic.prototype.type = "orthographic";
-    Orthographic.prototype.name = "Orthographic";
+    Orthographic.type = Orthographic.prototype.type = 'orthographic';
+    Orthographic.prototype.name = 'Orthographic';
     Orthographic.prototype.projection = d3.geo.orthographic();
 
     return Orthographic;
@@ -195,8 +195,8 @@ angular.module('charts.geo').factory('Stereographic', ['GeoProjection', function
     };
     Stereographic.prototype = Object.create(GeoProjection.prototype);
 
-    Stereographic.type = Stereographic.prototype.type = "stereographic";
-    Stereographic.prototype.name = "Stereographic";
+    Stereographic.type = Stereographic.prototype.type = 'stereographic';
+    Stereographic.prototype.name = 'Stereographic';
     Stereographic.prototype.projection = d3.geo.stereographic();
 
     return Stereographic;
@@ -212,8 +212,8 @@ angular.module('charts.geo').factory('TransverseMercator', ['GeoProjection', fun
     };
     TransverseMercator.prototype = Object.create(GeoProjection.prototype);
 
-    TransverseMercator.type = TransverseMercator.prototype.type = "transverseMercator";
-    TransverseMercator.prototype.name = "Transverse Mercator";
+    TransverseMercator.type = TransverseMercator.prototype.type = 'transverseMercator';
+    TransverseMercator.prototype.name = 'Transverse Mercator';
     TransverseMercator.prototype.projection = d3.geo.transverseMercator();
 
     return TransverseMercator;

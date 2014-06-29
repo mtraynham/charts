@@ -4,12 +4,12 @@
 
         var _g;
 
-        var _gaugeCssClass = "gauge";
-        var _sliceCssClass = "pie-slice";
-        var _sliceLabelsCssClass = "pie-slice-labels";
+        var _gaugeCssClass = 'gauge';
+        var _sliceCssClass = 'pie-slice';
+        var _sliceLabelsCssClass = 'pie-slice-labels';
         var _needleCircleCssClass = 'needle-center';
         var _needleCssClass = 'needle';
-        var _gaugeTextCssClass = "gauge-text";
+        var _gaugeTextCssClass = 'gauge-text';
 
         var _domain = [ 0, 100 ];
         var _gap = 3;
@@ -24,15 +24,15 @@
         var _needleLengthPercentage = 0.9;
         var _needleRadius = 15;
         var _needleValue = 0;
-        var _needleColor = "#000000";
+        var _needleColor = '#000000';
 
-        var _text = "";
-        var _textColor = "#FFFFFF";
+        var _text = '';
+        var _textColor = '#FFFFFF';
         var _textX = 0;
         var _textY = 30;
         var _textRotation = 0;
 
-        var numberFormat = d3.format("s");
+        var numberFormat = d3.format('s');
 
         _chart.margins({top: 0, left: 0, right: 0, bottom: 35});
         _chart.label(function (d) { return numberFormat(d); });
@@ -48,8 +48,8 @@
 
         function safeArc(d, i, arc) {
             var path = arc(d, i);
-            if (path.indexOf("NaN") >= 0) {
-                path = "M0,0";
+            if (path.indexOf('NaN') >= 0) {
+                path = 'M0,0';
             }
             return path;
         }
@@ -81,8 +81,8 @@
                 leftY = -radius * Math.sin(thetaRadian - Math.PI / 2),
                 rightX = -radius * Math.cos(thetaRadian + Math.PI / 2),
                 rightY = -radius * Math.sin(thetaRadian + Math.PI / 2);
-            //M #{leftX} #{leftY} L #{topX} #{topY} L #{rightX} #{rightY}"
-            return "M " + leftX + " " + leftY + " L " + topX + " " + topY + " L " + rightX + " " + rightY;
+            //M #{leftX} #{leftY} L #{topX} #{topY} L #{rightX} #{rightY}'
+            return 'M ' + leftX + ' ' + leftY + ' L ' + topX + ' ' + topY + ' L ' + rightX + ' ' + rightY;
         }
 
         function drawChart() {
@@ -95,15 +95,15 @@
             var radius = (_radius ? _radius : Math.min(width, height)) - _externalRadiusPadding;
 
             // TODO Smarter centering?
-            _g.attr("transform", "translate(" + (_chart.width() / 2 + _chart.margins().left - _chart.margins().right) +
-                    ", " + (_chart.height() + _chart.margins().top - _chart.margins().bottom) + ")");
+            _g.attr('transform', 'translate(' + (_chart.width() / 2 + _chart.margins().left - _chart.margins().right) +
+                    ', ' + (_chart.height() + _chart.margins().top - _chart.margins().bottom) + ')');
 
             var innerRadius = (_innerRadiusPercentage !== null ?
                 Math.max(Math.min(_innerRadiusPercentage, 1), 0) : 0.5) * radius;
             var startRadian = deg2rad(_minAngle);
             var endRadian = deg2rad(_maxAngle);
 
-            var gauge = _g.select("g." + _gaugeCssClass);
+            var gauge = _g.select('g.' + _gaugeCssClass);
 
             /*****************************************************************
              * Slices
@@ -131,27 +131,27 @@
             var arc = d3.svg.arc().outerRadius(radius).innerRadius(innerRadius);
 
             // Get slices
-            var slices = gauge.selectAll("g." + _sliceCssClass).data(pieData);
+            var slices = gauge.selectAll('g.' + _sliceCssClass).data(pieData);
 
             // Create elements
-            var slicesEnter = slices.enter().append("g").attr("class", function (d, i) {
-                return _sliceCssClass + " _" + i;
+            var slicesEnter = slices.enter().append('g').attr('class', function (d, i) {
+                return _sliceCssClass + ' _' + i;
             });
-            var slicePath = slicesEnter.append("path").attr("fill", fill).attr("d", function (d, i) {
+            var slicePath = slicesEnter.append('path').attr('fill', fill).attr('d', function (d, i) {
                 return safeArc(d, i, arc);
             });
             dc.transition(slicePath, _chart.transitionDuration(), function (s) {
-                s.attrTween("d", tweenPie(radius, innerRadius, endRadian, endRadian));
+                s.attrTween('d', tweenPie(radius, innerRadius, endRadian, endRadian));
             });
 
             // Update elements
-            var slicePaths = gauge.selectAll("g." + _sliceCssClass)
-                .data(pieData).select("path").attr("d", function (d, i) {
+            var slicePaths = gauge.selectAll('g.' + _sliceCssClass)
+                .data(pieData).select('path').attr('d', function (d, i) {
                 return safeArc(d, i, arc);
             });
             dc.transition(slicePaths, _chart.transitionDuration(), function (s) {
-                s.attrTween("d", tweenPie(radius, innerRadius));
-            }).attr("fill", fill);
+                s.attrTween('d', tweenPie(radius, innerRadius));
+            }).attr('fill', fill);
 
             // Remove elements
             slices.exit().remove();
@@ -163,15 +163,15 @@
             var labelData = labelScale.ticks(_slices);
 
             // Update Labels
-            var labels = gauge.selectAll("text." + _sliceLabelsCssClass)
+            var labels = gauge.selectAll('text.' + _sliceLabelsCssClass)
                 .data(_chart.renderLabel() ? labelData : []);
-            var labelsEnter = labels.enter().append("text").attr("class", function (d, i) {
-                return _sliceLabelsCssClass + " _" + i;
+            labels.enter().append('text').attr('class', function (d, i) {
+                return _sliceLabelsCssClass + ' _' + i;
             });
-            dc.transition(labels, _chart.transitionDuration()).attr("transform", function (d) {
+            dc.transition(labels, _chart.transitionDuration()).attr('transform', function (d) {
                 var newAngle = _minAngle + ((_maxAngle - _minAngle) * labelScale(d));
                 return 'rotate(' + newAngle + ') translate(0,' + -(radius + _labelPadding) + ')';
-            }).attr("text-anchor", "middle").text(function (d) {
+            }).attr('text-anchor', 'middle').text(function (d) {
                 return _chart.label()(d);
             });
             labels.exit().remove();
@@ -188,12 +188,12 @@
             }
 
             // Update needle
-            _g.select("circle." + _needleCircleCssClass)
+            _g.select('circle.' + _needleCircleCssClass)
                 .attr('r', _needleRadius)
                 .attr('fill', _needleColor);
 
             // TODO Tween?
-            _g.select("path." + _needleCssClass)
+            _g.select('path.' + _needleCssClass)
                 .attr('fill', _needleColor)
                 .attr('d', needlePath(needleValue, _domain, _minAngle, _maxAngle,
                     _needleLengthPercentage * radius, _needleRadius));
@@ -202,20 +202,20 @@
              * Text
              *****************************************************************/
             // Update text
-            var text = _g.select("text." + _gaugeTextCssClass);
-            dc.transition(text, _chart.transitionDuration()).attr("transform", function (d) {
+            var text = _g.select('text.' + _gaugeTextCssClass);
+            dc.transition(text, _chart.transitionDuration()).attr('transform', function () {
                 return 'rotate(' + _textRotation + ') translate(' + _textX + ',' + _textY + ')';
             })
-            .attr("text-anchor", "middle")
-            .attr("fill", _textColor)
-            .text(function (d) {
+            .attr('text-anchor', 'middle')
+            .attr('fill', _textColor)
+            .text(function () {
                 return _text;
             });
         }
 
         _chart._doRender = function () {
             _chart.resetSvg();
-            _g = _chart.svg().append("g");
+            _g = _chart.svg().append('g');
             _g.append('g').attr('class', _gaugeCssClass);
             _g.append('circle').attr('class', _needleCircleCssClass)
                 .attr('cx', 0)

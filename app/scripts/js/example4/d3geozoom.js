@@ -6,16 +6,16 @@
     d3.geo.zoom = function () {
         var projection,
             zoomPoint,
-            event = d3.dispatch("zoomstart", "zoom", "zoomend"),
+            event = d3.dispatch('zoomstart', 'zoom', 'zoomend'),
             zoom = d3.behavior.zoom()
-                .on("zoomstart", function () {
+                .on('zoomstart', function () {
                     var mouse0 = d3.mouse(this),
                         rotate = quaternionFromEuler(projection.rotate()),
                         point = position(projection, mouse0);
                     if (point) {
                         zoomPoint = point;
                     }
-                    zoomOn.call(zoom, "zoom", function () {
+                    zoomOn.call(zoom, 'zoom', function () {
                         projection.scale(d3.event.scale);
                         var mouse1 = d3.mouse(this),
                             between = rotateBetween(zoomPoint, position(projection, mouse1));
@@ -27,8 +27,8 @@
                     });
                     event.zoomstart.apply(this, arguments);
                 })
-                .on("zoomend", function () {
-                    zoomOn.call(zoom, "zoom", null);
+                .on('zoomend', function () {
+                    zoomOn.call(zoom, 'zoom', null);
                     event.zoomend.apply(this, arguments);
                 }),
             zoomOn = zoom.on;
@@ -37,7 +37,7 @@
             return arguments.length ? zoom.scale((projection = _).scale()) : projection;
         };
 
-        return d3.rebind(zoom, event, "on");
+        return d3.rebind(zoom, event, 'on');
     };
 
     function bank(projection, p0, p1) {
@@ -47,8 +47,7 @@
     }
 
     function position(projection, point) {
-        var t = projection.translate(),
-            spherical = projection.invert(point);
+        var spherical = projection.invert(point);
         return spherical && isFinite(spherical[0]) && isFinite(spherical[1]) && cartesian(spherical);
     }
 
