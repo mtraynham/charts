@@ -160,7 +160,7 @@ module.exports = function (grunt) {
         },
 
         useminPrepare: {
-            html: '<%= conf.app %>/index.html',
+            html: '<%= conf.dist %>/index.html',
             options: {
                 dest: '<%= conf.dist %>'
             }
@@ -170,7 +170,7 @@ module.exports = function (grunt) {
             html: ['<%= conf.dist %>/**/*.html'],
             css: ['<%= conf.dist %>/styles/**/*.css'],
             options: {
-                assetsDirs: ['<%= conf.dist %>','<%= conf.dist %>/images']
+                assetsDirs: ['<%= conf.dist %>', '<%= conf.dist %>/images']
             }
         },
 
