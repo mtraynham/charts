@@ -21,7 +21,7 @@ module.exports = function (grunt) {
 
         watch: {
             maven: {
-                files: ['<%= conf.app %>'],
+                files: ['<%= conf.app %>/**/*'],
                 tasks : [ 'default' ]
             }
         },
