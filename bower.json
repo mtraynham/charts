@@ -14,7 +14,7 @@
         "d3-geo-projection": "git://github.com/mtraynham/d3-geo-projection.git#master",
         "dc": "git://github.com/dc-js/dc.js.git#master",
         "queue-async": "~1.0.7",
-        "topojson": "~1.6.13",
+        "topojson": "~1.6.14",
         "natural-earth-topo": "git://github.com/mtraynham/natural-earth-topo#master"
     },
     "resolutions": {
